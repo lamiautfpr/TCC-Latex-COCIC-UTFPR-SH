@@ -11,7 +11,7 @@
 % Identificação
 %=====================================================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{cocic-utfpr-sh}[2019/05/06 v1.0.0 Formatacao de modelo de trabalho de conclusão de curso COCIC/UTFPR-SH]
+\ProvidesClass{cocic-utfpr-sh}[2019/05/06 v1.0.0]
 
 %=====================================================================
 % Declaração de opções
