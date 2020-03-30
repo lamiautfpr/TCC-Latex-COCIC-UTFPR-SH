@@ -1,24 +1,33 @@
+%%This work may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version 1.3 of this license or (at your option) any later version.
+%--------------------------------------------------------------
+
 % TEMPLATE PARA TRABALHO DE CONCLUSÃO DE CURSO
 % Universidade Tecnológica Federal do Paraná - UTFPR
+% Disponibilizado e mantido pelo LAMIA - Laboratório de Aprendizado de Máquina e Images Aplicados à Indústria
+% lamia@utfpr.edu.br
 % Campus Santa Helena
 % Bacharelado em Ciência da Computação
-%
 % Customização da classe abnTeX2 (http://www.abntex.net.br/) para as normas da UTFPR - SH
 % LaTeX:  abnTeX2   
-%    
 % Projeto hospedado em: <https://github.com/lamia-utfpr/TCC-Latex-COCIC-UTFPR-SH>
-%
 % Autor: Thiago França Naves
 
-\documentclass{cocic-utfpr-sh}
+\documentclass{lamia-tcc-utfpr-sh}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %P A C O T E S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Adicione aqui seus pacotes
-
-
-
+\usepackage{csquotes} %pacote com comandos para fazer citações de longos textos ou parágrafos de alguma referência
+\usepackage[backend=biber, style=abnt, uniquename=mininit, giveninits, extrayear, repeattitles, backref]{biblatex} %pacote com todas as funções de bibliograficas modernas do latex, pesquise as variações do comando \cite disponíveis com o biblatex 
+\addbibresource{elementos-postextuais/referencias.bib} %endereço do seu arquivo com as referências bibliográficas
+\hypersetup{
+    colorlinks=true,       		% Se não quiser cores no texto marcar como false
+    	linkcolor=black,          	% cor dos links do texto como o sumário
+    	citecolor=blue,        		% cor das citações no texto
+    	filecolor=magenta,      	% cor de arquivos externos 
+		urlcolor=blue,}             % cor de url no texto e nas referências bibliográficas
+		
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %I N I C I O  D O  D O C U M E N T O
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -42,14 +51,13 @@
 \banca[Prof.]{Nome do participante banca 1,~D.Sc.}{}
 \banca[Prof.]{Nome do participante banca 2,~D.Sc.}{}
 
-
 \location{Santa~Helena}{PR}{Brasil}
 
 % mês e ano de defesa
 \date{Junho}{2019}
 \maketitle
 
-% HIFENIZAÇÃO DE PALAVRAS QUE NÃO ESTÃO NO DICIONÁRIO---------------------------
+% Hifenização de palavras que não estão no dicionário, coloque aquelas necessárias do seu texto
 \hyphenation{%
 	qua-dros-cha-ve
 	Kat-sa-gge-los
@@ -93,6 +101,7 @@
 % Palavras-chave separadas por ponto
 \keywords{Keyword1. Keyword2. Keyword3. Keyword4. Keyword5}
 \end{englishabstract}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % L I S T A S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -115,7 +124,7 @@
 \maketocpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% C O N T E Ú D O
+% C O N T E Ú D O - T E X T O
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \startcontent
 \input{elementos-textuais/cap-1-introducao}
@@ -128,7 +137,8 @@
 % B I B L I O G R A F I A
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Retirar esta parte se o trabalho não tiver bibliografia
-\makebibspage{abntex2-alf}{elementos-postextuais/referencias}
+\printbibliography
+\newpage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -140,7 +150,7 @@
 % A N E X O (opcional)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \annex
-\input{elementos-postextuais/anexo-1.tex}
+\input{elementos-postextuais/anexo1.tex}
 
 
 \end{document}
