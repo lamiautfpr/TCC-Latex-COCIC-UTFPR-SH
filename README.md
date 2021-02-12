@@ -22,10 +22,9 @@ ___
 Este modelo em Latex é uma adaptação do modelo disponibilizado pela [ABNTEX](https://www.abntex.net.br/), de acordo com as Normas da Univerdade Tecnológica Federal do Paraná (UTFPR) - Campus Santa Helena e as normas da ABNT para elaboração de documentos técnicos e científicos brasileiros. Para mais informações do pacotes e classes contidas no modelo, consultar o site https://www.ctan.org/pkg/abntex2.
 
 ## Objetivos
-O objetivo geral deste projeto é fornecer um modelo em Latex padrão para elaboração de Trabalhos de Conclusão de Curso (TCC) para o curso de ciência da computação da UTFPR - Santa Helena.
+O objetivo geral deste projeto é fornecer um modelo em Latex padrão para elaboração de Trabalhos de Conclusão de Curso (TCC) para o curso de Ciência da Computação da UTFPR - Santa Helena.
   
 ## Modelo
-
 
 
 
