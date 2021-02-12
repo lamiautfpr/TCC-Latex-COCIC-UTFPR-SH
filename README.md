@@ -1,13 +1,9 @@
-# TCC-Latex-COCIC-UTFPR-SH
-Modelo no padrão Latex de Trabalho de Conclusão de Curso fornecido pelo LAMIA para o curso de Ciência da Computação da UTFPR campus Santa Helena
-
-
 <h1 align="center">
   <br>
   <a href="https://www.lamia.sh.utfpr.edu.br/">
     <img src="https://user-images.githubusercontent.com/26206052/86039037-3dfa0b80-ba18-11ea-9ab3-7e0696b505af.png" alt="LAMIA - Laboratório de                  Aprendizagem de Máquina e Imagens Aplicados à Indústria" width="400"></a>
 <br> <br>
-Principais Configurações na Integração de Visão Computacional e Aprendizagem Profunda: Algoritmos e Técnicas
+TCC-Latex-COCIC-UTFPR-SH
 </h1>
 
 <p align="center">  
