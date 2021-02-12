@@ -25,7 +25,8 @@ Este modelo em Latex é uma adaptação do modelo disponibilizado pela [ABNTEX](
 O objetivo geral deste projeto é fornecer um modelo em Latex padrão para elaboração de Trabalhos de Conclusão de Curso (TCC) para o curso de Ciência da Computação da UTFPR - Santa Helena.
   
 ## Modelo
-
+ <img src="https://github.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH/blob/master/LAMIA%20-%20TCC%20Latex%20UTFPR-SH/imagens/struct%20of%20papers.svg" width="400"></a>
+<br> <br>
 
 
 ## Como Utilizar
