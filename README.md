@@ -25,11 +25,12 @@ Este modelo em Latex é uma adaptação do modelo disponibilizado pela [ABNTEX](
 O objetivo geral deste projeto é fornecer um modelo em Latex padrão para elaboração de Trabalhos de Conclusão de Curso (TCC) para o curso de Ciência da Computação da UTFPR - Santa Helena.
   
 ## Modelo
-A estrutura de trabalho ciêntifico tipicamente possue 5 parte
+A estrutura de trabalhos ciêntificos tipicamente possuem 4 partes: Capa e elementos Pré-textuais, Textuais e Pós-Textuais. A figura a baixo ilustra a ordem de cada parte. Os blocos em cinza são partes opcinais, enquanto os blocos em braco são obrigatórios.
 <p align="center">
  <img  src="https://raw.githubusercontent.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH/master/LAMIA%20-%20TCC%20Latex%20UTFPR-SH/imagens/struct-of-paper.png" width="400"></a>
 </p>
 
+O modelo disponibilizado segue a mesma estrutura ilustrada na figura. 
 
 ## Como Utilizar
 Para clonar e rodar está aplicação será necessário o [Git](https://git-scm.com) e o [Python3](https://www.python.org/downloads/) (python 3.6 ou superior) instalados em sua máquina. A partir da linha de comando descrita abaixo será possível clonar este repositório.
