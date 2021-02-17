@@ -25,83 +25,49 @@ Este modelo em Latex é uma adaptação do modelo disponibilizado pela [ABNTEX](
 O objetivo geral deste projeto é fornecer um modelo em Latex padrão para elaboração de Trabalhos de Conclusão de Curso (TCC) para o curso de Ciência da Computação da UTFPR - Santa Helena.
   
 ## Modelo
-A estrutura de trabalhos ciêntificos tipicamente possuem 4 partes: Capa e elementos Pré-textuais, Textuais e Pós-Textuais. A figura a baixo ilustra a ordem de cada parte. Os blocos em cinza são partes opcinais, enquanto os blocos em braco são obrigatórios.
+A estrutura de trabalhos ciêntificos tipicamente possuem 4 partes: Capa e elementos Pré-textuais, Textuais e Pós-Textuais. A figura a baixo ilustra a ordem de cada parte, da esquerda para a direita. Os blocos em cinza são partes opcinais, enquanto os blocos em braco são obrigatórios.
 <p align="center">
  <img  src="https://raw.githubusercontent.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH/master/LAMIA%20-%20TCC%20Latex%20UTFPR-SH/imagens/struct-of-paper.png" width="600"></a>
 </p>
 
-O modelo disponibilizado segue a mesma estrutura ilustrada na figura. 
+O modelo disponibilizado segue a mesma estrutura ilustrada na figura acima, entretanto com mais arquivos, como por exemplo o arquivo de abreviatura.tex. Abaixo a estrutura de diretórios é mostrada, alguns arquivos e diretórios foram ocultados, afim de simplificar a apresentação deste documento. A escrita de cada arquivo deve seguir as normas estabeleciadas pela ABNT para trabalhos ciêntificos. Este modelo apenas facilita o processo de desenvolvimento, como margens, criação automático de sumário, enumaração de figuração e tabelas e outras "facilidades".
+
+```bash
+elementos-pretextuais
+  -abreviaturas.tex
+  -abstract.tex
+  -agradecimentos.tex
+  -dedicatoria.tex
+  -epigrafe.tex
+  -ficha_catalografica.png
+  -folhaAprovação.pdf
+  -glossario.tex
+  -resumo
+  -simbolos.tex
+elementos-textuais
+  -cap-1-introducao.tex
+  -cap-2-refencial.tex
+  -cap-3-metodologia.tex
+  -cap-4-resultados.tex
+elementos-postextuais
+  -anexo1.tex
+  -referencias.bib
+imagens
+lamia-tcc-utfpr-sh.cls
+main.tex
+```
+
+Dois arquivos merecem atenção, main.tex e lamia-tcc-utfpr-sh.cls. O arquivo main.tex é reponsável a adição de pacotes extras, configuração da capa e adição de capitulos. Em outras palavras, é o arquivo configura o modelo. O arquivo lamia-tcc-utfpr-sh.cls gerencia os aspectos de formatação, como por exemplo margens, tamanho da fonte. Este arquivo é o documento de classe que foi adaptado do ABNTEX2.
 
 ## Como Utilizar
-Para clonar e rodar está aplicação será necessário o [Git](https://git-scm.com) e o [Python3](https://www.python.org/downloads/) (python 3.6 ou superior) instalados em sua máquina. A partir da linha de comando descrita abaixo será possível clonar este repositório.
+Para clonar e rodar está aplicação será necessário o [Git](https://git-scm.com) e o uso de algum editor de arquivos latex (recomendamos uso do editor [overleaf](https://www.overleaf.com/)). A partir da linha de comando descrita abaixo será possível clonar este repositório.
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/lamiautfpr/TCC-01-2019-PRINCIPAIS-CONFIGURACOES-NA-INTEGRACAO-DE-VISAO-COMPUTACIONAL-E-DEEP-LEARNING-ALGORITMOS.git
+$ git clone https://github.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH.git
 
-# Go into the repository
-$ cd TCC-01-2019-PRINCIPAIS-CONFIGURACOES-NA-INTEGRACAO-DE-VISAO-COMPUTACIONAL-E-DEEP-LEARNING-ALGORITMOS
 ```
 Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use the command prompt from your IDE.
 
-Agora que você já está com o repositório clonado será necessário criar um virtual environment para armazenamento das bibliotecas presentes no requeriments. No diretório do projeto utilize as linhas de comando abaixo:
+Após o download do modelo, se o arquivo estive em zip, faça upload na plataforma do overleaf. Outra de editar o modelo é [instalar o latex](https://linuxconfig.org/how-to-install-latex-on-ubuntu-20-04-focal-fossa-linux) em máquina e instalar algum editor de arquivos, por exemplo [vscode](https://code.visualstudio.com/). Esta documetação não irá abordar esta forma, mas siga os link disponibilizados.
 
-```bash
-# Create virtualenv
-$ virtualenv venv
-
-# Execute virtual env
-$ source venv/bin/activate
-```
-
-Note: Este passo pode ser ignorado caso não possua uma ambiente virtual. Ambientes virtuais são recomendados para a execução de aplicações em python.
-
-Com o virtual enviroment criado, será necessário baixar as bibliotecas presentes no requeriments.txt. Para isso basta utilizar o pip3 para fazer a instalação recursiva de todas as bibliotecas presentes no arquivo de texto. Certifique-se que o shell está no diretório do requeriments. Recomenda-se a utilização da execução em super usuário utilizando sudo.
-
-```bash
-# Install all requeriments
-$ sudo pip3 install -r requeriments.txt
-```
-Com a criação do ambiente finalizada, configure o arquivo experiment.json com os dados do experimento que queira executar (veja a seja sobre o arquivo json para cada campo). Após a configuração do experimento utilize o comando a baixo:
-
-```bash
-$ python src/main.py src/config/experiment.json
-```
-
-O comando descrito acima construirá todos o modelos e executará os testes com o protocolo de experimento escolhido. É recomendado que os modelos implementados sejam executados sobre GPU ou TPU, dada a complexidade computacional exigida por algoritmos baseados em aprendizagem profunda. O [Google Colaboratory](https://colab.research.google.com/) pode ser utilizado para realização de testes em aceleradores gráficos. Também recomendamos a replicação dos resultados da monografia, afim verificar se todas as cofiguraçoes foram feitas corretamente. Para isso, copie o protocolo descrito na monografia de referência.
-
-As bibliotecas utilizadas no projeto estão presentes no arquivo requeriments.txt.
-
-```bash
-google-auth==1.18.0
-google-auth-oauthlib==0.4.1
-google-pasta==0.2.0
-Keras-Preprocessing==1.1.2
-matplotlib==3.3.0
-numpy==1.19.0
-pandas==1.0.5
-Pillow==7.1.2
-scikit-learn==0.23.1
-scipy==1.4.1
-seaborn==0.10.1
-sklearn==0.0
-tensorboard==2.2.2
-tensorboard-plugin-wit==1.7.0
-tensorflow-cpu==2.2.0
-tensorflow-estimator==2.2.0
-```
-
-
-
-<!--
-## Citação
-
-Se você utliza e quer citar o projeto em sua pesquisa, por favor utilize o formato de citação abaixo:
-    
-    @inproceedings{LAMIA_ic02,
-      title={Painel Inteligente de Dados Covid-19},
-      author={Naves, T. F.; BEUREN, A. T.; BRILHADOR, A.},
-      journal={IEEE Conference on Big Data},
-      year={2020}
-    }
--->
