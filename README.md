@@ -27,7 +27,7 @@ O objetivo geral deste projeto é fornecer um modelo em Latex padrão para elabo
 ## Modelo
 A estrutura de trabalhos ciêntificos tipicamente possuem 4 partes: Capa e elementos Pré-textuais, Textuais e Pós-Textuais. A figura a baixo ilustra a ordem de cada parte. Os blocos em cinza são partes opcinais, enquanto os blocos em braco são obrigatórios.
 <p align="center">
- <img  src="https://raw.githubusercontent.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH/master/LAMIA%20-%20TCC%20Latex%20UTFPR-SH/imagens/struct-of-paper.png" width="400"></a>
+ <img  src="" width="400"></a>
 </p>
 
 O modelo disponibilizado segue a mesma estrutura ilustrada na figura. 
