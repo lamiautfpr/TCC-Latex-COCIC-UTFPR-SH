@@ -57,7 +57,7 @@ lamia-tcc-utfpr-sh.cls
 main.tex
 ```
 
-Dois arquivos merecem atenção, main.tex e lamia-tcc-utfpr-sh.cls. O arquivo main.tex é reponsável a adição de pacotes extras, configuração da capa e adição de capitulos. Em outras palavras, é o arquivo configura o modelo. O arquivo lamia-tcc-utfpr-sh.cls gerencia os aspectos de formatação, como por exemplo margens, tamanho da fonte. Este arquivo é o documento de classe que foi adaptado do ABNTEX2.
+Dois arquivos merecem atenção, main.tex e lamia-tcc-utfpr-sh.cls. O arquivo main.tex é reponsável a adição de pacotes extras, configuração da capa e adição de capítulos. Em outras palavras, é o arquivo configura o modelo. O arquivo lamia-tcc-utfpr-sh.cls gerencia os aspectos de formatação, como por exemplo margens, tamanho da fonte. Este arquivo é o documento de classe que foi adaptado do ABNTEX2.
 
 ## Como Utilizar
 Para clonar e rodar está aplicação será necessário o [Git](https://git-scm.com) e o uso de algum editor de arquivos latex (recomendamos uso do editor [overleaf](https://www.overleaf.com/)). A partir da linha de comando descrita abaixo será possível clonar este repositório.
@@ -69,5 +69,5 @@ $ git clone https://github.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH.git
 ```
 Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use the command prompt from your IDE.
 
-Após o download do modelo, se o arquivo estive em zip, faça upload na plataforma do overleaf. Outra de editar o modelo é [instalar o latex](https://linuxconfig.org/how-to-install-latex-on-ubuntu-20-04-focal-fossa-linux) em máquina e instalar algum editor de arquivos, por exemplo [vscode](https://code.visualstudio.com/). Esta documetação não irá abordar esta forma, mas siga os link disponibilizados.
+Após o download do modelo, se o arquivo estiver em zip, faça upload na plataforma do overleaf. Outra forma de editar o modelo é [instalar o latex](https://linuxconfig.org/how-to-install-latex-on-ubuntu-20-04-focal-fossa-linux) em sua máquina e instalar algum editor de arquivos, por exemplo [vscode](https://code.visualstudio.com/). Esta documentação não irá abordar esta forma, mas siga os link disponibilizados.
 
