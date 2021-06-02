@@ -14,7 +14,7 @@ TCC-Latex-COCIC-UTFPR-SH
 
 <p align="center">
 <br>
-Status do Projeto: Concluído:heavy_check_mark:
+Status do Projeto: em andamento:warning:
 </p>
 ___
 
