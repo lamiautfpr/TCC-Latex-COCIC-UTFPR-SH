@@ -18,8 +18,22 @@
 %P A C O T E S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Adicione aqui seus pacotes
+
 \usepackage{csquotes} %pacote com comandos para fazer citações de longos textos ou parágrafos de alguma referência
-\usepackage[backend=biber, style=abnt, uniquename=mininit, giveninits, extrayear, repeattitles, backref]{biblatex} %pacote com todas as funções de bibliograficas modernas do latex, pesquise as variações do comando \cite disponíveis com o biblatex 
+
+%pacote com todas as funções de bibliograficas modernas do latex, pesquise as variações do comando \cite disponíveis com o biblatex  
+\usepackage[
+	backend=biber, 
+	style=abnt, 
+	uniquename=mininit, 
+	giveninits, % Abrevia os primeiros nomes da bibliografia 
+	extrayear, % Diferencia os nomes com letras (bibliografia e referencia)
+	repeatfields, % Imprime campos repetidos na bibliografia. O padrão desse pacote é substituílos por traços sublineares. Contudo, a UTFPR prefere os campos repetidos.
+	backref=false, % Desabilita a referencia da página onde foi citado.
+	noslsn % As abreviações [s.l], [s.n] e [s.l.: s.n.] são ocultadas. Essas abreviações são permitidas pela norma NBR 6023:2018, porém o UTFPR-SH prefere não utilizá-los.
+
+]{biblatex} 
+
 \addbibresource{elementos-postextuais/referencias.bib} %endereço do seu arquivo com as referências bibliográficas
 \hypersetup{
     colorlinks=true,       		% Se não quiser cores no texto marcar como false
