@@ -114,7 +114,7 @@ A norma NBR 6030:2018 estipula alguns elementos obrigatórios para cada tipo de 
   author,
   booktitle,
   eventtitle,
-  pages={1--8},
+  pages,
   number,
   eventyear,
   year,
