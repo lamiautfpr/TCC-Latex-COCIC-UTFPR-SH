@@ -73,3 +73,70 @@ Após o download do modelo, se o arquivo estiver em zip, faça upload na platafo
 
 Além de fazer o download do repositório, ajude-nos com a atualização do modelo e da criação da documentação. Para isso, faça o fork do projeto e envie as possíveis alterações para os nossos colaboradores. Para qualquer erro na documentação e no modelo encontrado abra uma issue, que assim que possível corrigiremos.
 
+## Algumas Considerações a Respeito das Referencias
+
+A norma NBR 6030:2018 estipula alguns elementos obrigatórios para cada tipo de referencia bibliografia. Afim de facilitar o desenvolvimento da monografia, a seguir alguns modelos de bibtex para a construção de referencias. São apenas alguns tipos comuns que podem ser encontrados na escrita de uma referencia. 
+
+@article{Alias,
+	author,
+	title,
+	journal,
+	volume,
+	number,
+	year,
+	urldate,
+	url,
+	pages
+}
+
+@inbook{Alias,
+	title,
+	author,
+	chapter,
+	pages,
+	booktitle,
+	bookauthor,
+	year,
+	publisher,
+	location
+}
+
+@book{Alias,
+    author,
+    title,
+    year,
+    publisher,
+    edition,
+    pagetotal,
+    location
+}
+
+@inproceedings{Alias,
+  title,
+  author,
+  booktitle,
+  eventtitle,
+  pages,
+  number,
+  eventyear,
+  year,
+  location,
+  venue,
+  publisher,
+  url,
+  urldate
+}
+
+@thesis{Alias, 
+    location, 
+    title,
+    pagetotal,
+    url,
+    institution, 
+    type,
+    author, 
+    eventyear,
+    year,
+    urldate,
+    month
+}
