@@ -71,3 +71,70 @@ Note: If you're using Linux Bash for Windows, [see this guide](https://www.howto
 
 Após o download do modelo, se o arquivo estiver em zip, faça upload na plataforma do overleaf. Outra forma de editar o modelo é [instalar o latex](https://linuxconfig.org/how-to-install-latex-on-ubuntu-20-04-focal-fossa-linux) em sua máquina e instalar algum editor de arquivos, por exemplo [vscode](https://code.visualstudio.com/). Esta documentação não irá abordar esta forma, mas siga os link disponibilizados.
 
+## Algumas Considerações a Respeito das Referencias
+
+A norma NBR 6030:2018 estipula alguns elementos obrigatórios para cada tipo de referencia bibliografia. Afim de facilitar o desenvolvimento da monografia, a seguir alguns modelos de bibtex para a construção de referencias. São apenas alguns tipos comuns que podem ser encontrados na escrita de uma referencia. 
+
+@article{Alias,
+	author,
+	title,
+	journal,
+	volume,
+	number,
+	year,
+	urldate,
+	url,
+	pages
+}
+
+@inbook{Alias,
+	title,
+	author,
+	chapter,
+	pages,
+	booktitle,
+	bookauthor,
+	year,
+	publisher,
+	location
+}
+
+@book{Alias,
+    author,
+    title,
+    year,
+    publisher,
+    edition,
+    pagetotal,
+    location
+}
+
+@inproceedings{Alias,
+  title,
+  author,
+  booktitle,
+  eventtitle,
+  pages,
+  number,
+  eventyear,
+  year,
+  location,
+  venue,
+  publisher,
+  url,
+  urldate
+}
+
+@thesis{Alias, 
+    location, 
+    title,
+    pagetotal,
+    url,
+    institution, 
+    type,
+    author, 
+    eventyear,
+    year,
+    urldate,
+    month
+}
