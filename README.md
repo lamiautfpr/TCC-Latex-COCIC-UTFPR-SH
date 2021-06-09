@@ -19,18 +19,18 @@ Status do Projeto: em andamento:warning:
 ___
 
 ## Resumo
-Este modelo em Latex é uma adaptação do modelo disponibilizado pela [ABNTEX](https://www.abntex.net.br/), de acordo com as Normas da Univerdade Tecnológica Federal do Paraná (UTFPR) - Campus Santa Helena e as normas da ABNT para elaboração de documentos técnicos e científicos brasileiros. Para mais informações do pacotes e classes contidas no modelo, consultar o site https://www.ctan.org/pkg/abntex2.
+Este modelo em Latex é uma adaptação do modelo disponibilizado pela [ABNTEX](https://www.abntex.net.br/), de acordo com as Normas da Univerdade Tecnológica Federal do Paraná (UTFPR) - Campus Santa Helena e as normas da ABNT para elaboração de documentos técnicos e científicos brasileiros. Para mais informações dos pacotes e classes contidas no modelo, consultar o site https://www.ctan.org/pkg/abntex2.
 
 ## Objetivos
 O objetivo geral deste projeto é fornecer um modelo em Latex padrão para elaboração de Trabalhos de Conclusão de Curso (TCC) para o curso de Ciência da Computação da UTFPR - Santa Helena.
   
 ## Modelo
-A estrutura de trabalhos ciêntificos tipicamente possuem 4 partes: Capa e elementos Pré-textuais, Textuais e Pós-Textuais. A figura a baixo ilustra a ordem de cada parte, da esquerda para a direita. Os blocos em cinza são partes opcinais, enquanto os blocos em braco são obrigatórios.
+A estrutura de trabalhos científicos tipicamente possuem 4 partes: Capa e elementos Pré-textuais, Textuais e Pós-Textuais. A figura a baixo ilustra a ordem de cada parte, da esquerda para a direita. Os blocos em cinza são partes opcionais, enquanto os blocos em braco são obrigatórios.
 <p align="center">
  <img  src="https://raw.githubusercontent.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH/master/LAMIA%20-%20TCC%20Latex%20UTFPR-SH/imagens/struct-of-paper.png" width="600"></a>
 </p>
 
-O modelo disponibilizado segue a mesma estrutura ilustrada na figura acima, entretanto com mais arquivos, como por exemplo o arquivo de abreviatura.tex. Abaixo a estrutura de diretórios é mostrada, alguns arquivos e diretórios foram ocultados, afim de simplificar a apresentação deste documento. A escrita de cada arquivo deve seguir as normas estabeleciadas pela ABNT para trabalhos ciêntificos. Este modelo apenas facilita o processo de desenvolvimento, como margens, criação automático de sumário, enumaração de figuração e tabelas e outras "facilidades".
+O modelo disponibilizado segue a mesma estrutura ilustrada na figura acima, entretanto com mais arquivos, como por exemplo o arquivo de abreviatura.tex. Abaixo a estrutura de diretórios é mostrada, alguns arquivos e diretórios foram ocultados, a fim de simplificar a apresentação deste documento. A escrita de cada arquivo deve seguir as normas estabeleciadas pela ABNT para trabalhos científicos. Este modelo apenas facilita o processo de desenvolvimento, como margens, criação automático de sumário, enumeração de figuras e tabelas, dentre outras "facilidades".
 
 ```bash
 elementos-pretextuais
@@ -57,7 +57,7 @@ lamia-tcc-utfpr-sh.cls
 main.tex
 ```
 
-Dois arquivos merecem atenção, main.tex e lamia-tcc-utfpr-sh.cls. O arquivo main.tex é reponsável a adição de pacotes extras, configuração da capa e adição de capítulos. Em outras palavras, é o arquivo configura o modelo. O arquivo lamia-tcc-utfpr-sh.cls gerencia os aspectos de formatação, como por exemplo margens, tamanho da fonte. Este arquivo é o documento de classe que foi adaptado do ABNTEX2.
+Dois arquivos merecem atenção, main.tex e lamia-tcc-utfpr-sh.cls. O arquivo main.tex é reponsável a adição de pacotes extras (pacotes do usuário), configuração da capa, adição de capítulos, autores e outros. Em outras palavras, é o arquivo configura o modelo. O arquivo lamia-tcc-utfpr-sh.cls gerencia os aspectos de formatação, como por exemplo margens e tamanho da fonte. Este arquivo é o documento de classe que foi adaptado do ABNTEX2.
 
 ## Como Utilizar
 Para clonar e rodar está aplicação será necessário o [Git](https://git-scm.com) e o uso de algum editor de arquivos latex (recomendamos uso do editor [overleaf](https://www.overleaf.com/)). A partir da linha de comando descrita abaixo será possível clonar este repositório.
@@ -70,4 +70,6 @@ $ git clone https://github.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH.git
 Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use the command prompt from your IDE.
 
 Após o download do modelo, se o arquivo estiver em zip, faça upload na plataforma do overleaf. Outra forma de editar o modelo é [instalar o latex](https://linuxconfig.org/how-to-install-latex-on-ubuntu-20-04-focal-fossa-linux) em sua máquina e instalar algum editor de arquivos, por exemplo [vscode](https://code.visualstudio.com/). Esta documentação não irá abordar esta forma, mas siga os link disponibilizados.
+
+Além de fazer o download do repositório, ajude-nos com a atualização do modelo e da criação da documentação. Para isso, faça o fork do projeto e envie as possíveis alterações para os nossos colaboradores. Para qualquer erro na documentação e no modelo encontrado abra uma issue, que assim que possível corrigiremos.
 
