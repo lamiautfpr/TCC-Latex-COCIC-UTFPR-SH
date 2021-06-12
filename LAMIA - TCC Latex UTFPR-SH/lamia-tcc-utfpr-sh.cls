@@ -7,6 +7,7 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{pdfpages}
+\interfootnotelinepenalty=10000
 
 %=====================================================================
 % Identificação
