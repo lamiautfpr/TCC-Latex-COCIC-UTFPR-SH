@@ -12,7 +12,9 @@
 % Projeto hospedado em: <https://github.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH>
 % Autor: Thiago França Naves
 
+\pdfminorversion=6 % o pdf será gerado na versão 1.6
 \documentclass{lamia-tcc-utfpr-sh}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %P A C O T E S
@@ -22,7 +24,15 @@
 \usepackage{csquotes} %pacote com comandos para fazer citações de longos textos ou parágrafos de alguma referência
 
 %pacote com todas as funções de bibliograficas modernas do latex, pesquise as variações do comando \cite disponíveis com o biblatex  
-\usepackage[backend=biber, style=abnt, uniquename=mininit, giveninits, extrayear, repeattitles, backref, noslsn]{biblatex} %pacote com todas as funções de bibliograficas modernas do latex, pesquise as variações do comando \cite e \textcite disponíveis com o biblatex 
+\usepackage[
+  backend=biber,
+  style=abnt,
+  uniquename=mininit,
+  giveninits,
+  extrayear,
+  repeattitles,
+  backref=false,
+  noslsn]{biblatex} %pacote com todas as funções de bibliograficas modernas do latex, pesquise as variações do comando \cite e \textcite disponíveis com o biblatex 
 
 \addbibresource{elementos-postextuais/referencias.bib} %endereço do seu arquivo com as referências bibliográficas
 \hypersetup{
@@ -31,7 +41,8 @@
     citecolor=blue,        		% cor das citações no texto
     filecolor=magenta,      		% cor de arquivos externos 
     urlcolor=blue,}             	% cor de url no texto e nas referências bibliográficas
-		
+\DeclareUnicodeCharacter{0301}{\'{e}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %I N I C I O  D O  D O C U M E N T O
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
