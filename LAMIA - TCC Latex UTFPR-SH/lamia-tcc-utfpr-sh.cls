@@ -53,7 +53,7 @@
 
 \usepackage{enumitem}
 
-\usepackage{caption}
+\usepackage[labelfont=bf, font={footnotesize, bf}]{caption}
 \captionsetup[table]{skip=10pt}
 
 \usepackage{float}
@@ -172,7 +172,7 @@
 %N O M E S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\utfpr{Universidade Tecnológica Federal do Paraná}
-\def\cocic{Coordenação de Ci{\^e}ncia da Computa{\c{c}}{\~a}o}
+\def\cocic{Coordenação de Ciência da Computação}
 \def\bcc{} %(preencher quando existir departamento) 
 \def\dcc{} %(preencher quando existir pos lato ou scritu senso)
 
@@ -373,7 +373,7 @@
   \noindent\@topbox\\ % universidade, instituto, etc
   \vfill
   \begin{center}
-      \MakeUppercase{\@city}\\
+      \bfseries\MakeUppercase{\@city}\\
       \number\year
   \end{center}
 }
@@ -401,7 +401,7 @@
   \vfill
   
   \begin{center}
-      \MakeUppercase{\@city}\\
+      \bfseries\MakeUppercase{\@city}\\
       \number\year
   \end{center}
 }
@@ -508,7 +508,7 @@
     \centering\vbox to \titlepagewinheight{
       \vspace*{\fill}
       \vspace{20pt}
-      \MakeUppercase{\@authora}\\
+      \MakeUppercase{\textbf{\@authora}}\\
       \@ifundefined{@authorb}{}{\MakeUppercase{\@authorb}\\}
       \@ifundefined{@authorc}{}{\MakeUppercase{\@authorc}\\}
       \vspace{20pt}
@@ -532,9 +532,9 @@
   \parbox[b]{\titlepagewinwidth}{
     \centering\vbox to \titlepagewinheight{
       \vspace*{\fill}
-      \MakeUppercase{\@authora}\\
-      \@ifundefined{@authorb}{}{\MakeUppercase{\@authorb}\\}
-      \@ifundefined{@authorc}{}{\MakeUppercase{\@authorc}\\}
+      \MakeUppercase{\textbf{\@authora}}\\
+      \@ifundefined{@authorb}{}{\MakeUppercase{\textbf{\@authorb}}\\}
+      \@ifundefined{@authorc}{}{\MakeUppercase{\textbf{\@authorc}}\\}
       \vspace{\stretch{3}}{{
           \MakeUppercase{\@title}\@ifundefined{@subtitle}{}{: \@subtitle\\}
       }\par}
@@ -549,9 +549,9 @@
 \newcommand{\titlepagetopinfo}{%
   {
 %   \setstretch{2.0}
-  \MakeUppercase{\utfpr}\\
+  \MakeUppercase{\textbf{\utfpr}}\\
    \vspace{7pt}
-  \MakeUppercase{\cocic}\\
+  \MakeUppercase{\textbf{\cocic}}\\
    \vspace{7pt}
   \MakeUppercase{\bcc}%\\
   \@ifundefined{@dept}{}{\MakeUppercase{\csname \@dept\endcsname}\\}%
