@@ -7,12 +7,19 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{pdfpages}
+\usepackage[
+  type={CC},
+  modifier={by-nc-sa},
+  version={4.0},
+  lang={brazilian},
+  imagewidth={3cm},
+  imageposition={left}
+]{doclicense}
 \interfootnotelinepenalty=10000
-
 %=====================================================================
 % Identificação
 %=====================================================================
-\NeedsTeXFormat{LaTeX2e}
+% \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{lamia-tcc-utfpr-sh}[2020/03/29 v1.3]
 
 %=====================================================================
@@ -172,9 +179,10 @@
 %N O M E S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\utfpr{Universidade Tecnológica Federal do Paraná}
-\def\cocic{Coordenação de Ciência da Computação}
-\def\bcc{} %(preencher quando existir departamento) 
+\def\coord{Coordenação de Ciência da Computação}
+\def\bcc{} %(preencher quando existir departamento)
 \def\dcc{} %(preencher quando existir pos lato ou scritu senso)
+\def\degree{Ciência da Computação} %(Nome do Curso)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %D I M E N S Õ E S
@@ -289,7 +297,7 @@
 
 %=====================================================================
 % Definição do Departamento relacionado ao documento
-% deve ser definido como 'cocic'
+% deve ser definido como 'coord'
 %=====================================================================
 \newcommand{\dept}[1]{\gdef\@dept{#1}}
 
@@ -382,13 +390,20 @@
 %=====================================================================
 % Folha de Rosto
 %=====================================================================
+\newcommand\blfootnote[1]{%
+  \renewcommand\footnoterule{}
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
 \newcommand{\thetitlepage}{%
 
   \noindent\@topboxrosto
 
   \hspace*{\fill}\parbox[b]{.5\textwidth}{%
     \linespread{1}\selectfont
-    Trabalho de Conclusão apresentado ao Curso de Ciência da Computação da Universidade Tecnológica Federal do Paraná, Câmpus Santa Helena, como requisito parcial à obtenção do título de Bacharel em Ciência da Computação.
+    Trabalho de conclusão de curso apresentado como requisito parcial à obtenção do título de Bacharel em Ciência da Computação da Coordenação de Ciência da Computação da Universidade Tecnológica Federal do Paraná.
     \\
     \\
     
@@ -404,6 +419,26 @@
       \bfseries\MakeUppercase{\@city}\\
       \number\year
   \end{center}
+  \blfootnote{% taken from amsart.cls
+  \begin{center}
+    \begin{minipage}{3cm}
+      \linespread{1}\selectfont
+      \begin{center}
+        \doclicenseImage
+        \href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt}{\underline{4.0 International}}
+        
+      \end{center}
+      
+    \end{minipage}
+    \hfill
+    \begin{minipage}{11cm}
+      \linespread{1}\selectfont
+      Esta licença permite remixe, adaptação e criação a partir do trabalho, para fins não comerciais, desde que sejam atribuídos créditos ao(s) autor(es) e que licenciem as novas criações sob termos idênticos.
+      
+      Conteúdos elaborados por terceiros, citados e referenciados nesta obra não são cobertos pela licença.
+    \end{minipage}
+  \end{center}
+  }
 }
 
 
@@ -416,7 +451,7 @@
     \centering
     \includegraphics[width=1\textwidth]{elementos-pretextuais/ficha_catalografica.png}
   % **********************************************
-  % Para elaborar a ficha catalográfica consult a biblioteca do campus
+  % Para elaborar a ficha catalográfica consultar a biblioteca do campus
   % debib-sh@utfpr.edu.br 
   %
   % Substitua a ficha_catalografica.png pela sua.
@@ -494,7 +529,6 @@
 \newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
 
 
-
 \def\@topbox{%
   \parbox[t]{\textwidth}{%
     \centering%
@@ -551,8 +585,9 @@
 %   \setstretch{2.0}
   \MakeUppercase{\textbf{\utfpr}}\\
    \vspace{7pt}
-  \MakeUppercase{\textbf{\cocic}}\\
+  \MakeUppercase{\textbf{\coord}}\\
    \vspace{7pt}
+   \MakeUppercase{\textbf{\degree}}\\
   \MakeUppercase{\bcc}%\\
   \@ifundefined{@dept}{}{\MakeUppercase{\csname \@dept\endcsname}\\}%
   \@ifundefined{@curso}{}{\MakeUppercase{\csname \@curso\endcsname}\\

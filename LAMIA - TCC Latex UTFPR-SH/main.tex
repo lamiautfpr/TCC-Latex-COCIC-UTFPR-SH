@@ -24,6 +24,7 @@
 \usepackage{csquotes} %pacote com comandos para fazer citações de longos textos ou parágrafos de alguma referência
 
 %pacote com todas as funções de bibliograficas modernas do latex, pesquise as variações do comando \cite disponíveis com o biblatex  
+
 \usepackage[
   backend=biber,
   style=abnt,
@@ -41,15 +42,17 @@
     citecolor=blue,        		% cor das citações no texto
     filecolor=magenta,      		% cor de arquivos externos 
     urlcolor=blue,}             	% cor de url no texto e nas referências bibliográficas
-\DeclareUnicodeCharacter{0301}{\'{e}}
+\DeclareUnicodeCharacter{0301}{\'{e}} % habilita a adição de caracteres unices nas referência bibliográficas
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %I N I C I O  D O  D O C U M E N T O
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
+
 % título da monografia é obrigatório
 \title{\textbf{Título da monografia}}
+% Nome do Curso é obrigatório
 
 % autor é obrigatório; máximo de 3 autores (se TCC Empresa)
 \author{Nome completo }{\input{elementos-pretextuais/agradecimentos}}
@@ -57,7 +60,7 @@
 %\author{Nome completo aluno 3}{\input{elementos-pretextuais/agradecimentos}}
 
 % orientador é obrigatório
-\advisor[Prof.]{Prof. Me. ou Dr. Xxx}{}
+\advisor[Prof.]{Prof. Me. ou Dr. Nome Completo}{}
 
 % co-orientador é opcional
 %\coadvisor[Prof.]{Nome do co-orientador,~M.Sc.}{}
@@ -69,7 +72,7 @@
 \location{Santa~Helena}{PR}{Brasil}
 
 % mês e ano de defesa
-\date{Junho}{2019}
+\date{Agosto}{2021}
 \maketitle
 
 % Hifenização de palavras que não estão no dicionário, coloque aquelas necessárias do seu texto
