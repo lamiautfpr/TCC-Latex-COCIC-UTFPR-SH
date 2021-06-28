@@ -60,7 +60,7 @@
 
 \usepackage{enumitem}
 
-\usepackage{caption}
+\usepackage[labelfont=bf, font={footnotesize, bf}]{caption}
 \captionsetup[table]{skip=10pt}
 
 \usepackage{float}
