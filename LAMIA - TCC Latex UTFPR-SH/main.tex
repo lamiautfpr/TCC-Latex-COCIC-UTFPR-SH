@@ -15,7 +15,6 @@
 \pdfminorversion=6 % o pdf será gerado na versão 1.6
 \documentclass{lamia-tcc-utfpr-sh}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %P A C O T E S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,7 +42,17 @@
     filecolor=magenta,      		% cor de arquivos externos 
     urlcolor=blue,}             	% cor de url no texto e nas referências bibliográficas
 \DeclareUnicodeCharacter{0301}{\'{e}} % habilita a adição de caracteres unices nas referência bibliográficas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%C O N F I G U R A Ç Õ E S A D I C I O N A I S
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[titles]{tocloft} % pacote customizar a lista de figuras e tabelas
+\renewcommand{\cftfigpresnum}{\figurename\enspace}
+\renewcommand{\cftfigaftersnum}{ -}
+\renewcommand{\cftfignumwidth}{2cm}
 
+\renewcommand{\cfttabpresnum}{\tablename\enspace}
+\renewcommand{\cfttabaftersnum}{ -}
+\renewcommand{\cfttabnumwidth}{2cm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %I N I C I O  D O  D O C U M E N T O
@@ -59,7 +68,6 @@
 \author{Nome completo }{\input{elementos-pretextuais/agradecimentos}}
 %\author{Nome completo aluno 2}{\input{elementos-pretextuais/agradecimentos}}
 %\author{Nome completo aluno 3}{\input{elementos-pretextuais/agradecimentos}}
-
 % orientador é obrigatório
 \advisor[Prof.]{Prof. Me. ou Dr. Nome Completo}{}
 

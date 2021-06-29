@@ -16,6 +16,7 @@
   imageposition={left}
 ]{doclicense}
 \interfootnotelinepenalty=10000
+
 %=====================================================================
 % Identificação
 %=====================================================================
@@ -607,6 +608,7 @@
 %=====================================================================
 % Resumo (abstract) e Abstract (englishabstract)
 %=====================================================================
+
 \renewenvironment{abstract}[1]{
   \if@english
   \else
@@ -616,7 +618,7 @@
       \textbf{RESUMO}
     \end{center}
 
-
+    \setlength{\parindent}{0pt}
     \linespread{1}\selectfont
     {#1}
 
@@ -638,10 +640,9 @@
       \textbf{ABSTRACT}
     \end{center}
 
-
+  \setlength{\parindent}{0pt}
   \linespread{1}\selectfont
   \emph{#1}
-
   
 }
 {
@@ -765,6 +766,7 @@
 %=====================================================================
 % Definição do conteúdo de listas de figuras
 %=====================================================================
+
 \newcommand{\makefigurespage}{
   \renewcommand{\listfigurename}{\vspace{-30mm}\normalsize\bfseries\centering LISTA DE ILUSTRAÇÕES\vspace{-10mm}}
   \listoffigures{}
@@ -776,7 +778,8 @@
 %=====================================================================
 \newcommand{\maketablespage}{
   %\addcontentsline{toc}{chapter}{\listtablename} 
-  \renewcommand{\listtablename}{\vspace{-30mm}\normalsize\bfseries\centering LISTA DE TABELAS E QUADROS\vspace{-10mm}}  
+  
+  \renewcommand{\listtablename}{\vspace{-30mm}\normalsize\bfseries\centering LISTA DE TABELAS\vspace{-10mm}}  
   \listoftables{}
   \pagebreak
 }{}
@@ -935,7 +938,7 @@
   \@startsection{subsection}{2}{\z@}%
     {-3.25ex\@plus -1ex \@minus -.2ex}%
     {1.5ex \@plus .2ex}%
-    {\normalfont\bfseries}
+    {\normalfont}
 }
 
 % ***Nomes de subsubsection normais no corpo
