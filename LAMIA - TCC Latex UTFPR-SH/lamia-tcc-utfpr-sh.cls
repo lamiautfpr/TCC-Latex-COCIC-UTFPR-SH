@@ -7,6 +7,7 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{pdfpages}
+\usepackage[table,dvipsnames,xcdraw]{xcolor}
 \usepackage[
   type={CC},
   modifier={by-nc-sa},
@@ -420,7 +421,8 @@
       \bfseries\MakeUppercase{\@city}\\
       \number\year
   \end{center}
-  \blfootnote{% taken from amsart.cls
+  \blfootnote{% taken from amsart.cls 
+  \color{Gray}
   \begin{center}
     \begin{minipage}{3cm}
       \linespread{1}\selectfont
