@@ -1,4 +1,4 @@
-\usepackage[table,xcdraw]{xcolor}
+\usepackage[table,xcdraw,dvipsnames]{xcolor}
 \usepackage{amsmath,amsfonts,amssymb} 
 \usepackage{booktabs}
 \usepackage{algorithmic}
@@ -7,7 +7,6 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{pdfpages}
-\usepackage[table,dvipsnames,xcdraw]{xcolor}
 \usepackage[
   type={CC},
   modifier={by-nc-sa},
