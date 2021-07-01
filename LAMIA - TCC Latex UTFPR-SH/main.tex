@@ -167,6 +167,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Retirar esta parte se o trabalho não tiver bibliografia
 \printbibliography
+\phantomsection % comando necessário para adição de entradas nas referências
+\addcontentsline{toc}{chapter}{\texorpdfstring REFERÊNCIAS} % adiciona as referências no sumário
 \newpage
 
 
@@ -178,7 +180,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A N E X O (opcional)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\annex
+% \inputannex{elementos-postextuais/anexo1.tex}{A}{Exemplos de Objetivo Geral e Específicos}
 \input{elementos-postextuais/anexo1.tex}
 
 

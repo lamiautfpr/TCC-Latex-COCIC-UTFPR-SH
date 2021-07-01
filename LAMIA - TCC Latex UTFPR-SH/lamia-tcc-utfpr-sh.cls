@@ -236,6 +236,7 @@
 \newcommand{\refequation}[1]{\equationname~\ref{#1}}
 \newcommand{\refappendix}[1]{\appendixname~\ref{#1}}
 
+
 %=====================================================================
 % Numeração das páginas
 %=====================================================================
@@ -986,14 +987,20 @@
 \newcommand{\annexname}{Annex}
 
 \newcommand{\annexchapter}[2]{
-    \par
+    % \par
     
-    \vspace{5mm}
-    \noindent
-    \textbf{\MakeUppercase{ANEXO #1}} -- #2
-    \vspace{3mm}
+    % \vspace{5mm}
+    % \noindent
+    % \textbf{\MakeUppercase{ANEXO #1}} - #2
+    % \vspace{3mm}
+  \vspace*{\fill}
+    \begin{center}
+      \textbf{\MakeUppercase{Anexo #1}} - #2
+    \end{center}
+  \vspace*{\fill}
+  \pagebreak
     
-   \addcontentsline{toc}{chapter}{\protect\numberline{}\texorpdfstring{\uppercase{ANEXO #1}}{ANEXO #1}\vspace{-4mm}}
+  \addcontentsline{toc}{chapter}{\protect\texorpdfstring{\uppercase{ANEXO #1}}{ANEXO #1} - #2\vspace{-4mm}}
 
     % \setcounter{chapter}{#1}
     % \setcounter{section}{0}
@@ -1001,19 +1008,28 @@
     % \addcontentsline{toc}{chapter}{#2}
 }
 
-\makeatletter % treat @ as a letter instead of a control word.
-\newcommand\annex{
-    \par
-    % \setcounter{chapter}{0}
-    % \setcounter{section}{0}
-    % \renewcommand\appendixname{Annex}
-    % \renewcommand\appendixpagename{Annexes}
-    % \renewcommand{\appendixtocname}{Annexes}
-    % \gdef\@chapapp{\annexname}
-    % \gdef\thechapter{\@alph\c@chapter}
-    % \renewcommand{\theHchapter}{\annexname.\thechapter}
-    % \addappheadtotoc
+% \makeatletter % treat @ as a letter instead of a control word.
+% \newcommand\inputannex[3]{
+%     % \par
+%     % % \setcounter{chapter}{0}
+%     % % \setcounter{section}{0}
+%     % % \renewcommand\appendixname{Annex}
+%     % % \renewcommand\appendixpagename{Annexes}
+%     % % \renewcommand{\appendixtocname}{Annexes}
+%     % % \gdef\@chapapp{\annexname}
+%     % % \gdef\thechapter{\@alph\c@chapter}
+%     % % \renewcommand{\theHchapter}{\annexname.\thechapter}
+%     % % \addappheadtotoc
     
-    \centerline{\textbf{\MakeUppercase{ANEXOS}}}
-}
-\makeatother
+%     % \centerline{\textbf{\MakeUppercase{ANEXOS}}}
+%   \vspace*{\fill}
+%       \begin{center}
+%         \textbf{\MakeUppercase{Anexo #2}} - #3
+%       \end{center}
+%   \vspace*{\fill}
+%   \pagebreak
+%   \annexchapter{#2}{#3}
+%   \input{#1}
+
+% }
+% \makeatother
