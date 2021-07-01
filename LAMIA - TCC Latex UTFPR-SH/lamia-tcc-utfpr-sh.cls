@@ -1000,7 +1000,7 @@
   \vspace*{\fill}
   \pagebreak
     
-  \addcontentsline{toc}{chapter}{\protect\uppercase{ANEXO #1} - #2\vspace{-4mm}}
+  \addcontentsline{toc}{chapter}{\protect\texorpdfstring{\uppercase{ANEXO #1}}{ANEXO #1} - #2\vspace{-4mm}}
 
     % \setcounter{chapter}{#1}
     % \setcounter{section}{0}
