@@ -75,7 +75,7 @@ Além de fazer o download do repositório, ajude-nos com a atualização do mode
 
 ## Algumas Considerações a Respeito das Referencias
 
-A norma NBR 6030:2018 estipula alguns elementos obrigatórios para cada tipo de referencia bibliografia. Afim de facilitar o desenvolvimento da monografia, a seguir alguns modelos de bibtex para a construção de referencias. São apenas alguns tipos comuns que podem ser encontrados na escrita de uma referencia. 
+A norma NBR 6030:2018 estipula alguns elementos obrigatórios para cada tipo de referencia bibliografia. Afim de facilitar o desenvolvimento da monografia, a seguir alguns modelos de bibtex para a construção de referencias. São apenas alguns tipos comuns que podem ser encontrados na escrita de uma referência. 
 
 @article{Alias,
 	author,
