@@ -341,8 +341,8 @@
 %=====================================================================
 % Definição padrão da folha de rosto.
 %=====================================================================
-\newlength{\titlepagewinwidth}\setlength{\titlepagewinwidth}{95mm}
-\newlength{\titlepagewinheight}\setlength{\titlepagewinheight}{64mm}
+\newlength{\titlepagewinwidth}\setlength{\titlepagewinwidth}{150mm}
+\newlength{\titlepagewinheight}\setlength{\titlepagewinheight}{84mm}        
 \newlength{\titlepagewinvoffset}\setlength{\titlepagewinvoffset}{112mm}
 \newcommand{\location}[3]{
   \gdef\@city{#1}
@@ -607,9 +607,9 @@
   {
 %   \setstretch{2.0}
   \MakeUppercase{\textbf{\utfpr}}\\
-   \vspace{7pt}
+   \vspace{1.5pt}
   \MakeUppercase{\textbf{\coord}}\\
-   \vspace{7pt}
+   \vspace{1.5pt}
    \MakeUppercase{\textbf{\degree}}\\
   \MakeUppercase{\bcc}%\\
   \@ifundefined{@dept}{}{\MakeUppercase{\csname \@dept\endcsname}\\}%
