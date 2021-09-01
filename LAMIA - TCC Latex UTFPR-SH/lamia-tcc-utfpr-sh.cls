@@ -512,7 +512,7 @@
       \@ifundefined{@bancaa}{}{
         \vspace{.8cm}
         \par\noindent\rule{\textwidth}{0.4pt}
-        Nome completo e por extenso do Membro 1 (de acordo com o curriculum lattes) \\
+        Nome completo e por extenso do Membro 2 (de acordo com o curriculum lattes) \\
         Titulação (Especialização, Mestrado, Doutorado)  \\
         Nome completo e por extenso da instituição a qual possui vínculo
 
@@ -520,7 +520,7 @@
       \@ifundefined{@bancab}{}{
         \vspace{.8cm}
         \par\noindent\rule{\textwidth}{0.4pt}
-        Nome completo e por extenso do Membro 1 (de acordo com o curriculum lattes) \\
+        Nome completo e por extenso do Membro 3 (de acordo com o curriculum lattes) \\
         Titulação (Especialização, Mestrado, Doutorado)  \\
         Nome completo e por extenso da instituição a qual possui vínculo
 
