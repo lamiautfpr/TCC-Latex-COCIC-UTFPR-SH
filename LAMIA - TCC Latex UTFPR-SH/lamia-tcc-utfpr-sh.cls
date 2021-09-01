@@ -466,7 +466,7 @@
 %=====================================================================
 % Folha de Aprovação
 %=====================================================================
-\newcommand{\@makeapprovalpage}{%
+\newcommand{\@makeapprovalpage}{% Para alterar essa folha de rosto e utilizar um documento PDF em seu lugar siga as instruções na seção "Definição padrão da folha de rosto" acima.
     \begin{center}
         \textbf{\uppercase{NOME COMPLETO E POR EXTENSO DO AUTOR}}
     \end{center}
