@@ -365,11 +365,11 @@
   \setcounter{page}{1}
   \renewcommand\thepage{} % ocultar numero da pagina
   
-  \@makeindexcard     % ficha catalográfica
+  \@makeindexcard     % ficha catalográfica, comente esse comando para omitir a ficha catalográfica no texto
   \clearpage
   
-  \@makeapprovalpage  % pagina de aprovacao
-%  \includepdf{elementos-pretextuais/folhaAprovacao.pdf}
+  \@makeapprovalpage  % folha de aprovacao em texto, comente esse comando para omitir a folha de aprovação que é construida utilizando texto definido na seção Folha de Aprovação abaixo
+%  \includepdf{elementos-pretextuais/folhaAprovacao.pdf}  % folha de aprovacao em PDF, descomente esse comando para utilizar a folha de aprovação com o arquivo PDF que deve ser inserido na pasta de arquivos pré-textuais
   \renewcommand\thepage{} % ocultar numero da pagina
   % no inicio do conteúdo, o numero da página é configurado para ser exibido novamente
 }
