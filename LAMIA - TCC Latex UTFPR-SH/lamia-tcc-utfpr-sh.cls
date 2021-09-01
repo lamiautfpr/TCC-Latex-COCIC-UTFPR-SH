@@ -368,8 +368,8 @@
   \@makeindexcard     % ficha catalográfica
   \clearpage
   
-  %\@makeapprovalpage  % pagina de aprovacao
- \includepdf{elementos-pretextuais/folhaAprovacao.pdf}
+  \@makeapprovalpage  % pagina de aprovacao
+%  \includepdf{elementos-pretextuais/folhaAprovacao.pdf}
   \renewcommand\thepage{} % ocultar numero da pagina
   % no inicio do conteúdo, o numero da página é configurado para ser exibido novamente
 }
@@ -467,61 +467,81 @@
 % Folha de Aprovação
 %=====================================================================
 \newcommand{\@makeapprovalpage}{%
-
-
     \begin{center}
-    	\centering FOLHA DE APROVAÇÃO 
-    
-    	\centering (FORNECIDA PELA SECRETARIA DO CURSO)
+        \textbf{\uppercase{NOME COMPLETO E POR EXTENSO DO AUTOR}}
     \end{center}
 
-    \vspace{15mm}
+    \vspace{2mm}
 
-   
+    % \vfil
 
-    \vfill
-
-
+     \noindent
+    \begin{center}
+    	\textbf{\uppercase{TÍTULO DO TRABALHO: SUBTÍTULO (SE HOUVER) PRECEDIDO DE DOIS PONTOS}}
+      \end{center}
+      
+      \vspace{4mm}
+      
+      \hspace*{\fill}\parbox[b]{.5\textwidth}{%
+    \linespread{1}\selectfont
+    Trabalho de conclusão de curso apresentado como requisito parcial à obtenção do título de Bacharel em Ciência da Computação da Coordenação de Ciência da Computação da Universidade Tecnológica Federal do Paraná (UTFPR).
+    }
+    
+    \vspace{1cm}
+      
     \noindent
     \begin{center}
-    	\textbf{BANCA EXAMINADORA}
+    	Data de aprovação: Dia/mês por extenso/ano 
   	\end{center}
-
-    \bigskip
+    % \bigskip
     \begin{center}
-    \linespread{1.2}\selectfont
-    \vspace{.8cm}
-      \line(1,0){250}\\
-      \@advisor 
+        \linespread{1}\selectfont
+        \vspace{.5cm}
+        \par\noindent\rule{\textwidth}{0.4pt}
+        Nome completo e por extenso do Membro 1 (de acordo com o curriculum lattes) \\
+        Titulação (Especialização, Mestrado, Doutorado)  \\
+        Nome completo e por extenso da instituição a qual possui vínculo 
       
-      \@ifundefined{@coadvisor}{}{
-      \vspace{.8cm}
-        \line(1,0){250}\\
-        \@coadvisor 
+    %   \@ifundefined{@coadvisor}{}{
+    %   \vspace{.8cm}
+    %     \line(1,0){250}\\
+    %     \@coadvisor 
 
-      }
+    %   }
 
       \@ifundefined{@bancaa}{}{
-      \vspace{.8cm}
-        \line(1,0){250}\\
-        \@bancaa 
+        \vspace{.8cm}
+        \par\noindent\rule{\textwidth}{0.4pt}
+        Nome completo e por extenso do Membro 1 (de acordo com o curriculum lattes) \\
+        Titulação (Especialização, Mestrado, Doutorado)  \\
+        Nome completo e por extenso da instituição a qual possui vínculo
 
       }
       \@ifundefined{@bancab}{}{
-      \vspace{.8cm}
-        \line(1,0){250}\\
-        \@bancab  
+        \vspace{.8cm}
+        \par\noindent\rule{\textwidth}{0.4pt}
+        Nome completo e por extenso do Membro 1 (de acordo com o curriculum lattes) \\
+        Titulação (Especialização, Mestrado, Doutorado)  \\
+        Nome completo e por extenso da instituição a qual possui vínculo
 
       }
-      \@ifundefined{@bancac}{}{
-      \vspace{.8cm}
-        \line(1,0){250}\\
-        \@bancac 
+    %   \@ifundefined{@bancac}{}{
+    %   \vspace{.8cm}
+    %     \line(1,0){250}\\
+    %     \@bancac 
   
-      }
-      \vspace{.8cm}
+    %   }
+    %   \vspace{.8cm}
+    
     \end{center}
-
+    
+    \vspace{2cm}
+    
+    \begin{center}
+      \bfseries\MakeUppercase{\@city}\\
+      \number\year
+  \end{center}
+    
     \pagebreak
 }
 
