@@ -319,8 +319,8 @@
 %=====================================================================
 \setcounter{tocdepth}{2}
 \renewcommand{\cftsecfont}{\bfseries} %comente essa linha o texto não for em negrito
-\setlength{\cftsecindent}{0pt}% Remove a idetação para as seções no sumário
-\setlength{\cftsubsecindent}{0pt}% Remove a identação para as subseçõs no sumário
+\setlength{\cftsecindent}{0pt}% Remove a indentação para as seções no sumário
+\setlength{\cftsubsecindent}{0pt}% Remove a indentação para as subseçõs no sumário
 %=====================================================================
 % Formatação das seções
 %=====================================================================
