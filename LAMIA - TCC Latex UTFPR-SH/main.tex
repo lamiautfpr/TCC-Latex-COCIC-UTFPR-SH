@@ -44,17 +44,27 @@
     filecolor=magenta,      		% cor de arquivos externos 
     urlcolor=blue,}             	% cor de url no texto e nas referências bibliográficas
 \DeclareUnicodeCharacter{0301}{\'{e}} % habilita a adição de caracteres unices nas referência bibliográficas
+
+\usepackage[titles]{tocloft} % formata sumário, lista de figura e lista de tabela
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %C O N F I G U R A Ç Õ E S A D I C I O N A I S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[titles]{tocloft} % pacote customizar a lista de figuras e tabelas
-\renewcommand{\cftfigpresnum}{\figurename\enspace}
-\renewcommand{\cftfigaftersnum}{ -}
+\setlist[itemize]{leftmargin=1.25cm} % indetação da lista de elementos (enumarate e itemize)
+
+% formatação do the table of contents (TOC) -----------
+\renewcommand{\cftsecfont}{\bfseries} %comente essa linha se o texto não for em negrito
+\setlength{\cftsecindent}{0pt}% Remove a indentação para as seções no sumário
+\setlength{\cftsubsecindent}{0pt}% Remove a indentação para as subseções no sumário
+
+\renewcommand{\cftfigpresnum}{\figurename\enspace} % adiciona o label Figura antes da numeração
+\renewcommand{\cftfigaftersnum}{ - } % adiciona um - depois da numeração
 \renewcommand{\cftfignumwidth}{2cm}
 
-\renewcommand{\cfttabpresnum}{\tablename\enspace}
-\renewcommand{\cfttabaftersnum}{ -}
+\renewcommand{\cfttabpresnum}{\tablename\enspace} %adiciona o label Figura antes da numeração
+\renewcommand{\cfttabaftersnum}{ - } % adiciona um - depois da numeração
 \renewcommand{\cfttabnumwidth}{2cm}
+% ------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %I N I C I O  D O  D O C U M E N T O

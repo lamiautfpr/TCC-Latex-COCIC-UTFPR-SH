@@ -58,7 +58,6 @@
 \RequirePackage{listings}
 
 \usepackage[toc]{appendix}
-\usepackage[titles]{tocloft} %formatar conteúdo do sumário
 
 
 \usepackage{enumitem}
@@ -318,9 +317,7 @@
 % Formatação das tabela de conteúdo (Sumário)
 %=====================================================================
 \setcounter{tocdepth}{2}
-\renewcommand{\cftsecfont}{\bfseries} %comente essa linha o texto não for em negrito
-\setlength{\cftsecindent}{0pt}% Remove a indentação para as seções no sumário
-\setlength{\cftsubsecindent}{0pt}% Remove a indentação para as subseçõs no sumário
+
 %=====================================================================
 % Formatação das seções
 %=====================================================================
