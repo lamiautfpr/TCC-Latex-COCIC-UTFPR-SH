@@ -7,7 +7,7 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{pdfpages}
-\usepackage[
+\usepackage[% pacote para adição da marca CC
   type={CC},
   modifier={by-nc-sa},
   version={4.0},
@@ -58,6 +58,8 @@
 \RequirePackage{listings}
 
 \usepackage[toc]{appendix}
+\usepackage[titles]{tocloft} %formatar conteúdo do sumário
+
 
 \usepackage{enumitem}
 
@@ -316,7 +318,9 @@
 % Formatação das tabela de conteúdo (Sumário)
 %=====================================================================
 \setcounter{tocdepth}{2}
-
+\renewcommand{\cftsecfont}{\bfseries} %comente essa linha o texto não for em negrito
+\setlength{\cftsecindent}{0pt}% Remove a idetação para as seções no sumário
+\setlength{\cftsubsecindent}{0pt}% Remove a identação para as subseçõs no sumário
 %=====================================================================
 % Formatação das seções
 %=====================================================================
@@ -336,7 +340,6 @@
 \renewcommand{\subparagraph}{%
   \@startsection{subparagraph}{5}{0pt}{1ex}{-1em}{\reset@font\bfseries}
 }
-
 
 %=====================================================================
 % Definição padrão da folha de rosto.
@@ -405,13 +408,14 @@
 
   \hspace*{\fill}\parbox[b]{.5\textwidth}{%
     \linespread{1}\selectfont
-    Trabalho de conclusão de curso apresentado como requisito parcial à obtenção do título de Bacharel em Ciência da Computação da Coordenação de Ciência da Computação da Universidade Tecnológica Federal do Paraná.
+    Trabalho de conclusão de curso apresentado como requisito para obtenção do título de Bacharel em Ciência da Computação da Coordenação de Ciência da Computação da Universidade Tecnológica Federal do Paraná.
     \\
     \\
     
     \@ifundefined{@advisor}{}{
         \titlepageadvisorinfo
     }
+
     \vfill
   }
   
@@ -421,27 +425,27 @@
       \bfseries\MakeUppercase{\@city}\\
       \number\year
   \end{center}
-  \blfootnote{% taken from amsart.cls 
-  \color{Gray}
-  \begin{center}
-    \begin{minipage}{3cm}
-      \linespread{1}\selectfont
-      \begin{center}
-        \doclicenseImage
-        \href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt}{\underline{4.0 International}}
+  % \blfootnote{% adiciona a licença CC
+  %   \color{Gray}
+  %   \begin{center}
+  %     \begin{minipage}{3cm}
+  %       \linespread{1}\selectfont
+  %       \begin{center}
+  %         \doclicenseImage
+  %         \href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt}{\underline{4.0 International}}
+          
+  %       \end{center}
         
-      \end{center}
-      
-    \end{minipage}
-    \hfill
-    \begin{minipage}{11cm}
-      \linespread{1}\selectfont
-      Esta licença permite remixe, adaptação e criação a partir do trabalho, para fins não comerciais, desde que sejam atribuídos créditos ao(s) autor(es) e que licenciem as novas criações sob termos idênticos.
-      
-      Conteúdos elaborados por terceiros, citados e referenciados nesta obra não são cobertos pela licença.
-    \end{minipage}
-  \end{center}
-  }
+  %     \end{minipage}
+  %     \hfill
+  %     \begin{minipage}{11cm}
+  %       \linespread{1}\selectfont
+  %       Esta licença permite remixe, adaptação e criação a partir do trabalho, para fins não comerciais, desde que sejam atribuídos créditos ao(s) autor(es) e que licenciem as novas criações sob termos idênticos.
+        
+  %       Conteúdos elaborados por terceiros, citados e referenciados nesta obra não são cobertos pela licença.
+  %     \end{minipage}
+  %   \end{center}
+  % }
 }
 
 
@@ -952,7 +956,7 @@
   \@startsection{section}{1}{\z@}%
     {-3.5ex \@plus -1ex \@minus -.2ex}%
     {2.3ex \@plus.2ex}%
-    {\normalfont\MakeUppercase}
+    {\normalfont\bfseries}
 }
 
 % ***Nomes de subsection em negrito no corpo
