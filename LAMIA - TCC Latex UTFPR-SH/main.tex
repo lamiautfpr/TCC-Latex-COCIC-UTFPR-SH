@@ -42,29 +42,19 @@
     linkcolor=black,          	   	% cor dos links do texto como o sumário
     citecolor=black,        		% cor das citações no texto
     filecolor=magenta,      		% cor de arquivos externos 
-    urlcolor=blue,}             	% cor de url no texto e nas referências bibliográficas
+    urlcolor=black,}             	% cor de url no texto e nas referências bibliográficas
 \DeclareUnicodeCharacter{0301}{\'{e}} % habilita a adição de caracteres unices nas referência bibliográficas
-
-\usepackage[titles]{tocloft} % formata sumário, lista de figura e lista de tabela
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %C O N F I G U R A Ç Õ E S A D I C I O N A I S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setlist[itemize]{leftmargin=1.25cm} % indetação da lista de elementos (enumarate e itemize)
-
-% formatação do the table of contents (TOC) -----------
-\renewcommand{\cftsecfont}{\bfseries} %comente essa linha se o texto não for em negrito
-\setlength{\cftsecindent}{0pt}% Remove a indentação para as seções no sumário
-\setlength{\cftsubsecindent}{0pt}% Remove a indentação para as subseções no sumário
-
-\renewcommand{\cftfigpresnum}{\figurename\enspace} % adiciona o label Figura antes da numeração
-\renewcommand{\cftfigaftersnum}{ - } % adiciona um - depois da numeração
+\usepackage[titles]{tocloft} % pacote customizar a lista de figuras e tabelas
+\renewcommand{\cftfigpresnum}{\figurename\enspace}
+\renewcommand{\cftfigaftersnum}{ -}
 \renewcommand{\cftfignumwidth}{2cm}
 
-\renewcommand{\cfttabpresnum}{\tablename\enspace} %adiciona o label Figura antes da numeração
-\renewcommand{\cfttabaftersnum}{ - } % adiciona um - depois da numeração
+\renewcommand{\cfttabpresnum}{\tablename\enspace}
+\renewcommand{\cfttabaftersnum}{ -}
 \renewcommand{\cfttabnumwidth}{2cm}
-% ------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %I N I C I O  D O  D O C U M E N T O
@@ -73,16 +63,15 @@
 
 
 % título da monografia é obrigatório
-\title{\textbf{Título da monografia}}
+\title{\textbf{Principais Configurações na Integração de Visão Computacional e Aprendizagem Profunda: Algoritmos e Técnicas}}
 % Nome do Curso é obrigatório
 
 % autor é obrigatório; máximo de 3 autores (se TCC Empresa)
-\author{Nome completo }{\input{elementos-pretextuais/agradecimentos}}
+\author{Nome completo} {\input{elementos-pretextuais/agradecimentos}}
 %\author{Nome completo aluno 2}{\input{elementos-pretextuais/agradecimentos}}
-%\author{Nome completo aluno 3}{\input{elementos-pretextuais/agradecimentos}}
+%\author{Nome completo aluno 3}
 % orientador é obrigatório
 \advisor[Prof.]{Prof. Me. ou Dr. Nome Completo}{}
-
 % co-orientador é opcional
 %\coadvisor[Prof.]{Nome do co-orientador,~M.Sc.}{}
 
@@ -176,9 +165,11 @@
 % B I B L I O G R A F I A
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Retirar esta parte se o trabalho não tiver bibliografia
-\printbibliography
-\phantomsection % comando necessário para adição de entradas nas referências
-\addcontentsline{toc}{chapter}{\texorpdfstring REEFERÊNCIAS} % adiciona as referências no sumário
+% Se não quiser que apareça no sumário, basta retirar o [] (deixar apenas \printbibliography)
+\printbibliography[
+heading=bibintoc,
+title={REFERÊNCIAS}
+]
 \newpage
 
 
@@ -190,7 +181,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % A N E X O (opcional)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \inputannex{elementos-postextuais/anexo1.tex}{A}{Exemplos de Objetivo Geral e Específicos}
+\annex
 \input{elementos-postextuais/anexo1.tex}
 
 
