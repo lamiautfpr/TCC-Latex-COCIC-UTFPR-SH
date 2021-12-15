@@ -474,9 +474,9 @@
 
     %\vspace{15mm}
 \begin{center}
-\textbf{NOME COMPLETO E POR EXTENSO DO AUTOR}\\
+\textbf{NOME COMPLETO E POR EXTENSO DO(A) AUTOR(A)}\\
     \vspace{1.5cm}
-    {\textbf{TÍTULO DO TRABALHO: SUBTÍTULO (SE HOUVER) PRECEDIDO DE DOIS PONTOS }}
+    {\textbf{O TÍTULO DEVE SER CLARO E PRECISO: SUBTÍTULO (SE HOUVER) DEVE SER PRECEDIDO DE DOIS PONTOS CONFIRMANDO SUA VINCULAÇÃO AO TÍTULO }}
     \vspace{1.5cm}
 \end{center}
 
@@ -485,11 +485,9 @@
     Trabalho de conclusão de curso de graduação apresentado como requisito para obtenção do título de Bacharel em Ciência da Computação da Universidade Tecnológica Federal do Paraná (UTFPR).
     \\
     \\
-    
-    \vfill
   }
 
-    \vfill
+    %\vfill
 
 
     \noindent
@@ -497,7 +495,7 @@
     	Data de aprovação: Dia/mês por extenso/ano
   	\end{center}
 
-    \bigskip
+    %\bigskip
     \begin{center}
     \linespread{1.2}\selectfont
     \vspace{.8cm}
@@ -508,35 +506,35 @@
       \vspace{.8cm}
         \line(1,0){400}\\
         \@coadvisor 
-
       }
 
       \@ifundefined{@bancaa}{}{
       \vspace{.8cm}
         \line(1,0){400}\\
         \@bancaa 
-
+        
       }
       \@ifundefined{@bancab}{}{
       \vspace{.8cm}
         \line(1,0){400}\\
-        \@bancab  
-
+        \@bancab
+        
       }
       \@ifundefined{@bancac}{}{
       \vspace{.8cm}
         \line(1,0){400}\\
         \@bancac 
-  
+        
       }
       \vspace{.8cm}
     \end{center}
 
 \begin{center}
-\textbf{CIDADE} 
+\vspace{1.5cm}
+\textbf{SANTA HELENA} 
 
 \\
-\textbf{ANO DA ENTREGA}
+\textbf{2021}
     
 \end{center}
 
@@ -910,10 +908,10 @@
   
   \addcontentsline{toc}{chapter}{\protect\numberline{}\texorpdfstring{\uppercase{\bibname}}{\bibname}}
   
-  %\renewcommand{\bibname}{\vspace{-70pt}\selectfont\normalsize\centerline{\textbf{REFERÊNCIAS}}\vspace{-20pt}} 
+    \renewcommand{\bibname}{\vspace{-70pt}\selectfont\normalsize\centerline{\textbf{REFERÊNCIAS}}\vspace{-20pt}}  
   
-  %\bibliographystyle{#1}
-  %\bibliography{#2}
+  \bibliographystyle{#1}
+  \bibliography{#2}
   
   \pagebreak
 }{}
@@ -1011,11 +1009,11 @@
     %\noindent
     \centering
     \vspace*{\fill}
-    \textbf{\MakeUppercase{ANEXO #1}} -- #2
+    \textbf{\MakeUppercase{APÊNDICE #1}} -- #2
     \vspace*{\fill}
     %\vspace{3mm}
     
-   \addcontentsline{toc}{chapter}{\protect\numberline{}\texorpdfstring{\uppercase{ANEXO #1}}{ANEXO #1}\vspace{-4mm}}
+   \addcontentsline{toc}{chapter}{\protect\numberline{}\texorpdfstring{\uppercase{APÊNDICE #1}}{APÊNDICE #1} -- #2\vspace{-4mm}}
 
     % \setcounter{chapter}{#1}
     % \setcounter{section}{0}
