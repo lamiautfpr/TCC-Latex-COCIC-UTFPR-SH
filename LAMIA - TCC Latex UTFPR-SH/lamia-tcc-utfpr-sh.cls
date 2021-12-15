@@ -7,7 +7,7 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{pdfpages}
-\usepackage[% pacote para adição da marca CC
+\usepackage[
   type={CC},
   modifier={by-nc-sa},
   version={4.0},
@@ -58,7 +58,6 @@
 \RequirePackage{listings}
 
 \usepackage[toc]{appendix}
-
 
 \usepackage{enumitem}
 
@@ -181,10 +180,10 @@
 %N O M E S
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\utfpr{Universidade Tecnológica Federal do Paraná}
-\def\coord{Coordenação de Ciência da Computação}
+%\def\coord{Coordenação de Ciência da Computação}
 \def\bcc{} %(preencher quando existir departamento)
 \def\dcc{} %(preencher quando existir pos lato ou scritu senso)
-\def\degree{Ciência da Computação} %(Nome do Curso)
+%\def\degree{Ciência da Computação} %(Nome do Curso)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %D I M E N S Õ E S
@@ -236,7 +235,6 @@
 \newcommand{\refchapter}[1]{\chaptername~\ref{#1}}
 \newcommand{\refequation}[1]{\equationname~\ref{#1}}
 \newcommand{\refappendix}[1]{\appendixname~\ref{#1}}
-
 
 %=====================================================================
 % Numeração das páginas
@@ -316,7 +314,7 @@
 %=====================================================================
 % Formatação das tabela de conteúdo (Sumário)
 %=====================================================================
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{5}
 
 %=====================================================================
 % Formatação das seções
@@ -338,6 +336,7 @@
   \@startsection{subparagraph}{5}{0pt}{1ex}{-1em}{\reset@font\bfseries}
 }
 
+
 %=====================================================================
 % Definição padrão da folha de rosto.
 %=====================================================================
@@ -352,11 +351,11 @@
 
 
 \renewcommand{\maketitle}{%
-  \@makecoverpage     % capa
+ \@makecoverpage     % capa
   \clearpage
   
   \begin{titlepage}
-    \thetitlepage     % folha de rosto
+   \thetitlepage     % folha de rosto
   \end{titlepage}
   \clearpage
   
@@ -365,11 +364,11 @@
   \setcounter{page}{1}
   \renewcommand\thepage{} % ocultar numero da pagina
   
-  \@makeindexcard     % ficha catalográfica, comente esse comando para omitir a ficha catalográfica no texto
+  %\@makeindexcard     % ficha catalográfica
   \clearpage
   
-  \@makeapprovalpage  % folha de aprovacao em texto, comente esse comando para omitir a folha de aprovação que é construida utilizando texto definido na seção Folha de Aprovação abaixo
-%  \includepdf{elementos-pretextuais/folhaAprovacao.pdf}  % folha de aprovacao em PDF, descomente esse comando para utilizar a folha de aprovação com o arquivo PDF que deve ser inserido na pasta de arquivos pré-textuais
+  \@makeapprovalpage  % pagina de aprovacao
+ %\includepdf{elementos-pretextuais/folhaAprovacao.pdf}
   \renewcommand\thepage{} % ocultar numero da pagina
   % no inicio do conteúdo, o numero da página é configurado para ser exibido novamente
 }
@@ -405,14 +404,13 @@
 
   \hspace*{\fill}\parbox[b]{.5\textwidth}{%
     \linespread{1}\selectfont
-    Trabalho de conclusão de curso apresentado como requisito para obtenção do título de Bacharel em Ciência da Computação da Coordenação de Ciência da Computação da Universidade Tecnológica Federal do Paraná.
+    Trabalho de conclusão de curso de graduação apresentado como requisito para obtenção do título de Bacharel em Ciência da Computação da Universidade Tecnológica Federal do Paraná (UTFPR).
     \\
     \\
     
     \@ifundefined{@advisor}{}{
         \titlepageadvisorinfo
     }
-
     \vfill
   }
   
@@ -422,27 +420,25 @@
       \bfseries\MakeUppercase{\@city}\\
       \number\year
   \end{center}
-  % \blfootnote{% adiciona a licença CC
-  %   \color{Gray}
-  %   \begin{center}
-  %     \begin{minipage}{3cm}
-  %       \linespread{1}\selectfont
-  %       \begin{center}
-  %         \doclicenseImage
-  %         \href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt}{\underline{4.0 International}}
-          
-  %       \end{center}
+  \blfootnote{% taken from amsart.cls 
+  \color{Gray}
+  \begin{center}
+    \begin{minipage}{3cm}
+      \linespread{1}\selectfont
+      \begin{center}
+        \doclicenseImage
+        \href{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt}{\underline{4.0 International}}
         
-  %     \end{minipage}
-  %     \hfill
-  %     \begin{minipage}{11cm}
-  %       \linespread{1}\selectfont
-  %       Esta licença permite remixe, adaptação e criação a partir do trabalho, para fins não comerciais, desde que sejam atribuídos créditos ao(s) autor(es) e que licenciem as novas criações sob termos idênticos.
-        
-  %       Conteúdos elaborados por terceiros, citados e referenciados nesta obra não são cobertos pela licença.
-  %     \end{minipage}
-  %   \end{center}
-  % }
+      \end{center}
+      
+    \end{minipage}
+    \hfill
+    \begin{minipage}{11cm}
+      \linespread{1}\selectfont
+      Esta licença permite compartilhamento, remixe, adaptação e criação a partir do trabalho, mesmo para fins comerciais, desde que sejam atribuídos créditos ao(s) autor(es). Conteúdos elaborados por terceiros, citados e referenciados nesta obra não são cobertos pela licença.
+    \end{minipage}
+  \end{center}
+  }
 }
 
 
@@ -467,82 +463,83 @@
 %=====================================================================
 % Folha de Aprovação
 %=====================================================================
-\newcommand{\@makeapprovalpage}{% Para alterar essa folha de rosto e utilizar um documento PDF em seu lugar siga as instruções na seção "Definição padrão da folha de rosto" acima.
-    \begin{center}
-        \textbf{\uppercase{NOME COMPLETO E POR EXTENSO DO AUTOR}}
-    \end{center}
+\newcommand{\@makeapprovalpage}{%
 
-    \vspace{2mm}
 
-    % \vfil
-
-     \noindent
-    \begin{center}
-    	\textbf{\uppercase{TÍTULO DO TRABALHO: SUBTÍTULO (SE HOUVER) PRECEDIDO DE DOIS PONTOS}}
-      \end{center}
-      
-      \vspace{4mm}
-      
-      \hspace*{\fill}\parbox[b]{.5\textwidth}{%
-    \linespread{1}\selectfont
-    Trabalho de conclusão de curso apresentado como requisito parcial à obtenção do título de Bacharel em Ciência da Computação da Coordenação de Ciência da Computação da Universidade Tecnológica Federal do Paraná (UTFPR).
-    }
+    %\begin{center}
+    %	\centering FOLHA DE APROVAÇÃO 
     
-    \vspace{1cm}
-      
+    %	\centering (FORNECIDA PELA SECRETARIA DO CURSO)
+    %\end{center}
+
+    %\vspace{15mm}
+\begin{center}
+\textbf{NOME COMPLETO E POR EXTENSO DO AUTOR}\\
+    \vspace{1.5cm}
+    {\textbf{TÍTULO DO TRABALHO: SUBTÍTULO (SE HOUVER) PRECEDIDO DE DOIS PONTOS }}
+    \vspace{1.5cm}
+\end{center}
+
+   \hspace*{\fill}\parbox[b]{.5\textwidth}{%
+    \linespread{1}\selectfont
+    Trabalho de conclusão de curso de graduação apresentado como requisito para obtenção do título de Bacharel em Ciência da Computação da Universidade Tecnológica Federal do Paraná (UTFPR).
+    \\
+    \\
+    
+    \vfill
+  }
+
+    \vfill
+
+
     \noindent
     \begin{center}
-    	Data de aprovação: Dia/mês por extenso/ano 
+    	Data de aprovação: Dia/mês por extenso/ano
   	\end{center}
-    % \bigskip
-    \begin{center}
-        \linespread{1}\selectfont
-        \vspace{.5cm}
-        \par\noindent\rule{\textwidth}{0.4pt}
-        Nome completo e por extenso do Membro 1 (de acordo com o curriculum lattes) \\
-        Titulação (Especialização, Mestrado, Doutorado)  \\
-        Nome completo e por extenso da instituição a qual possui vínculo 
-      
-    %   \@ifundefined{@coadvisor}{}{
-    %   \vspace{.8cm}
-    %     \line(1,0){250}\\
-    %     \@coadvisor 
 
-    %   }
+    \bigskip
+    \begin{center}
+    \linespread{1.2}\selectfont
+    \vspace{.8cm}
+      \line(1,0){400}\\
+      \@advisor 
+      
+      \@ifundefined{@coadvisor}{}{
+      \vspace{.8cm}
+        \line(1,0){400}\\
+        \@coadvisor 
+
+      }
 
       \@ifundefined{@bancaa}{}{
-        \vspace{.8cm}
-        \par\noindent\rule{\textwidth}{0.4pt}
-        Nome completo e por extenso do Membro 2 (de acordo com o curriculum lattes) \\
-        Titulação (Especialização, Mestrado, Doutorado)  \\
-        Nome completo e por extenso da instituição a qual possui vínculo
+      \vspace{.8cm}
+        \line(1,0){400}\\
+        \@bancaa 
 
       }
       \@ifundefined{@bancab}{}{
-        \vspace{.8cm}
-        \par\noindent\rule{\textwidth}{0.4pt}
-        Nome completo e por extenso do Membro 3 (de acordo com o curriculum lattes) \\
-        Titulação (Especialização, Mestrado, Doutorado)  \\
-        Nome completo e por extenso da instituição a qual possui vínculo
+      \vspace{.8cm}
+        \line(1,0){400}\\
+        \@bancab  
 
       }
-    %   \@ifundefined{@bancac}{}{
-    %   \vspace{.8cm}
-    %     \line(1,0){250}\\
-    %     \@bancac 
+      \@ifundefined{@bancac}{}{
+      \vspace{.8cm}
+        \line(1,0){400}\\
+        \@bancac 
   
-    %   }
-    %   \vspace{.8cm}
-    
+      }
+      \vspace{.8cm}
     \end{center}
+
+\begin{center}
+\textbf{CIDADE} 
+
+\\
+\textbf{ANO DA ENTREGA}
     
-    \vspace{2cm}
-    
-    \begin{center}
-      \bfseries\MakeUppercase{\@city}\\
-      \number\year
-  \end{center}
-    
+\end{center}
+
     \pagebreak
 }
 
@@ -763,7 +760,7 @@
 
 
 %=====================================================================
-% Definição do conteúdo de "dedicatória"
+% Definição do conteúdo de "epígrafe"
 %=====================================================================
 \newcommand{\makeepigraphpage}{
 
@@ -913,10 +910,10 @@
   
   \addcontentsline{toc}{chapter}{\protect\numberline{}\texorpdfstring{\uppercase{\bibname}}{\bibname}}
   
-  \renewcommand{\bibname}{\vspace{-70pt}\selectfont\normalsize\centerline{\textbf{REFERÊNCIAS}}\vspace{-20pt}} 
+  %\renewcommand{\bibname}{\vspace{-70pt}\selectfont\normalsize\centerline{\textbf{REFERÊNCIAS}}\vspace{-20pt}} 
   
-  \bibliographystyle{#1}
-  \bibliography{#2}
+  %\bibliographystyle{#1}
+  %\bibliography{#2}
   
   \pagebreak
 }{}
@@ -953,7 +950,7 @@
   \@startsection{section}{1}{\z@}%
     {-3.5ex \@plus -1ex \@minus -.2ex}%
     {2.3ex \@plus.2ex}%
-    {\normalfont\bfseries}
+    {\normalfont\MakeUppercase}
 }
 
 % ***Nomes de subsection em negrito no corpo
@@ -1008,20 +1005,17 @@
 \newcommand{\annexname}{Annex}
 
 \newcommand{\annexchapter}[2]{
-    % \par
+    \par
     
-    % \vspace{5mm}
-    % \noindent
-    % \textbf{\MakeUppercase{ANEXO #1}} - #2
-    % \vspace{3mm}
-  \vspace*{\fill}
-    \begin{center}
-      \textbf{\MakeUppercase{Anexo #1}} - #2
-    \end{center}
-  \vspace*{\fill}
-  \pagebreak
+    \vspace{5mm}
+    %\noindent
+    \centering
+    \vspace*{\fill}
+    \textbf{\MakeUppercase{ANEXO #1}} -- #2
+    \vspace*{\fill}
+    %\vspace{3mm}
     
-  \addcontentsline{toc}{chapter}{\protect\texorpdfstring{\uppercase{ANEXO #1}}{ANEXO #1} - #2\vspace{-4mm}}
+   \addcontentsline{toc}{chapter}{\protect\numberline{}\texorpdfstring{\uppercase{ANEXO #1}}{ANEXO #1}\vspace{-4mm}}
 
     % \setcounter{chapter}{#1}
     % \setcounter{section}{0}
@@ -1029,28 +1023,19 @@
     % \addcontentsline{toc}{chapter}{#2}
 }
 
-% \makeatletter % treat @ as a letter instead of a control word.
-% \newcommand\inputannex[3]{
-%     % \par
-%     % % \setcounter{chapter}{0}
-%     % % \setcounter{section}{0}
-%     % % \renewcommand\appendixname{Annex}
-%     % % \renewcommand\appendixpagename{Annexes}
-%     % % \renewcommand{\appendixtocname}{Annexes}
-%     % % \gdef\@chapapp{\annexname}
-%     % % \gdef\thechapter{\@alph\c@chapter}
-%     % % \renewcommand{\theHchapter}{\annexname.\thechapter}
-%     % % \addappheadtotoc
+\makeatletter % treat @ as a letter instead of a control word.
+\newcommand\annex{
+    \par
+    % \setcounter{chapter}{0}
+    % \setcounter{section}{0}
+    % \renewcommand\appendixname{Annex}
+    % \renewcommand\appendixpagename{Annexes}
+    % \renewcommand{\appendixtocname}{Annexes}
+    % \gdef\@chapapp{\annexname}
+    % \gdef\thechapter{\@alph\c@chapter}
+    % \renewcommand{\theHchapter}{\annexname.\thechapter}
+    % \addappheadtotoc
     
-%     % \centerline{\textbf{\MakeUppercase{ANEXOS}}}
-%   \vspace*{\fill}
-%       \begin{center}
-%         \textbf{\MakeUppercase{Anexo #2}} - #3
-%       \end{center}
-%   \vspace*{\fill}
-%   \pagebreak
-%   \annexchapter{#2}{#3}
-%   \input{#1}
-
-% }
-% \makeatother
+    %\centerline{\textbf{\MakeUppercase{ANEXOS}}}
+}
+\makeatother
