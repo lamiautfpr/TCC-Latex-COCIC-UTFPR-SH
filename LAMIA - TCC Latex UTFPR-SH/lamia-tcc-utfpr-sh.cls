@@ -401,6 +401,12 @@
 \newcommand{\thetitlepage}{%
 
   \noindent\@topboxrosto
+  
+  \centering
+\textbf{
+ TERM PAPER UNDERGRADUATE THESIS
+    \vspace{10mm}
+}
 
   \hspace*{\fill}\parbox[b]{.5\textwidth}{%
     \linespread{1}\selectfont
