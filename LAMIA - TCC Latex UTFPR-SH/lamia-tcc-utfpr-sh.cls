@@ -63,6 +63,8 @@
 
 \usepackage[labelfont=bf, font={footnotesize, bf}]{caption}
 \captionsetup[table]{skip=10pt}
+%% Definição do separador da legenda de ':' para '-'
+\captionsetup{labelsep={endash}}
 
 \usepackage{float}
 \usepackage{url}
