@@ -1,0 +1,50 @@
+%% Epígrafe (elemento opcional)
+%% Texto em que se apresenta uma citação, seguida de indicação de autoria,
+%% relacionada com a matéria tratada no corpo do trabalho.
+%%%% Opção 1: baseada na ABNT NBR 10520 (citações diretas curtas e longas).
+%%%% Ambiente {Epigraph*}: remove o formato de citação direta longa.
+% \begin{Epigraph}%% Argumentos (2):
+% % [Deslocamento Vertical]%% Escala de comprimento a partir da margem superior
+% % [Título]%% Não se aplica
+% %%%%%% Epígrafes nos idiomas primário (texto) e original (nota de rodapé)
+% %%%%%% [Arg-1]: idioma (brazilian ou english).
+% %%%%%% {Arg-2}: autoria.
+% %%%%%% {Arg-3}: texto.
+% %%%%%% [Arg-4]: nota de rodapé.
+% \Citation[brazilian]{\cite[tradução]{Einstein1921}}{%
+%   Até onde as leis da matemática se referem à realidade, não são certas; e até onde são certas, não se referem à realidade.
+% }[%
+%   \Citation[english]{\cite{Einstein1921}}{%
+%     As far as the laws of mathematics refer to reality, they are not certain; and as far as they are certain, they do not refer to reality.
+%   }.
+% ].
+% \par%
+% \Citation[brazilian]{\cite[p.~37, tradução]{Asimov1950}}{%
+%   Primeira Lei: um robô não pode ferir um ser humano ou, por omissão, permitir que um ser humano sofra algum mal.
+%   Segunda Lei: um robô deve obedecer às ordens que lhe sejam dadas por seres humanos, exceto nos casos em que tais ordens contrariem a Primeira Lei.
+%   Terceira Lei: um robô deve proteger sua própria existência desde que tal proteção não entre em conflito com a Primeira ou Segunda Leis.
+% }[%
+%   \Citation[english]{\cite[37]{Asimov1950}}{%
+%     First Law: a robot may not injure a human being or, through inaction, allow a human being to come to harm.
+%     Second Law: a robot must obey the orders given it by human beings except where such orders would conflict with the First Law.
+%     Third Law: a robot must protect its own existence as long as such protection does not conflict with the First or Second Laws.
+%   }.
+% ].
+% \end{Epigraph}
+%%%% Opção 2: baseada na classe de documento memoir.
+% \begin{Epigraphs}%% Argumentos (2):
+% [Deslocamento Vertical]%% Escala de comprimento a partir da margem superior
+% [Título]%% Não se aplica
+%%%%%% Epígrafes nos idiomas primário (texto) e original (nota de rodapé)
+%%%%%% [Arg-1]: idioma (brazilian ou english).
+%%%%%% {Arg-2}: autoria.
+%%%%%% {Arg-3}: texto.
+%%%%%% [Arg-4]: nota de rodapé.
+% \QItem[brazilian]{\cite[tradução]{Einstein1921}}{%
+%   Até onde as leis da matemática se referem à realidade, não são certas; e até onde são certas, não se referem à realidade.
+% }[%
+%   \Citation[english]{\cite{Einstein1921}}{%
+%     As far as the laws of mathematics refer to reality, they are not certain; and as far as they are certain, they do not refer to reality.
+%   }.
+% ]
+% \end{Epigraphs}

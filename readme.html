@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>[Federal University of Technology — Paraná] UTFPR-Thesis</title>
+    <img src="./Pre-Textual/Logos/utfpr.png" alt="UTFPR" align="right" height="60"/>
+    <meta charset="utf-8"/>
+  </head>
+  <h1>[Federal University of Technology — Paraná] UTF<span style="font-size:18px">PR</span>-Thesis</h1>
+  <p><a target="_blank" href="./utfpr-thesis.pdf">Go to PDF file of this LaTeX template</a></p>
+  <body bgcolor="Silver">
+    <div style="border: 2px solid black">
+    <p>This LaTeX template (unofficial) allows the production of academic works (doctoral, master, and bachelor theses, among others) of the Federal University of Technology — Paraná (UTFPR). It was developed using the <a href="http://www.ctan.org/pkg/memoir">memoir</a> LaTeX class, to meet the requirements of the Brazilian Association of Technical Standards (ABNT) for the development of Brazilian technical and scientific documents. Also, several code snippets of the <a href="http://www.abntex.net.br/">abnTeX2</a> LaTeX class and others developed by users of the <a href="http://tex.stackexchange.com/">TeX-LaTeX Stack Exchange</a> were used.</p>
+    <p>Status: added by Luiz E. M. Lima, maintenance on demand.<br>
+    Last updated: October 8, 2023 (Version 1.7).</p>
+    </div>
+    <br>
+    <div style="border: 2px solid black">
+    <p>Este modelo LaTeX (não oficial) permite a produção de trabalhos acadêmicos (teses, dissertações, trabalhos de conclusão, entre outros) da Universidade Tecnológica Federal do Paraná (UTFPR). Foi desenvolvido utilizando a classe LaTeX <a href="http://www.ctan.org/pkg/memoir">memoir</a>, de modo a atender aos requisitos da Associação Brasileira de Normas Técnicas (ABNT) para o desenvolvimento de documentos técnicos e científicos brasileiros. Além disso, diversos trechos de códigos da classe LaTeX <a href="http://www.abntex.net.br/">abnTeX2</a> e outros desenvolvidos por usuários do <a href="http://tex.stackexchange.com/">TeX-LaTeX Stack Exchange</a> foram usados.</p>
+    <p>Estado: adicionado por Luiz E. M. Lima, manutenção sob demanda. Disponibilizado e adaptado pelo LAMIA - Laboratório de Aprendizado de Máquina e Images Aplicados à Indústria <br>
+    Última atualização: 8 de outubro de 2023 (Versão 1.7).</p>
+    </div>
+    <p>Este arquivo apresenta algumas informações a respeito do UTF<span style="font-size:10px">PR</span>-Thesis, modelo LaTeX para produção de trabalhos acadêmicos (teses, dissertações, trabalhos de conclusão, entre outros) da UTFPR, e está dividido nas seguintes seções:</p>
+      <ol>
+        <li> Arquivos constituintes do projeto.
+        <li> Aplicativos e ferramentas.
+        <li> Aplicativos e ferramentas online.
+        <li> Informações e dicas sobre TeX/LaTeX.
+        <li> Dicas de uso.
+      </ol>
+    <section>
+      <h1>1. Arquivos constituintes do projeto</h1>
+      <p>Breve descrição dos arquivos que devem ser manipulados no modelo LaTeX:</p>
+        <ul>
+          <li><a target="_blank" href="./utfpr-thesis.tex">./utfpr-thesis.tex</a> (Principal).
+          <li><a target="_blank" href="./Pre-Textual/pre-textual.tex">./Pre-Textual/pre-textual.tex</a> (Elementos Pré-Textuais).
+          <li><a target="_blank" href="./Pre-Textual/entries-acronyms.tex">./Pre-Textual/entries-acronyms.tex</a> (Abreviaturas e Siglas — Entradas <b>MakeIndex</b>).
+          <li><a target="_blank" href="./Pre-Textual/entries-symbols.tex">./Pre-Textual/entries-symbols.tex</a> (Símbolos — Entradas <b>MakeIndex</b>).
+          <li><a target="_blank" href="./Pre-Textual/list-acronyms.tex">./Pre-Textual/list-acronyms.tex</a> (Abreviaturas e Siglas — Lista Manual).
+          <li><a target="_blank" href="./Pre-Textual/list-symbols.tex">./Pre-Textual/list-symbols.tex</a> (Símbolos — Lista Manual).
+          <li><a target="_blank" href="./Chapter-1/chapter-1.tex">./Chapter-1/chapter-1.tex</a> (Capítulo 1).
+          <li><a target="_blank" href="./Chapter-2/chapter-2.tex">./Chapter-2/chapter-2.tex</a> (Capítulo 2).
+          <li><a target="_blank" href="./Chapter-3/chapter-3.tex">./Chapter-3/chapter-3.tex</a> (Capítulo 3).
+          <li><a target="_blank" href="./Chapter-4/chapter-4.tex">./Chapter-4/chapter-4.tex</a> (Capítulo 4).
+          <li><a target="_blank" href="./Chapter-5/chapter-5.tex">./Chapter-5/chapter-5.tex</a> (Capítulo 5).
+          <li><a target="_blank" href="./Post-Textual/references.bib">./Post-Textual/references.bib</a> (Referências — Base de Dados).
+          <li><a target="_blank" href="./Post-Textual/entries-glossary.tex">./Post-Textual/entries-glossary.tex</a> (Glossário — Entradas <b>MakeIndex</b>).
+          <li><a target="_blank" href="./Post-Textual/list-glossary.tex">./Post-Textual/list-glossary.tex</a> (Glossário — Lista Manual).
+          <li><a target="_blank" href="./Post-Textual/appendix-a.tex">./Post-Textual/appendix-a.tex</a> (Apêndice A).
+          <li><a target="_blank" href="./Post-Textual/appendix-b.tex">./Post-Textual/appendix-b.tex</a> (Apêndice B).
+          <li><a target="_blank" href="./Post-Textual/annex-a.tex">./Post-Textual/annex-a.tex</a> (Anexo A).
+          <li><a target="_blank" href="./Post-Textual/annex-b.tex">./Post-Textual/annex-b.tex</a> (Anexo B).
+        </ul>
+      <p>Breve descrição dos demais arquivos constituintes:</p>
+        <ul>
+          <li><a target="_blank" href="./Chapter-Example/chapter-example.tex">./Chapter-Example/chapter-example.tex</a> (Capítulo de Exemplo).
+          <li><a target="_blank" href="./Post-Textual/references-examples.bib">./Post-Textual/references-examples.bib</a> (Exemplos de Referências — Base de Dados).
+          <li><a target="_blank" href="./utfpr-thesis.sty">./utfpr-thesis.sty</a> (Pacote de Estilos).
+          <li><a target="_blank" href="./utfpr-thesis.pdf">./utfpr-thesis.pdf</a> (PDF Resultante da Compilação).
+          <li><a target="_blank" href="./readme.html">./readme.html</a> (Descrição e Informações).
+          <li><a target="_blank" href="./readme.txt">./readme.txt</a> (Breve Descrição).
+        </ul>
+      <p>Os demais arquivos nos diretórios (pastas) do projeto são imagens, carregadas no modelo em formatos suportados, assim como alguns arquivos-fontes para geração das mesmas ou de elementos do documento. Não apagar o conteúdo dos diretórios:</p>
+        <ul>
+          <li><a target="_blank" href="./Pre-Textual/">./Pre-Textual/</a>.
+          <li><a target="_blank" href="./Pre-Textual/Backgrounds/">./Pre-Textual/Backgrounds/</a>.
+          <li><a target="_blank" href="./Pre-Textual/Extras/">./Pre-Textual/Extras/</a>.
+          <li><a target="_blank" href="./Pre-Textual/Logos/">./Pre-Textual/Logos/</a>.
+          <li><a target="_blank" href="./Pre-Textual/Logos/Campi/">./Pre-Textual/Logos/Campi/</a>.
+          <li><a target="_blank" href="./Post-Textual/">./Post-Textual/</a>.
+        </ul>
+      <h2>1.1. Compilação dos arquivos</h2>
+      <p>No diretório do projeto, abra um prompt de comando (no Windows) ou um console (no Linux) e digite <q><i>make help</i></q> para obter informações a respeito dos comandos de compilação dos arquivos do modelo LaTeX:</p>
+        <ul>
+          <li><a target="_blank" href="./make.bat">./make.bat</a> (<b>Batchfile</b> para Compilação no Prompt de Comando do Windows).
+          <li><a target="_blank" href="./makefile">./makefile</a> (<b>Makefile</b> para Compilação no Console do Linux).
+        </ul>
+    </section>
+    <section>
+      <h1>2. Aplicativos e ferramentas</h1>
+        <ol type="a">
+          <li>Compiladores/distribuições TeX/LaTeX:
+            <ul>
+              <li><a href="http://www.tug.org/texlive/">TeX Live</a> (Linux e Windows).
+              <li><a href="http://miktex.org/">MiKTeX</a> (Linux, Mac e Windows).
+              <li><a href="http://www.tug.org/mactex/">MacTeX</a> (Mac).
+            </ul>
+          <li>Editores TeX/LaTeX:
+            <ul>
+              <li><a href="http://www.xm1math.net/texmaker/">Texmaker</a> (Linux, Mac e Windows).
+              <li><a href="http://texstudio.sourceforge.net/">TeXstudio</a> (Linux, Mac e Windows).
+              <li><a href="http://www.tug.org/texworks/">TeXworks</a> (Linux, Mac e Windows).
+              <li><a href="http://www.texniccenter.org/">TeXnicCenter</a> (Windows).
+              <li><a href="http://www.winshell.de/">WinShell</a> (Windows).
+            </ul>
+          <li>Editores/gerenciadores BibTeX (referências):
+            <ul>
+              <li><a href="http://jabref.sourceforge.net/">JabRef</a> (Linux, Mac e Windows).
+              <li><a href="http://www.mendeley.com/">Mendeley</a> (Linux, Mac e Windows).
+              <li><a href="http://www.zotero.org/">Zotero</a> (Linux, Mac e Windows).
+              <li><a href="http://sites.google.com/site/bibfilex/">Bibfilex</a> (Linux, Mac e Windows).
+              <li><a href="http://www.docear.org/">Docear</a> (Linux, Mac e Windows).
+            </ul>
+          <li>Editores de equações TeX/LaTeX:
+            <ul>
+              <li><a href="http://sourceforge.net/projects/dragmath/">DragMath</a> (Linux, Mac e Windows).
+              <li><a href="http://equalx.sourceforge.net/">EqualX</a> (Linux, Mac e Windows).
+            </ul>
+          <li>Editores de tabelas TeX/LaTeX:
+            <ul>
+              <li><a href="http://ctan.org/pkg/excel2latex/">Excel2LaTeX</a> (Windows).
+              <li><a href="http://calc2latex.sourceforge.net/">Calc2LaTeX</a> (Linux, Mac e Windows).
+              <li><a href="http://ctan.org/pkg/latable/">LaTable</a> (Windows).
+            </ul>
+          <li>Editores de imagens/diagramas/gráficos:
+            <ul>
+              <li><a href="http://latexdraw.sourceforge.net/">LaTeXDraw</a> (Linux, Mac e Windows).
+              <li><a href="http://asymptote.sourceforge.net/">Asymptote</a> (Linux, Mac e Windows).
+              <li><a href="http://inkscape.org/">Inkscape</a> (Linux, Mac e Windows).
+              <li><a href="http://www.gimp.org/">GIMP</a> (Linux, Mac e Windows).
+              <li><a href="http://dia-installer.de/">Dia Diagram Editor</a> (Linux, Mac e Windows).
+              <li><a href="http://www.draw.io/">draw.io</a> (Linux, Mac e Windows).
+              <li><a href="http://www.gnuplot.info/">gnuplot</a> (Linux, Mac e Windows).
+              <li><a href="http://www.geogebra.org/">GeoGebra</a> (Linux, Mac e Windows).
+              <li><a href="http://sourceforge.net/projects/gratex/">GraTeX</a> (Linux, Mac e Windows).
+            </ul>
+          <li>Visualizadores de PDF:
+            <ul>
+              <li><a href="http://www.sumatrapdfreader.org/free-pdf-reader.html">Sumatra PDF</a> (Windows).
+              <li><a href="http://skim-app.sourceforge.io/">Skim</a> (Mac).
+              <li><a href="http://wiki.gnome.org/Apps/Evince/">Evince</a> (Linux).
+              <li><a href="http://pdfpresenter.sourceforge.net/">PDF Presenter</a> (Linux, Mac e Windows).
+              <li><a href="http://impressive.sourceforge.net/">Impressive</a> (Linux, Mac e Windows).
+            </ul>
+          <li>Interpretadores de Postscript e PDF:
+            <ul>
+              <li><a href="http://ghostscript.com/">Ghostscript</a> (Linux e Windows).
+            </ul>
+        </ol>
+    </section>
+    <section>
+      <h1>3. Aplicativos e ferramentas online</h1>
+        <ol type="a">
+          <li>Compiladores/editores TeX/LaTeX:
+            <ul>
+              <li><a href="http://www.papeeria.com/">Papeeria</a>.
+              <li><a href="http://www.overleaf.com/">Overleaf</a>.
+              <li><a href="http://latexbase.com/">LaTeX Base</a>.
+              <li><a href="http://www.tutorialspoint.com/online_latex_editor.php">Online Latex Editor (Tutorials Point)</a>.
+            </ul>
+          <li>Editores/gerenciadores BibTeX (referências):
+            <ul>
+              <li><a href="http://truben.no/latex/bibtex/">BibTeX Online Editor</a>.
+              <li><a href="http://zbib.org/">ZoteroBib</a>.
+              <li><a href="http://www.doi2bib.org/">doi2bib</a>.
+              <li><a href="http://manas.tungare.name/software/isbn-to-bibtex/">ISBN to BibTeX Converter</a>.
+            </ul>
+          <li>Editores de equações TeX/LaTeX:
+            <ul>
+              <li><a href="http://formulasheet.com/">Formula Sheet</a>.
+              <li><a href="http://www.tutorialspoint.com/latex_equation_editor.htm">LaTeX Equation Editor (Tutorials Point)</a>.
+              <li><a href="http://www.codecogs.com/latex/eqneditor.php">Editor Online de Equações LaTeX (CodeCogs)</a>.
+              <li><a href="http://mathurl.com/">mathURL</a>.
+              <li><a href="http://www.mathcha.io/">Mathcha</a>.
+            </ul>
+          <li>Editores de tabelas TeX/LaTeX:
+            <ul>
+              <li><a href="http://www.tablesgenerator.com/">Tables Generator</a>.
+              <li><a href="http://www.latex-tables.com/">LaTeX Complex Tables Editor</a>.
+              <li><a href="http://truben.no/table/">Table Editor</a>.
+              <li><a href="http://www.mathcha.io/">Mathcha</a>.
+            </ul>
+          <li>Editores de imagens/diagramas/gráficos:
+            <ul>
+              <li><a href="http://www.tutorialspoint.com/online_image_editor.htm">Online Image Editor (Tutorials Point)</a>.
+              <li><a href="http://www.tutorialspoint.com/whiteboard.htm">Free Online Whiteboard (Tutorials Point)</a>.
+              <li><a href="http://www.lucidchart.com/">Lucidchart</a>.
+              <li><a href="http://www.draw.io/">draw.io</a>.
+              <li><a href="http://www.geogebra.org/">GeoGebra</a>.
+              <li><a href="http://plot.ly/">Plotly</a>.
+              <li><a href="http://tikzcd.yichuanshen.de/">tikzcd-editor</a>.
+              <li><a href="http://www.mathcha.io/">Mathcha</a>.
+            </ul>
+        </ol>
+    </section>
+    <section>
+      <h1>4. Informações e dicas sobre TeX/LaTeX</h1>
+        <ul>
+          <li><a href="http://www.latex-project.org/">LaTeX Project</a>.
+          <li><a href="http://www.ctan.org/">Comprehensive TeX Archive Network (CTAN)</a>.
+          <li><a href="http://www.tug.org/">TeX Users Group (TUG)</a>.
+          <li><a href="http://en.wikibooks.org/wiki/LaTeX/">LaTeX — Wikibooks</a>.
+          <li><a href="http://tex.stackexchange.com/">TeX-LaTeX Stack Exchange</a>.
+        <ul>
+    </section>
+    <section>
+      <h1>5. Dicas de uso</h1>
+      <p>Sempre que for manipular e/ou substituir um dos arquivos constituintes do projeto, mantenha uma cópia do original num local seguro e/ou renomeie a cópia do original para poder ser seguida como um exemplo no desenvolvimento do seu próprio arquivo.</p>
+      <p>O único formato de imagens que pode ser inserido ao compilar com <b>LaTeX</b> é o Encapsulated PostScript (EPS). Se for compilar com <b>PDFLaTeX</b>, para produzir um PDF diretamente, tem-se uma escolha mais ampla de formatos de imagens para inserir:</p>
+        <ul>
+          <li>JPG, amplamente utilizado na Internet, em câmeras digitais, etc., sendo a melhor escolha para fotos.
+          <li>PNG, um formato sem perdas e muito comum (ainda que não tanto como JPG), sendo a melhor escolha para diagramas (se não for possível gerar uma versão vetorial) e capturas de tela.
+          <li>PDF, é amplamente utilizado para documentos, mas pode ser usado para armazenar imagens também; suporta imagens vetoriais e mapa de bits, mas não é recomendado para o último, pois JPG ou PNG irá fornecer o mesmo resultado com menor espaço em disco.
+          <li>EPS, pode ser usado com ajuda do pacote epstopdf, que só precisa estar instalado; portanto, não há necessidade de carregá-lo no documento.
+        </ul>
+    <hr>
+  </body>
+  <p>Copyright © 2021–2023 <a href="mailto:luizeduardomlima@gmail.com">Luiz E. M. Lima</a></p>
+</html>

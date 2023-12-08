@@ -1,0 +1,84 @@
+%%%% APÊNDICE (A)
+%%
+%% Texto ou documento elaborado pelo autor, de modo a complementar sua
+%% argumentação, sem prejuízo da unidade nuclear do trabalho.
+
+%% Locais (pastas) de ilustrações deste capítulo
+\graphicspath{%
+  {./Post-Textual/}%% Primário
+%   {./Post-Textual/Illustrations/}%% Secundário (descomentar se houver)
+}
+
+\chapter{Título do Apêndice A}%
+\label{chpt:apx-a}
+
+Documentos auxiliares e/ou complementares, como legislações, estatutos, gráficos, tabelas, etc., podem ser apresentados na forma de apêndices, quando necessário.
+Os apêndices, assim como os anexos, são enumerados com letras maiúsculas, por exemplo, \Cref{chpt:apx-a}.
+Utilizam-se letras maiúsculas dobradas quando esgotadas as letras do alfabeto.
+
+Apêndices complementam o texto principal do documento com informações para leitores com especial interesse no tema, devendo ser considerados leitura opcional, ou seja, o entendimento do texto principal do documento não deve exigir a leitura atenta dos apêndices.
+
+Apêndices usualmente contemplam provas de teoremas, deduções de fórmulas matemáticas, diagramas esquemáticos, gráficos e trechos de código numérico.
+Quanto a este último, um código numérico extenso não deve fazer parte do documento, mesmo como apêndice.
+O ideal é disponibilizar o código numérico na Internet para os interessados em examiná-lo ou utilizá-lo, por exemplo, na plataforma \href{https://codeocean.com/}{Code Ocean\LinkIcon}, entre outras.
+
+\section{Título de seção secundária do Apêndice A}%
+\label{sect:apx-a2}
+
+Exemplo de seção secundária de apêndice (\Cref{sect:apx-a2}).
+
+\subsection{Título de seção terciária do Apêndice A}%
+\label{ssect:apx-a3}
+
+Exemplo de seção terciária de apêndice (\Cref{ssect:apx-a3}).
+
+\subsubsection{Título de seção quaternária do Apêndice A}%
+\label{sssect:apx-a4}
+
+Exemplo de seção quaternária de apêndice (\Cref{sssect:apx-a4}).
+
+\paragraph{Título de seção quinária do Apêndice A}%
+\label{prgh:apx-a5}
+
+Exemplo de seção quinária de apêndice (\Cref{prgh:apx-a5}).
+
+\subparagraph{Título de parágrafo do \Cref{prgh:apx-a5}}%
+\label{sprgh:apx-a6}
+
+exemplo de parágrafo (divisão de seção quinária) de apêndice (\Cref{sprgh:apx-a6}).
+
+\section{Ambientes matemáticos e atalhos úteis}%
+\label{sect:math}
+
+O \Cref{tfrm:math} apresenta os ambientes matemáticos e seus respectivos atalhos úteis em \gly*{TeX}/\gly*{LaTeX}.
+
+\begin{tabframed}[!htbp]
+\SetCaptionWidth{\textwidth}
+\caption{Ambientes matemáticos e atalhos úteis}%
+\label{tfrm:math}
+\begin{tabularx}{\CaptionWidth}{?{}X*{3}{|>{\columncolor{shadecolor}}Y}?{}}%% CHKTEX 44
+\toprule%
+\multicolumn{1}{?{}Y|}{\textbf{Tipo}}                                           &
+\multicolumn{1}{Y|}{\textbf{Fórmulas embutidas (no texto)}}                     &
+\multicolumn{1}{Y|}{\textbf{Equações destacadas}}                               &
+\multicolumn{1}{Y?{}}{\textbf{Equações destacadas e numeradas automaticamente}} \\
+\midrule%
+Ambiente                         &
+\texttt{math}                    &
+\texttt{displaymath}             &
+\texttt{equation}\rlap{$^{(1)}$} \\
+\midrule%
+Atalho \gly*{LaTeX}                           &
+\texttt{\textbackslash(\ldots\textbackslash)} &
+\texttt{\textbackslash[\ldots\textbackslash]} &
+{\textendash}                                 \\
+\midrule%
+Atalho \gly*{TeX}       &
+\texttt{\$\ldots\$}     &
+\texttt{\$\$\ldots\$\$} &
+{\textendash}           \\
+\bottomrule%
+\end{tabularx}
+\SourceOrNote*[]{\MathBF{^{(1)}} Versão com asterisco (\texttt{equation*}) suprime a numeração (pacote \gly*{LaTeX} \texttt{amsmath})}
+\SourceOrNote{autoria própria (\YearNum)}
+\end{tabframed}

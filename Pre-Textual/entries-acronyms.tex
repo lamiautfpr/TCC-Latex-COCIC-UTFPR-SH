@@ -1,0 +1,157 @@
+%%%% LISTA DE ABREVIATURAS E SIGLAS (ENTRADAS)
+%%
+%% Elemento opcional. Consiste na relação alfabética das abreviaturas e siglas
+%% utilizadas no texto, seguidas das palavras ou expressões correspondentes
+%% grafadas por extenso. Recomenda-se a elaboração de lista própria para cada
+%% tipo.
+%%
+%% Observações:
+%% - com subdivisões (\MakeAcronyms* em ./lamia-tcc-utfpr-sh.tex), os itens são
+%%   ordenados pelo rótulo (label), mas conforme o tipo;
+%% - sem subdivisões (\MakeAcronyms em ./lamia-tcc-utfpr-sh.tex), os itens são
+%%   ordenados pelo rótulo (label), mas em uma única lista.
+
+%% Abreviaturas e siglas
+%% Definição:
+%% \New<AcronymType>Entry{Label}{%% Usar somente letras latinas não acentuadas
+%%   Term        = {...},%        % Obrigatório
+%%   Description = {...},%        % Obrigatório
+%%   Plural      = {...},%        % Opcional
+%% }
+%%%% Se a letra inicial do termo, da descrição ou do plural for acentuada, deve
+%%%% ser colocada entre chaves, por exemplo, Description = {{á}rea}.
+%% Impressão no texto e adição automática na lista:
+%% +========================+==========================================+
+%% | Comando                | Imprime                                  |
+%% +========================+==========================================+
+%% | \<acrtype>{Label}      | Termo                                    |
+%% +------------------------+------------------------------------------+
+%% | \<AcrType>{Label}      | Termo com letra inicial em maiúscula     |
+%% +------------------------+------------------------------------------+
+%% | \<acrtype>descr{Label} | Descrição                                |
+%% +------------------------+------------------------------------------+
+%% | \<AcrType>Descr{Label} | Descrição com letra inicial em maiúscula |
+%% +------------------------+------------------------------------------+
+%% | \<acrtype>pl{Label}    | Plural                                   |
+%% +------------------------+------------------------------------------+
+%% | \<AcrType>Pl{Label}    | Plural com letra inicial em maiúscula    |
+%% +========================+==========================================+
+%% Adição automática também no Índice Remissivo, usando um asterisco opcional:
+%% +======================+=======================================+
+%% | Comando              | Imprime                               |
+%% +======================+=======================================+
+%% | \<acrtype>*{Label}   | Termo                                 |
+%% +----------------------+---------------------------------------+
+%% | \<AcrType>*{Label}   | Termo com letra inicial em maiúscula  |
+%% +----------------------+---------------------------------------+
+%% | \<acrtype>pl*{Label} | Plural                                |
+%% +----------------------+---------------------------------------+
+%% | \<AcrType>Pl*{Label} | Plural com letra inicial em maiúscula |
+%% +======================+=======================================+
+%% Sendo:
+%% +=============+===============+===========+===========+
+%% | Tipo        | <AcronymType> | <acrtype> | <AcrType> |
+%% +=============+===============+===========+===========+
+%% | Abreviatura | Abbreviation  | abrv      | Abrv      |
+%% +-------------+---------------+-----------+-----------+
+%% | Sigla       | Initials      | intl      | Intl      |
+%% +=============+===============+===========+===========+
+
+%% Definições de abreviaturas
+\NewAbbreviationEntry{art}{%
+  Term        = {art.},%
+  Description = {artigo},%
+  Plural      = {arts.},%
+}
+\NewAbbreviationEntry{cap}{%
+  Term        = {cap.},%
+  Description = {capítulo},%
+  Plural      = {caps.},%
+}
+\NewAbbreviationEntry{sec}{%
+  Term        = {seç.},%
+  Description = {seção},%
+  Plural      = {seçs.},%
+}
+
+%% Definições de siglas
+\NewInitialsEntry{ABNT}{%
+  Term        = {ABNT},%
+  Description = {Associação Brasileira de Normas Técnicas},%
+}
+\NewInitialsEntry{BMP}{%
+  Term        = {BMP},%
+  Description = {Mapa de Bits, do Inglês \ENLang*{Bitmap}},%
+}
+\NewInitialsEntry{CAPES}{%
+  Term        = {CAPES},%
+  Description = {Coordenação de Aperfeiçoamento de Pessoal de Nível Superior},%
+}
+\NewInitialsEntry{CNPq}{%
+  Term        = {CNPq},%
+  Description = {Conselho Nacional de Desenvolvimento Científico e Tecnológico},%
+}
+\NewInitialsEntry{CTAN}{%
+  Term        = {CTAN},%
+  Description = {\ENLang{Comprehensive \gly*{TeX} Archive Network}},%
+}
+\NewInitialsEntry{EPS}{%
+  Term        = {EPS},%
+  Description = {\ENLang{Encapsulated PostScript}},%
+}
+\NewInitialsEntry{GIF}{%
+  Term        = {GIF},%
+  Description = {Formato de Intercâmbio de Gráficos, do Inglês \ENLang*{Graphics Interchange Format}},%
+}
+\NewInitialsEntry{GIMP}{%
+  Term        = {GIMP},%
+  Description = {Programa de Manipulação de Imagem \intl*{GNU}, do Inglês \intl*{GNU} \ENLang*{Image Manipulation Program}},%
+}
+\NewInitialsEntry{GNU}{%
+  Term        = {GNU},%
+  Description = {GNU Não é Unix, do Inglês GNU \ENLang*{is Not Unix}},%
+}
+\NewInitialsEntry{JPEG}{%
+  Term        = {JPEG},%
+  Description = {\ENLang{Joint Photographic Experts Group}},%
+}
+\NewInitialsEntry{NBR}{%
+  Term        = {NBR},%
+  Description = {Norma Brasileira},%
+}
+\NewInitialsEntry{PDF}{%
+  Term        = {PDF},%
+  Description = {Formato de Documento Portátil, do Inglês \ENLang*{Portable Document Format}},%
+}
+\NewInitialsEntry{PNG}{%
+  Term        = {PNG},%
+  Description = {Gráficos Portáteis de Rede, do Inglês \ENLang*{Portable Network Graphics}},%
+}
+\NewInitialsEntry{PS}{%
+  Term        = {PS},%
+  Description = {\ENLang{PostScript}},%
+}
+\NewInitialsEntry{QR}{%
+  Term        = {QR},%
+  Description = {Resposta Rápida, do Inglês \ENLang*{Quick Response}},%
+}
+\NewInitialsEntry{TCC}{%
+  Term        = {TCC},%
+  Description = {Trabalho de Conclusão de Curso},%
+}
+\NewInitialsEntry{TUG}{%
+  Term        = {TUG},%
+  Description = {\ENLang{\TeX\ Users Group}},%
+}
+\NewInitialsEntry{UML}{%
+  Term        = {UML},%
+  Description = {Linguagem de Modelagem Unificada, do Inglês \ENLang*{Unified Modeling Language}},%
+}
+\NewInitialsEntry{URL}{%
+  Term        = {URL},%
+  Description = {Localizador Uniforme de Recursos, do Inglês \ENLang*{Uniform Resource Locator}},%
+}
+\NewInitialsEntry{UTFPR}{%
+  Term        = {UTFPR},%
+  Description = {Universidade Tecnológica Federal do Paraná},%
+}

@@ -1,0 +1,185 @@
+%%This work may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version 1.3 of this license or (at your option) any later version.
+%--------------------------------------------
+%%%% Copyright (C) 2021-2023 Luiz E. M. Lima (luizeduardomlima@gmail.com)
+%------------------
+% TEMPLATE PARA TRABALHO DE CONCLUSÃO DE CURSO
+% Universidade Tecnológica Federal do Paraná - UTFPR
+% Disponibilizado e adaptado pelo LAMIA - Laboratório de Aprendizado de Máquina e Images Aplicados à Indústria
+% lamia-sh@utfpr.edu.br
+% https://www.lamia.sh.utfpr.edu.br/ - https://github.com/lamiautfpr - https://www.instagram.com/lamiautfpr/ - 
+% Campus Santa Helena
+% Bacharelado em Ciência da Computação
+% Projeto hospedado em: <https://github.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH>
+% Coordenador LAMIA: Thiago França Naves - naves@utfpr.edu.br
+% Colaboradores: Eduardo Gasparin, João Ewerton Sousa, Paulo Vitor Souza
+
+
+%% Classe de documento
+\documentclass[%% Opções (^ = padrão; > = para pacotes; ¹ = somente twoside):
+  a4paper,%% Tamanho de papel: a4paper, letterpaper (^), etc.
+  12pt,%% Tamanho de fonte: 10pt (^), 11pt, 12pt, etc.
+  oneside,%% Impressão de folhas: oneside ou twoside (^)
+%   openany,%% Impressão de capítulos (¹): openany ou openright (^)
+%   fleqn,%% Alinhamento de equações à esquerda (centralizado por padrão)
+%   draft,%% Aparência de documento (>): draft ou final (^)
+  english,%% Idioma secundário (penúltimo) (>)
+  brazilian,%% Idioma primário (último) (>)
+]{memoir}
+
+%% Pacotes utilizados
+\usepackage[%% Opções (^ = padrão; ¹ = somente twoside; ² = somente openany):
+%   Font    = Times,%% Fonte principal: Arial (^), CM (padrão TeX) ou Times
+%   Link    = TextColor,%% Cor de hyperlinks: DarkBlue (^) ou TextColor
+%   Caption = Left,%% Alinhamento de legendas: Center (^) ou Left
+%   Source  = Left,%% Alinhamento de fonte (referência): Center (^) ou Left
+%   ABNTCit = NSB,%% Citação ABNT: AAY (NOME, ANO) (^), NRB (1) ou NSB [1]
+%   BibDOI  = Icon,%% Ícone de DOI em referências: Icon ou Name (^)
+%   BibURL  = Icon,%% Ícone de URL em referências: Icon ou URL (^)
+%   CoverBG = On,%% Plano de fundo (capa e contracapa): On ou Off (^)
+%   CoverId = All,%% Dados de identificação (capa): All ou Main (^)
+%   PageNum = All,%% Numeração de páginas (partes): All, Main (^) ou None
+%   TwoSide = All,%% Frente e verso (partes) (¹): All, Main (^) ou None
+%   OpenPg  = Odd,%% Paginação de elementos (²): Odd ou Any (^)
+%   Version = Defense,%% Versão de documento: Final (^) ou Defense
+]{lamia-tcc-utfpr-sh}
+\usepackage[hyperlink]{qrcode}
+\usepackage{float}
+\usepackage{placeins}
+
+%% Informações do documento: descomentar para alterar
+%% Importa as variáveis que contem os dados do documento (nome, autores, ano 
+%% data de aprovação, banca e orientadores)
+\input{./variables}
+
+%% Arquivo(s) de referências
+\addbibresource{./Post-Textual/references.bib}
+
+%% Processamento de entradas (itens) de listas, glossários e índices
+%% Comandos \MakeAcronyms* e \MakeSymbols*: inserem as subdivisões da lista.
+%%%% Lista de abreviaturas e siglas: [Arquivo de Entradas] (opcional)
+\MakeAcronyms[./Pre-Textual/entries-acronyms]
+%%%% Lista de símbolos: [Arquivo de Entradas] (opcional)
+\MakeSymbols[./Pre-Textual/entries-symbols]
+%%%% Glossário: [Arquivo de Entradas] (opcional)
+\MakeGlossary[./Post-Textual/entries-glossary]
+%%%% Índice remissivo
+\MakeIndex%
+
+%% Início do documento
+\begin{document}%% Não comentar
+
+%% Capa (automática)
+%% Planos de fundo são inseridos na capa e numa contracapa selecionando a opção
+%% CoverBG = On do pacote lamia-tcc-utfpr-sh e atribuindo argumentos válidos para grau
+%% acadêmico (\AcademicDegreeOption[Número]) e campus (\Campus{Cidade}).
+
+%% Elementos pré-textuais (frontmatter)
+%% Capa, folha de rosto, errata e folha de aprovação (Não editar)
+\input{./Pre-Textual/pre-textual}%% Não comentar (obrigatório)
+%% Dedicatória
+% \input{./Pre-Textual/dedication}%% (opcional)
+%% Agradecimentos
+\input{./Pre-Textual/acknowledgments}%% (opcional)
+%% Epigrafe
+% \input{./Pre-Textual/epigraph}%% (opcional)
+%% Resumo e Abstract
+\input{./Pre-Textual/abstract}%% Não comentar (obrigatório)
+
+%% Lista de algoritmos
+% \PrintFloatsList{algorithm} 
+
+%% Lista de ilustrações: figuras, fluxogramas, fotografias, gráficos e quadros
+\PrintIllustrationsList{figure, flowchart, photograph, graph, tabframed}
+%%%% Lista de figuras (adotar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{figure}
+%%%% Lista de fluxogramas (adotar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{flowchart}
+%%%% Lista de fotografias (adotar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{photograph}
+%%%% Lista de gráficos (adotar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{graph}
+%%%% Lista de quadros (adotar a partir de 3 itens e remover da lista geral)
+% \PrintFloatsList{tabframed}
+
+%% Lista de tabelas
+\PrintFloatsList{table}
+
+%% Lista de abreviaturas e siglas
+%%%% Opção 1: makeindex; conforme o arquivo ./Pre-Textual/entries-acronyms.tex.
+% \PrintAcronymsList%
+%%%% Opção 2: manual; conforme o arquivo ./Pre-Textual/list-acronyms.tex.
+% \input{./Pre-Textual/list-acronyms}
+
+%% Lista de símbolos
+%%%% Opção 1: makeindex; conforme o arquivo ./Pre-Textual/entries-symbols.tex.
+%%%% Comando \PrintSymbolsList*: insere a unidade (entre []) na margem direira.
+% \PrintSymbolsList%
+%%%% Opção 2: manual; conforme o arquivo ./Pre-Textual/list-symbols.tex.
+% \input{./Pre-Textual/list-symbols}
+
+%% Sumário
+%% Comando \PrintSummary*: remove o espaçamento entre partes e entre capítulos.
+\PrintSummary%% Não comentar
+
+%% Formatação de elementos textuais (mainmatter)
+\Textual%% Não comentar
+
+% Capítulo 1
+\include{./Textual/cap-1-introducao}
+% Capítulo 2
+\include{./Textual/cap-2-referencial}
+% Capítulo 3
+\include{./Textual/cap-3-metodologia}
+% Capítulo 4
+\include{./Textual/cap-4-resultados}
+% Capítulo 5
+\include{./Textual/cap-5-conclusao}
+
+%% Marcadores de PDF para capítulos subsequentes no mesmo nível de partes
+% \PhantomPart%
+
+%% Capítulo de exemplo do original
+% \include{./Chapter-Example/chapter-example}
+
+% Caso queira deixar uma pagina em branco apenas com a informação da parte e seu label:
+%%\part{Nome da parte}
+%%\label{part:nomelabel}
+
+%% Formatação de elementos pós-textuais (backmatter)
+%% Comando \PostTextual*: remove as seções de nível inferior às primárias do
+%% sumário e dos marcadores de PDF.
+\PostTextual%% Não comentar
+
+%% Referências
+\PrintReferences%% Não comentar
+
+%% Glossário
+%%%% Opção 1: makeindex; conforme o arquivo ./Post-Textual/entries-glossary.tex.
+%%%% Comando \PrintGlossary*: remove o indicativo (páginas) dos itens.
+% \PrintGlossary%[\bfseries]%% Estilo de fonte do termo (opcional)
+%%%% Opção 2: manual; conforme o arquivo ./Post-Textual/list-glossary.tex.
+% \input{./Post-Textual/list-glossary}
+
+%% Apêndices
+%% Ambiente {Appendices*}: insere a folha separadora desta parte.
+% \begin{Appendices}
+% \input{./Post-Textual/appendix-a}
+% \input{./Post-Textual/appendix-b}
+% \end{Appendices}
+
+%% Anexos
+%% Ambiente {Annexes*}: insere a folha separadora desta parte.
+% \begin{Annexes}
+% \input{./Post-Textual/annex-a}
+% \input{./Post-Textual/annex-b}
+% \end{Annexes}
+
+%% Índice remissivo
+% \PrintIndex%% Não comentar
+
+%% Fim do documento
+\end{document}%% Não comentar
+
+%% O arquivo final (PDF) pode ser convertido para PDF/A usando diversas
+%% ferramentas, por exemplo:
+%%   https://www.pdfforge.org/online/en/pdf-to-pdfa

@@ -1,0 +1,116 @@
+%%%% GLOSSÁRIO (ENTRADAS)
+%%
+%% Relação de palavras ou expressões técnicas de uso restrito, ou de sentido
+%% obscuro, utilizadas no texto, acompanhadas das respectivas definições.
+
+%% Itens de Glossário
+%% Definição:
+%% \NewGlossaryEntry{Label}{%% Usar somente letras latinas não acentuadas
+%%   Term        = {...},%   % Obrigatório
+%%   Description = {...},%   % Obrigatório
+%%   Plural      = {...},%   % Opcional
+%%   Parent      = {...},%   % Opcional
+%% }
+%%%% Se a letra inicial do termo, da descrição ou do plural for acentuada, deve
+%%%% ser colocada entre chaves, por exemplo, Description = {{á}rea}.
+%% Impressão no texto e adição automática no Glossário:
+%% +==================+==========================================+
+%% | Comando          | Imprime                                  |
+%% +==================+==========================================+
+%% | \gly{Label}      | Termo                                    |
+%% +------------------+------------------------------------------+
+%% | \Gly{Label}      | Termo com letra inicial em maiúscula     |
+%% +------------------+------------------------------------------+
+%% | \glydescr{Label} | Descrição                                |
+%% +------------------+------------------------------------------+
+%% | \GlyDescr{Label} | Descrição com letra inicial em maiúscula |
+%% +------------------+------------------------------------------+
+%% | \glypl{Label}    | Plural                                   |
+%% +------------------+------------------------------------------+
+%% | \GlyPl{Label}    | Plural com letra inicial em maiúscula    |
+%% +==================+==========================================+
+%% Adição automática também no Índice Remissivo, usando um asterisco opcional:
+%% +================+=======================================+
+%% | Comando        | Imprime                               |
+%% +================+=======================================+
+%% | \gly*{Label}   | Termo                                 |
+%% +----------------+---------------------------------------+
+%% | \Gly*{Label}   | Termo com letra inicial em maiúscula  |
+%% +----------------+---------------------------------------+
+%% | \glypl*{Label} | Plural                                |
+%% +----------------+---------------------------------------+
+%% | \GlyPl*{Label} | Plural com letra inicial em maiúscula |
+%% +================+=======================================+
+
+%% Definições de itens de Glossário
+\NewGlossaryEntry{biber}{%
+  Term        = {biber},%
+  Description = {substituto do \gly*{BibTeX} para usuários do \gly*{BibLaTeX}},%
+  Parent      = {LaTeX},%
+}
+\NewGlossaryEntry{BibLaTeX}{%
+  Term        = {Bib\LaTeX},%
+  Description = {reimplementação completa das facilidades bibliográficas fornecidas pelo \gly*{LaTeX}},%
+  Parent      = {LaTeX},%
+}
+\NewGlossaryEntry{BibLaTeXabnt}{%
+  Term        = {Bib\LaTeX-abnt},%
+  Description = {pacote que oferece um estilo \gly*{BibLaTeX} que atende as regras da \intl*{ABNT}},%
+  Parent      = {LaTeX},%
+}
+\NewGlossaryEntry{BibTeX}{%
+  Term        = {Bib\TeX},%
+  Description = {aplicativo de gerenciamento de referências para a formatação de listas de referências no \gly*{LaTeX}},%
+  Parent      = {LaTeX},%
+}
+\NewGlossaryEntry{componente}{%
+  Term        = {componente},%
+  Description = {outro exemplo de uma entrada secundária (componente), subentrada da primária chamada \gly*{pai}; trata-se de uma entrada irmã de outra também secundária chamada \gly*{filho}},%
+  Plural      = {componentes},%
+  Parent      = {pai},%
+}
+\NewGlossaryEntry{dissertacao}{%
+  Term        = {dissertação},%
+  Description = {trabalho acadêmico desenvolvido no mestrado},%
+  Plural      = {dissertações},%
+}
+\NewGlossaryEntry{equilibriodaconfiguracao}{%
+  Term        = {equilíbrio da configuração},%
+  Description = {consistência entre os \glypl*{componente}},%
+  Plural      = {equilíbrios das configurações},%
+}
+\NewGlossaryEntry{filho}{%
+  Term        = {filho},%
+  Description = {exemplo de uma entrada secundária (filho), subentrada da primária chamada \gly*{pai}},%
+  Plural      = {filhos},%
+  Parent      = {pai},%
+}
+\NewGlossaryEntry{LaTeX}{%
+  Term        = {\LaTeX},%
+  Description = {conjunto de macros para o processador de textos \gly*{TeX}, utilizado amplamente para a produção de textos matemáticos e científicos devido à sua alta qualidade tipográfica},%
+  Parent      = {TeX},%
+}
+\NewGlossaryEntry{memoir}{%
+  Term        = {memoir},%
+  Description = {classe \gly*{LaTeX} que permite a composição de poesia, ficção, obras de não ficção e matemáticas, como livros, relatórios, artigos ou manuscritos},%
+  Parent      = {LaTeX},%
+}
+\NewGlossaryEntry{pai}{%
+  Term        = {pai},%
+  Description = {exemplo de entrada primária (pai) que possui subentradas ou entradas secundárias (\glypl*{filho})},%
+  Plural      = {pais},%
+}
+\NewGlossaryEntry{tese}{%
+  Term        = {tese},%
+  Description = {trabalho acadêmico desenvolvido no doutorado},%
+  Plural      = {teses},%
+}
+\NewGlossaryEntry{TeX}{%
+  Term        = {\TeX},%
+  Description = {sistema de tipografia criado por Donald E. Knuth},%
+}
+\NewGlossaryEntry{UTFPRThesis}{%
+  Term        = {\lamia-tcc-utfpr-sh},%
+  Description = {modelo \gly*{LaTeX} que permite atender os requisitos das normas definidas pela \intl*{UTFPR} para elaboração de trabalhos acadêmicos},%
+  Parent      = {LaTeX},%
+}

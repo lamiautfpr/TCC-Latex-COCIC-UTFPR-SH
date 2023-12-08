@@ -1,0 +1,157 @@
+%%%% LISTA DE SÍMBOLOS (ENTRADAS)
+%%
+%% Elemento opcional. Conjunto de sinais que substituem o nome de uma coisa ou
+%% de uma ação. Elaborada conforme a ordem apresentada no texto, com o devido
+%% significado.
+%%
+%% Observações:
+%% - com subdivisões (\MakeSymbols* em ./lamia-tcc-utfpr-sh.tex), os itens são
+%%   ordenados pelo rótulo (label), mas conforme o tipo;
+%% - sem subdivisões (\MakeSymbols em ./lamia-tcc-utfpr-sh.tex), os itens são
+%%   ordenados pela ocorrência nos arquivos-fonte (impressão no texto).
+
+%% Notações, sobrescritos, subscritos, letras gregas e letras latinas
+%% Definição:
+%% \New<SymbolType>Entry{Label}{%% Usar somente letras latinas não acentuadas
+%%   Term        = {...},%       % Obrigatório
+%%   Description = {...},%       % Obrigatório
+%%   Unit        = {...},%       % Opcional
+%%   Sort        = {...},%       % Opcional (para reordenar na lista)
+%% }
+%%%% Se a letra inicial da descrição for acentuada, deve ser colocada entre
+%%%% chaves, por exemplo, Description = {{á}rea}.
+%% Impressão no texto e adição automática na lista:
+%% +========================+==========================================+
+%% | Comando                | Imprime                                  |
+%% +========================+==========================================+
+%% | \<symtype>{Label}      | Termo                                    |
+%% +------------------------+------------------------------------------+
+%% | \<symtype>descr{Label} | Descrição                                |
+%% +------------------------+------------------------------------------+
+%% | \<SymType>Descr{Label} | Descrição com letra inicial em maiúscula |
+%% +------------------------+------------------------------------------+
+%% | \<symtype>unit{Label}  | Unidade                                  |
+%% +========================+==========================================+
+%% Adição automática também no Índice Remissivo, usando um asterisco opcional:
+%% +====================+=========+
+%% | Comando            | Imprime |
+%% +====================+=========+
+%% | \<symtype>*{Label} | Termo   |
+%% +====================+=========+
+%% Sendo:
+%% +==============+==============+===========+===========+
+%% | Tipo         | <SymbolType> | <symtype> | <SymType> |
+%% +==============+==============+===========+===========+
+%% | Notação      | Notation     | nttn      | Nttn      |
+%% +--------------+--------------+-----------+-----------+
+%% | Sobrescrito  | Superscript  | sprs      | Sprs      |
+%% +--------------+--------------+-----------+-----------+
+%% | Subscrito    | Subscript    | sbsc      | Sbsc      |
+%% +--------------+--------------+-----------+-----------+
+%% | Letra grega  | GreekLetter  | grkl      | GrkL      |
+%% +--------------+--------------+-----------+-----------+
+%% | Letra latina | LatinLetter  | ltnl      | LtnL      |
+%% +==============+==============+===========+===========+
+%%%% O comando \nttn{Label} possui um segundo argumento (opcional: [MrkSym]) que
+%%%% armazena um símbolo no comando \MrkSym (\DottedCircle por padrão), no qual
+%%%% se aplica a notação durante a impressão da mesma.
+
+%% Definições de notações
+\NewNotationEntry{averagea}{%
+  Term        = {\overline{\MrkSym}},%
+  Description = {média temporal},%
+}
+\NewNotationEntry{averageb}{%
+  Term        = {\langle\MrkSym\rangle},%
+  Description = {média na seção transversal},%
+}
+\NewNotationEntry{gradient}{%
+  Term        = {\vec{\nabla}},%
+  Description = {operador gradiente},%
+}
+
+%% Definições de sobrescritos
+\NewSuperscriptEntry{minus}{%
+  Term        = {^-},%
+  Description = {passo de tempo anterior},%
+}
+\NewSuperscriptEntry{plus}{%
+  Term        = {^+},%
+  Description = {passo de tempo posterior},%
+}
+\NewSuperscriptEntry{zero}{%
+  Term        = {^0},%
+  Description = {valor inicial},%
+}
+
+%% Definições de subscritos
+\NewSubscriptEntry{G}{%
+  Term        = {_\mathrm{G}},%
+  Description = {fase gasosa},%
+}
+\NewSubscriptEntry{L}{%
+  Term        = {_\mathrm{L}},%
+  Description = {fase líquida},%
+}
+\NewSubscriptEntry{S}{%
+  Term        = {_\mathrm{S}},%
+  Description = {fase sólida},%
+}
+
+%% Definições de letras gregas
+\NewGreekLetterEntry{mu}{%
+  Term        = {\mu},%
+  Description = {viscosidade dinâmica},%
+  Unit        = {kg/{(m{}\cdot{}s)}},%
+}
+\NewGreekLetterEntry{nu}{%
+  Term        = {\nu},%
+  Description = {viscosidade cinemática},%
+  Unit        = {m^2/s},%
+}
+\NewGreekLetterEntry{pi}{%
+  Term        = {\pi},%
+  Description = {constante circular (Pi)},%
+  Unit        = {rad},%
+}
+\NewGreekLetterEntry{rho}{%
+  Term        = {\rho},%
+  Description = {massa específica},%
+  Unit        = {kg/m^3},%
+}
+\NewGreekLetterEntry{theta}{%
+  Term        = {\theta},%
+  Description = {inclinação},%
+  Unit        = {\text{\textdegree}},%
+}
+
+%% Definições de letras latinas
+\NewLatinLetterEntry{A}{%
+  Term        = {A},%
+  Description = {{á}rea},%
+  Unit        = {m^2},%
+}
+\NewLatinLetterEntry{D}{%
+  Term        = {D},%
+  Description = {diâmetro},%
+  Unit        = {m},%
+}
+\NewLatinLetterEntry{L}{%
+  Term        = {L},%
+  Description = {comprimento},%
+  Unit        = {m},%
+}
+\NewLatinLetterEntry{R}{%
+  Term        = {R},%
+  Description = {raio},%
+  Unit        = {m},%
+}
+\NewLatinLetterEntry{Re}{%
+  Term        = {\mathrm{Re}},%
+  Description = {número de Reynolds},%
+}
+\NewLatinLetterEntry{V}{%
+  Term        = {V},%
+  Description = {velocidade},%
+  Unit        = {m/s},%
+}

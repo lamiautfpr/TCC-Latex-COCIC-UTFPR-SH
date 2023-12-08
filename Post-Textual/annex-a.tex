@@ -1,0 +1,36 @@
+%%%% ANEXO (A)
+%%
+%% Texto ou documento não elaborado pelo autor, que serve de fundamentação,
+%% comprovação e ilustração.
+
+%% Locais (pastas) de ilustrações deste capítulo
+\graphicspath{%
+  {./Post-Textual/}%% Primário
+  {./Post-Textual/Illustrations/}%% Secundário (descomentar se houver)
+}
+
+\chapter{Lei \No\ 9.610, de 19 de Fevereiro de 1998: Direitos Autorais / Disposições Preliminares}%
+\label{chpt:anx-a}
+
+\AddToShipoutPictureFG*{%
+  \AtTextLowerLeft{%
+    \setlength{\dimen1}{0pt}%
+    \ifbool{@twoside}{}{\ifnumodd{\thepage}{}{\setlength{\dimen1}{\oddsidemargin-\evensidemargin}}}%
+    \put(\LenToUnit{\dimen1}, 0){\includegraphics[width = \textwidth, height = \textheight, page = 1]{doc-law-n9610}}%
+  }%
+}\null%
+
+\newpage%
+
+\AddToShipoutPictureFG*{%
+  \AtTextLowerLeft{%
+    \setlength{\dimen1}{0pt}%
+    \ifbool{@twoside}{}{\ifnumodd{\thepage}{}{\setlength{\dimen1}{\oddsidemargin-\evensidemargin}}}%
+    \put(\LenToUnit{\dimen1}, 0){\includegraphics[width = \textwidth, height = \textheight, page = 2]{doc-law-n9610}}%
+  }%
+}\null%
+
+\sidebar{%
+  Texto completo da lei:\\[1ex]%
+  \qrcode[height = 15mm]{https://www.planalto.gov.br/ccivil_03/leis/l9610.htm}%
+}

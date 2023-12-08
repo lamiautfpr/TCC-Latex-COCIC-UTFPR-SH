@@ -1,0 +1,59 @@
+%%%% ELEMENTOS PRÉ-TEXTUAIS
+%%
+%% Parte que antecede o texto com informações que ajudam na identificação e na
+%% utilização do trabalho.
+%%
+%% Observações:
+%% - {Arg} argumento obrigatório de ambiente ou comando;
+%% - [Arg] argumento opcional de ambiente ou comando.
+
+%% Folha de rosto
+%% Contém os elementos essenciais à identificação do trabalho, além de uma
+%% licença Creative Commons (https://creativecommons.org/choose/).
+%% Ambiente {TitlePage*}: aplica caixa alta no título em idioma secundário.
+\begin{TitlePage}%% Argumentos (2):
+[BY-NC-SA]%% Tipo de licença (BY, BY-SA, BY-ND, BY-NC, BY-NC-SA ou BY-NC-ND)
+% [Texto da licença]%% Substitui o texto padrão para cada tipo de licença
+%%%% Descrição do trabalho (padrão; alterar se necessário)
+\DocumentTypeName\ apresentad\ifbool{Graduate}{a}{o} como requisito para obtenção do título de \StudentsTitlesList\ em \CourseName\ da \UTFPRName\ (\intl*{UTFPR}).
+%%%% Ficha catalográfica (somente para Teses e Dissertações em catálogo físico)
+%%%% [Arg-1]: local (pasta) do PDF (./Pre-Textual/ por padrão).
+%%%% {Arg-2}: nome do PDF (em ./Pre-Textual/; modelo em ./Pre-Textual/Extras/).
+% \IndexCardPDF{doc-index-card.pdf}
+\end{TitlePage}
+
+%% Errata (elemento opcional)
+%% Lista dos erros ocorridos no texto, seguidos das devidas correções.
+%% Ambiente {Errata*}: insere a autorreferência do documento.
+% \begin{Errata}%[Título Alternativo]%% Substitui o título padrão
+% %%%% Formato (com \midrule entre linhas): Página(s) & Onde se lê & Leia-se \\
+% \labelcpageref{err:chpt-1,err:chpt-2,err:chpt-3,err:chpt-4,err:chpt-5,err:chpt-6} &
+% capítulo{(s)}                                                                     &
+% seção{(ões)} primária{(s)}                                                        \\
+% \midrule%
+% \pageref{err:sect}           &
+% seção{(ões)}                 &
+% seção{(ões)} secundária{(s)} \\
+% \midrule%
+% \pageref{err:ssect}         &
+% subseção{(ões)}             &
+% seção{(ões)} terciária{(s)} \\
+% \end{Errata}
+
+%% Folha de aprovação
+%% Contém os elementos essenciais à aprovação do trabalho (sem as assinaturas).
+%%%% Opção 1: gerada por meio do pacote lamia-tcc-utfpr-sh.
+%%%% Ambiente {ApprovalPage*}: insere a titulação após o nome do membro.
+\begin{ApprovalPage}%% Argumentos (4):
+% [brazilian]%% Idioma original ou primário (brazilian ou english)
+% {12 de Novembro de 2023}%% Data de aprovação (dia, mês por extenso e ano)
+{\ApprovalDate}%% Data de aprovação (dia, mês por extenso e ano)
+{\DateAbreviated}%% Data de aprovação (forma abreviada; mestrado e doutorado)
+{\linewidth}%% Largura de linha de assinatura (graduação e especialização)
+%%%%%% Descrição do trabalho (padrão; alterar se necessário)
+\DocumentTypeName\ apresentad\ifbool{Graduate}{a}{o} como requisito para obtenção do título de \StudentsTitlesList\ em \CourseName\ da \UTFPRName\ (\intl*{UTFPR}).
+\end{ApprovalPage}
+%%%% Opção 2: gerada a partir do Sistema Acadêmico ou da secretaria.
+%%%% [Arg-1]: local (pasta) do PDF (./Pre-Textual/ por padrão).
+%%%% {Arg-2}: nome do PDF (em ./Pre-Textual/; modelos em ./Pre-Textual/Extras/).
+% \ApprovalPagePDF{doc-approval-page.pdf}

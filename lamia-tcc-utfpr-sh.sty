@@ -1,0 +1,3094 @@
+%%This work may be distributed and/or modified under the conditions of the LaTeX Project Public License, either version 1.3 of this license or (at your option) any later version.
+%--------------------------------------------
+%%%% Copyright (C) 2021-2023 Luiz E. M. Lima (luizeduardomlima@gmail.com)
+%------------------
+% TEMPLATE PARA TRABALHO DE CONCLUSÃO DE CURSO
+% Universidade Tecnológica Federal do Paraná - UTFPR
+% Disponibilizado e adaptado pelo LAMIA - Laboratório de Aprendizado de Máquina e Images Aplicados à Indústria
+% lamia-sh@utfpr.edu.br
+% https://www.lamia.sh.utfpr.edu.br/ - https://github.com/lamiautfpr - https://www.instagram.com/lamiautfpr/ - 
+% Campus Santa Helena
+% Bacharelado em Ciência da Computação
+% Projeto hospedado em: <https://github.com/lamiautfpr/TCC-Latex-COCIC-UTFPR-SH>
+% Coordenador LAMIA: Thiago França Naves - naves@utfpr.edu.br
+% Colaboradores: Eduardo Gasparin, João Ewerton Sousa, Paulo Vitor Souza
+
+%% Identificação e atualizações
+\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+\ProvidesPackage{lamia-tcc-utfpr-sh}[2023/10/08 v1.7 lamia-tcc-utfpr-sh package]
+
+
+%% Opções do pacote (^ = padrão; ¹ = somente twoside; ² = somente openany)
+\RequirePackage{xpatch}
+\tracingpatches%
+%%%% Fonte principal: Arial (^), CM (padrão TeX) ou Times
+\newbool{@FontCM}
+\newbool{@FontTimes}
+\DeclareOption{Font=Arial}{%
+  \boolfalse{@FontCM}%
+  \boolfalse{@FontTimes}%
+}
+\DeclareOption{Font=CM}{%
+  \booltrue{@FontCM}%
+  \boolfalse{@FontTimes}%
+}
+\DeclareOption{Font=Times}{%
+  \boolfalse{@FontCM}%
+  \booltrue{@FontTimes}%
+}
+%%%% Cor de hyperlinks: DarkBlue (^) ou TextColor
+\newbool{@LinkDarkBlue}
+% \DeclareOption{Link=DarkBlue}{\booltrue{@LinkDarkBlue}}
+\DeclareOption{Link=DarkBlue}{\boolfalse{@LinkDarkBlue}}
+\DeclareOption{Link=TextColor}{\boolfalse{@LinkDarkBlue}}
+%%%% Alinhamento de legendas: Center (^) ou Left
+\newbool{@CaptionCenter}
+\DeclareOption{Caption=Center}{\booltrue{@CaptionCenter}}
+\DeclareOption{Caption=Left}{\boolfalse{@CaptionCenter}}
+%%%% Alinhamento de fonte (referência): Center (^) ou Left
+\newbool{@SourceCenter}
+\DeclareOption{Source=Center}{\booltrue{@SourceCenter}}
+\DeclareOption{Source=Left}{\boolfalse{@SourceCenter}}
+%%%% Citação ABNT: AAY (NOME, ANO) (^), NRB (1) ou NSB [1]
+\newbool{@ABNTCitNRB}
+\newbool{@ABNTCitNSB}
+\DeclareOption{ABNTCit=AAY}{%
+  \boolfalse{@ABNTCitNRB}%
+  \boolfalse{@ABNTCitNSB}%
+}
+\DeclareOption{ABNTCit=NRB}{%
+  \booltrue{@ABNTCitNRB}%
+  \boolfalse{@ABNTCitNSB}%
+}
+\DeclareOption{ABNTCit=NSB}{%
+  \booltrue{@ABNTCitNRB}%
+  \booltrue{@ABNTCitNSB}%
+}
+%%%% Ícone de DOI em referências: Icon ou Name (^)
+\newbool{@BibDOIIcon}
+\DeclareOption{BibDOI=Icon}{\booltrue{@BibDOIIcon}}
+\DeclareOption{BibDOI=Name}{\boolfalse{@BibDOIIcon}}
+%%%% Ícone de URL em referências: Icon ou URL (^)
+\newbool{@BibURLIcon}
+\DeclareOption{BibURL=Icon}{\booltrue{@BibURLIcon}}
+\DeclareOption{BibURL=URL}{\boolfalse{@BibURLIcon}}
+%%%% Plano de fundo (capa e contracapa): On ou Off (^)
+\newbool{@CoverBGOn}
+\DeclareOption{CoverBG=On}{\booltrue{@CoverBGOn}}
+\DeclareOption{CoverBG=Off}{\boolfalse{@CoverBGOn}}
+%%%% Dados de identificação (capa): All ou Main (^)
+\newbool{@CoverIdAll}
+\DeclareOption{CoverId=All}{\booltrue{@CoverIdAll}}
+\DeclareOption{CoverId=Main}{\boolfalse{@CoverIdAll}}
+%%%% Numeração de páginas (partes): All, Main (^) ou None
+\newbool{@PageNumMain}
+\newbool{@PageNumFront}
+\DeclareOption{PageNum=All}{%
+  \booltrue{@PageNumMain}%
+  \booltrue{@PageNumFront}%
+}
+\DeclareOption{PageNum=Main}{%
+  \booltrue{@PageNumMain}%
+  \boolfalse{@PageNumFront}%
+}
+\DeclareOption{PageNum=None}{%
+  \boolfalse{@PageNumMain}%
+  \boolfalse{@PageNumFront}%
+}
+%%%% Frente e verso (partes) (¹): All, Main (^) ou None
+\newbool{@TwoSideMain}
+\newbool{@TwoSideFront}
+\DeclareOption{TwoSide=All}{%
+  \booltrue{@TwoSideMain}%
+  \booltrue{@TwoSideFront}%
+}
+\DeclareOption{TwoSide=Main}{%
+  \booltrue{@TwoSideMain}%
+  \boolfalse{@TwoSideFront}%
+}
+\DeclareOption{TwoSide=None}{%
+  \boolfalse{@TwoSideMain}%
+  \boolfalse{@TwoSideFront}%
+}
+%%%% Paginação de elementos (²): Odd ou Any (^)
+\newbool{@OpenPgOdd}
+\DeclareOption{OpenPg=Odd}{\booltrue{@OpenPgOdd}}
+\DeclareOption{OpenPg=Any}{\boolfalse{@OpenPgOdd}}
+%%%% Versão de documento: Final (^) ou Defense
+\newbool{@VersionFinal}
+\DeclareOption{Version=Final}{\booltrue{@VersionFinal}}
+\DeclareOption{Version=Defense}{%
+  \boolfalse{@twoside}%
+  \boolfalse{@mparswitch}%
+  \boolfalse{@VersionFinal}%
+  \ExecuteOptions{CoverBG = Off}%
+}
+%%%% Aviso de indisponíveis, execução de padrões e processamento de atribuídas
+\DeclareOption*{\PackageWarning{lamia-tcc-utfpr-sh}{Unknown option `\CurrentOption'}}
+\ExecuteOptions{%
+  Font    = Arial,%
+  Link    = DarkBlue,%
+  Caption = Center,%
+  Source  = Center,%
+  ABNTCit = AAY,%
+  BibDOI  = Name,%
+  BibURL  = URL,%
+  CoverBG = Off,%
+  CoverId = Main,%
+  PageNum = Main,%
+  TwoSide = Main,%
+  OpenPg  = Any,%
+  Version = Final,%
+}
+\ProcessOptions\relax%
+
+%% Pacotes utilizados
+\RequirePackage{ifdraft}
+\RequirePackage{babel}
+\ifboolexpr{ bool {luatex} or bool {xetex} }{%
+  \RequirePackage{fontspec}%
+  \RequirePackage{amsmath}%
+  \RequirePackage[bold-style = ISO]{unicode-math}%
+  \defaultfontfeatures{Ligatures = TeX}%
+  \ifbool{@FontCM}{}{%
+    \setmainfont{TeX Gyre Termes}%
+    \setsansfont{TeX Gyre Heros}[\ifbool{@FontTimes}{Scale = 0.9}{}]%
+    \setmathfont{TeX Gyre Termes Math}%
+    \setmathfont{TeX Gyre Termes Math}[version = bold]%
+  }%
+}{%
+  \RequirePackage[utf8]{inputenc}%
+  \RequirePackage[T1]{fontenc}%
+  \RequirePackage{lmodern}%
+  \ifbool{@FontCM}{%
+    \RequirePackage{amsmath}%
+    \RequirePackage{textcomp}%
+  }{%
+    \RequirePackage[\ifbool{@FontTimes}{}{helvratio = 1}]{newtxtext}%
+    \RequirePackage[smallerops]{newtxmath}%
+  }%
+}
+\RequirePackage{fontawesome5}
+\RequirePackage{microtype}
+\RequirePackage{ragged2e}
+\RequirePackage{fvextra}
+\RequirePackage{csquotes}
+\RequirePackage{mfirstuc}
+\RequirePackage[normalem]{ulem}
+\ifbool{xetex}{}{\RequirePackage{transparent}}
+\RequirePackage[table]{xcolor}
+\RequirePackage[pass, \ifdraft{showframe}{}]{geometry}
+\ifbool{luatex}{\RequirePackage{shellesc}}{\RequirePackage{morewrites}}
+\RequirePackage{enumitem}
+\RequirePackage{environ}
+\RequirePackage{icomma}
+\RequirePackage{algorithmic}
+\RequirePackage[content = {\faFileImage}, position = {center}]{draftfigure}
+\RequirePackage{eso-pic}
+\RequirePackage{graphicx}
+\RequirePackage{longtable}
+\RequirePackage[%
+  style        = abnt\ifbool{@ABNTCitNRB}{-numeric}{},%
+  natbib       = true,%
+  sorting      = \ifbool{@ABNTCitNRB}{none}{nty},%
+  uniquename   = minfull,%
+  extradate    = true,%
+  repeatfields = true,%
+  \ifbool{@ABNTCitNRB}{comp = true,}{}%
+]{biblatex}
+\RequirePackage[hyphens]{xurl}
+\RequirePackage[\ifdraft{draft = true}{}]{bookmark}
+\RequirePackage[capitalise, nameinlink]{cleveref}
+
+%% Configurações do pacote microtype
+\@ifpackagelater{microtype}{2021/10/31}{\microtypesetup{nopatch = footnote}}{}
+
+%% Fontes
+\ifbool{@FontTimes}{}{\renewcommand*{\familydefault}{\sfdefault}}
+\csletcs{old@ttfamily}{ttfamily}
+\renewrobustcmd*{\ttfamily}{\old@ttfamily\hyphenchar\font=`\-\relax}
+\csletcs{Old@TeX}{TeX}
+\csletcs{Old@LaTeX}{LaTeX}
+\AtBeginDocument{%
+  \renewrobustcmd*{\TeX}{{\fontfamily{lmr}\selectfont\protect\Old@TeX}}%
+  \renewrobustcmd*{\LaTeX}{{\fontfamily{lmr}\selectfont\Old@LaTeX}}%
+}
+\newrobustcmd*{\UTFPR}{UTF{\miniscule\kern-0.1em\hbox{PR}}}
+\newrobustcmd*{\No}{N\iflanguage{brazilian}{.\textsuperscript{o}}{o.}}
+\DeclareFontEncoding{LS1}{}{}
+\DeclareFontSubstitution{LS1}{stix2}{m}{n}
+\DeclareFontFamily{LS1}{stix2scr}{\skewchar\font127 }
+\DeclareFontShape{LS1}{stix2scr}{m}{n}{<->s*[1.2] stix2-mathscr}{}
+\DeclareFontShape{LS1}{stix2scr}{b}{n}{<->s*[1.2] stix2-mathscr-bold}{}
+\DeclareFontShape{LS1}{stix2scr}{bx}{n}{<->ssub * stix2scr/b/n}{}
+\newrobustcmd*{\DottedCircle}{\text{\usefont{LS1}{stix2scr}{m}{n}\symbol{\string"E3}}}%% CHKTEX 18
+
+%% Cores
+\definecolor{UTFPRBlack}{cmyk}{0, 0, 0, 1}
+\definecolor{UTFPRYellow}{cmyk}{0, 0.2, 1, 0}
+\definecolor{UTFPRBeige}{RGB}{148, 141, 106}
+\definecolor{UTFPRLightBeige}{RGB}{205, 193, 145}
+\definecolor{ADarkBlue}{RGB}{0, 0, 51}
+\definecolor{shadecolor}{gray}{0.9}
+\colorlet{LinkColor}{\ifbool{@LinkDarkBlue}{ADarkBlue}{.}}
+\AtBeginDocument{\colorlet{CoverBGColor}{\ifbool{Graduate}{UTFPRBlack}{UTFPRBeige}}}
+
+%% Hiperlinks e URLs
+\hypersetup{%
+  breaklinks         = true,%
+  colorlinks         = true,%
+  allcolors          = LinkColor,%
+  bookmarksdepth     = 4,%
+  bookmarksnumbered  = true,%
+  pdfdisplaydoctitle = true,%
+  pdfencoding        = unicode,%
+}
+\pdfstringdefDisableCommands{%
+  \csletcs{MakeTextUppercase}{@firstofone}%
+  \csletcs{uline}{@firstofone}%
+  \csletcs{unskip}{relax}%
+  \renewcommand*{\UTFPR}{UTFPR}%
+  \renewcommand*{\No}{N.}%
+  \renewcommand*{\and}{, }%
+  \renewcommand*{\\}{ }%
+}
+\csletcs{old@hypertarget}{hypertarget}
+\csletcs{old@hyperlink}{hyperlink}
+\renewcommand*{\hypertarget}[2]{\label{ht@#1}\old@hypertarget{#1}{#2}}
+\renewcommand*{\hyperlink}[2]{\ifcsdef{r@ht@#1}{\old@hyperlink{#1}{#2}}{#2}}
+\newcommand*{\PDFBookmark}[3][chapter]{%
+  \pdfbookmark[#1]{#2}{#3}%
+  \hypertarget{#3}{}%
+  \csgdef{#3ref}{\hyperlink{#3}{#2}}%
+}
+\newcommand*{\SectionPDFBookmark}[3][chapter]{%
+  \phantomsection%
+  \pdfbookmark[#1]{#2}{#3}%
+  \csuse{#1}*{#2}%
+  \label{#3}%
+  \csgdef{#3ref}{\titleref{#3}}%
+}
+\DeclareUrlCommand{\URL}{%
+  \renewcommand*{\UrlFont}{\color{LinkColor}\ttfamily}%
+  \renewcommand*{\UrlLeft}{<}%
+  \renewcommand*{\UrlRight}{>}%
+}
+\csgappto{UrlBreaks}{\UrlOrds}
+\csgappto{UrlSpecials}{\do\_{\_\penalty\UrlBreakPenalty}}
+\providecommand*{\@setCpagerefrange}[3]{\@@setcpagerefrange{#1}{#2}{Cref}{#3}}
+\providecommand*{\@setcpagerefrange}[3]{\@@setcpagerefrange{#1}{#2}{cref}{#3}}
+\providecommand*{\@setlabelcpagerefrange}[3]{\@@setcpagerefrange{#1}{#2}{labelcref}{#3}}
+
+%% Variáveis dependentes do idioma
+\newcommand*{\AddToLang}[4][extras]{%
+  \ifblank{#2}{}{%
+    \ifblank{#3}{}{%
+      \csdef{#2}{#3}%
+      \csappto{#1brazilian}{\csdef{#2}{#3}}%
+    }%
+    \ifblank{#4}{}{\csappto{#1english}{\csdef{#2}{#4}}}%
+  }%
+}
+\AddToLang{UTFPRName}{%
+  Universidade Tecnológica Federal do Paraná%
+}{%
+  Federal University of Technology \textemdash\ Paraná%
+}
+\AddToLang{PgAbrv}{f}{p}
+\AddToLang{InPrep}{em}{in}
+%%%% Definições para atualização no preâmbulo
+\newbool{Graduate}
+\newbool{DScOrMSc}
+\newcounter{AcadDegOpt}
+\newcommand*{\AcademicDegree}[2]{\AddToLang{AcademicDegreeName}{#1}{#2}}
+\newcommand*{\AcademicTitle}[2]{\AddToLang{AcademicTitleName}{#1}{#2}}
+\newcommand*{\DocumentType}[2]{\AddToLang{DocumentTypeName}{#1}{#2}}
+\newcommand*{\AcademicDegreeOption}[1][0]{%
+  \setcounter{AcadDegOpt}{#1}%
+  \AcademicDegree{Grau Acadêmico}{Academic Degree}%
+  \AcademicTitle{Título Acadêmico}{Academic Title}%
+  \DocumentType{Tipo de Documento}{Document Type}%
+  \ifnumgreater{\value{AcadDegOpt}}{0}{%
+    \ifnumless{\value{AcadDegOpt}}{4}{%
+      \booltrue{Graduate}%
+      \ifnumequal{\value{AcadDegOpt}}{1}{%
+        \booltrue{DScOrMSc}%
+        \AcademicDegree{Doutorado}{Doctorate}%
+        \AcademicTitle{Doutor\Gen{a}}{Doctor}%
+        \DocumentType{Tese}{Thesis}%
+      }{}%
+      \ifnumequal{\value{AcadDegOpt}}{2}{%
+        \booltrue{DScOrMSc}%
+        \AcademicDegree{Mestrado}{Master's Degree}%
+        \AcademicTitle{Mestr\Gen[e]{a}}{Master}%
+        \DocumentType{Dissertação}{Dissertation}%
+      }{}%
+      \ifnumequal{\value{AcadDegOpt}}{3}{%
+        \AcademicDegree{Especialização}{Specialization Degree}%
+        \AcademicTitle{Especialista}{Specialist}%
+        \DocumentType{Monografia}{Monograph}%
+      }{}%
+    }{%
+      \ifnumequal{\value{AcadDegOpt}}{4}{%
+        \AcademicDegree{Bacharelado}{Bachelor's Degree}%
+        \AcademicTitle{Bacharel\Gen{a}}{Bachelor}%
+      }{}%
+      \ifnumequal{\value{AcadDegOpt}}{5}{%
+        \AcademicDegree{Licenciatura}{Teaching Degree}%
+        \AcademicTitle{Licenciad\Gen[o]{a}}{Teacher}%
+      }{}%
+      \ifnumequal{\value{AcadDegOpt}}{6}{%
+        \AcademicDegree{Tecnologia}{Technologist Degree}%
+        \AcademicTitle{Tecnólog\Gen[o]{a}}{Technologist}%
+      }{}%
+      \DocumentType{Trabalho de Conclusão de Curso}{Undergraduate Thesis}%
+    }%
+  }{}%
+}
+\newcommand*{\AcadDegInCrs}{\AcademicDegreeName\space\InPrep\space\CourseName}
+\newcommand*{\Course}[2]{\AddToLang{CourseName}{#1}{#2}}
+\newcommand*{\Department}[2]{\AddToLang{DepartmentName}{#1}{#2}}
+\newcommand*{\Title}[2]{\AddToLang{@Ttl}{#1}{#2}}
+\newcommand*{\SubTitle}[2]{\AddToLang{@SubTtl}{#1}{#2}}
+%% Novas variaveis
+\newcommand*{\ApprovalDate}[1]{\AddToLang{ApprovalDate}{#1}}
+\newcommand*{\DateAbreviated}[1]{\AddToLang{DateAbreviated}{#1}}
+\AcademicDegreeOption%
+\Course{Curso{(s)}}{Course{(s)}}
+\Department{%
+  Departamento{(s)}, Coordenação{(ões)} ou Programa%
+}{%
+  Department{(s)}, Coordination{(s)}, or Program%
+}
+\Title{%
+  Título de trabalho acadêmico, claro e preciso, com texto muito longo que pode ocupar mais de uma linha%
+}{%
+  Title of academic work, clear and precise, with very long text that can take more than one line%
+}
+%% Definições de comandos
+\newbool{@SourceFinalPeriod}
+\AddToLang{SourceCall}{Fonte}{Source}
+\newcommand*{\MakeIcon}[2][\faQuestionCircle]{%
+  \ifdraft{%
+    \ifblank{#1}{\faQuestionCircle}{#1}%
+  }{%
+    \ifblank{#2}{}{\XeTeXLinkBox{\includegraphics[height = \fontcharht\font`A]{#2}}}%
+  }%
+}
+\newcommand*{\ORCID}[1]{\ifblank{#1}{}{\href{https://orcid.org/#1}{\MakeIcon{orcid}}}}
+\newcommand*{\Lattes}[1]{\ifblank{#1}{}{\href{http://lattes.cnpq.br/#1}{\MakeIcon{lattes}}}}
+\newcommand*{\email}[1]{\ifblank{#1}{}{\href{mailto:#1}{\faEnvelope}}}
+\newcommand*{\LinkIcon}{\textsuperscript{\fontsize{1.2ex}{1.2ex}\selectfont\faExternalLinkSquare*}}
+\NewDocumentCommand{\SourceOrNote}{ s O{\SourceCall} m }{%
+  \M@gettitle{#3}%
+  \memlegendinfo{#3}%
+  \par%
+  \begingroup%
+  \IfBooleanT{#1}{\booltrue{@SourceFinalPeriod}}{\boolfalse{@SourceFinalPeriod}}%
+  \ifblank{#2}{\boolfalse{@SourceCenter}}{}%
+  \ifbool{@SourceCenter}{%
+    \captionstyle[\centering]{\centering}%
+    \normalcaption%
+  }{%
+    \captionstyle[\justifying]{\justifying}%
+    \hangcaption%
+  }%
+  \@parboxrestore%
+  \ifbool{@minipage}{\@setminipage}{}%
+  \footnotesize%
+  \ifblank{#2}{\captiondelim{\mbox{}}}{\captiondelim{: }}%
+  \@makecaption{#2}{\ignorespaces\ifbool{@SourceFinalPeriod}{\@AddPeriod{#3}}{#3}}\par%
+  \endgroup%
+}
+\newcommand*{\ThreeDigitsCounter}[1]{%
+  \ifnumless{\value{#1}}{100}{0}{}%
+  \ifnumless{\value{#1}}{10}{0}{}%
+  \arabic{#1}%
+}
+%%%% Campus
+\AddToLang{CityCall}{Cidade}{City}
+\newcommand*{\CmpsName}{\CityCall}
+\newcommand*{\CmpsAcr}{}
+\newcommand*{\CmpsFile}{}
+\newcommand*{\CmpsBGFile}{}
+\newcommand*{\Campus}[1]{%
+  \ifblank{#1}{}{%
+    \renewcommand*{\CmpsName}{#1}%
+    \ifstrequal{#1}{Apucarana}{\renewcommand*{\CmpsAcr}{ap}}{}%
+    \ifstrequal{#1}{Campo Mourão}{\renewcommand*{\CmpsAcr}{cm}}{}%
+    \ifstrequal{#1}{Cornélio Procópio}{\renewcommand*{\CmpsAcr}{cp}}{}%
+    \ifstrequal{#1}{Curitiba}{\renewcommand*{\CmpsAcr}{ct}}{}%
+    \ifstrequal{#1}{Dois Vizinhos}{\renewcommand*{\CmpsAcr}{dv}}{}%
+    \ifstrequal{#1}{Francisco Beltrão}{\renewcommand*{\CmpsAcr}{fb}}{}%
+    \ifstrequal{#1}{Guarapuava}{\renewcommand*{\CmpsAcr}{gp}}{}%
+    \ifstrequal{#1}{Londrina}{\renewcommand*{\CmpsAcr}{ld}}{}%
+    \ifstrequal{#1}{Medianeira}{\renewcommand*{\CmpsAcr}{md}}{}%
+    \ifstrequal{#1}{Pato Branco}{\renewcommand*{\CmpsAcr}{pb}}{}%
+    \ifstrequal{#1}{Ponta Grossa}{\renewcommand*{\CmpsAcr}{pg}}{}%
+    \ifstrequal{#1}{Santa Helena}{\renewcommand*{\CmpsAcr}{sh}}{}%
+    \ifstrequal{#1}{Toledo}{\renewcommand*{\CmpsAcr}{td}}{}%
+    \renewcommand*{\CmpsFile}{utfpr-\CmpsAcr-\ifbool{Graduate}{d}{l}}%
+    \renewcommand*{\CmpsBGFile}{\CmpsFile-bg}%
+  }%
+}
+%%%% Data(s)
+\newcommand*{\YearNum}{\number\year}
+\newcommand*{\DepYearNum}{\YearNum}
+\newcommand*{\Year}[2][]{%
+  \ifblank{#1}{}{\renewcommand*{\DepYearNum}{#1}}%
+  \ifblank{#2}{}{\renewcommand*{\YearNum}{#2}}%
+}
+\csletcs{old@date}{date}
+\renewcommand*{\date}[1]{\AtBeginDocument{\old@date{#1}}}
+\date{\today}
+%%%% Aluno(s), orientador(es) e palavras-chave
+\newbool{@Male}
+\booltrue{@Male}
+\AddToLang{FrnmCall}{Prenome{(s)}}{Forename{(s)}}
+\AddToLang{SrnmCall}{Sobrenome}{Surname}
+\define@key{Person}{Gender}{\ifcsvoid{PTag}{}{\ifblank{#1}{}{\csgdef{\csuse{PTag}Gen}{\csuse{#1}}}}}
+\define@key{Person}{Title}{\ifcsvoid{PTag}{}{\ifblank{#1}{}{\csgdef{\csuse{PTag}Ttl}{#1}}}}
+\define@key{Person}{Forename}{\ifcsvoid{PTag}{}{\ifblank{#1}{}{\csgdef{\csuse{PTag}Frnm}{#1}}}}
+\define@key{Person}{Surname}{\ifcsvoid{PTag}{}{\ifblank{#1}{}{\csgdef{\csuse{PTag}Srnm}{#1}}}}
+\define@key{Person}{Email}{\ifcsvoid{PTag}{}{\ifblank{#1}{}{\csgdef{\csuse{PTag}Email}{\email{#1}}}}}
+\define@key{Person}{Lattes}{\ifcsvoid{PTag}{}{\ifblank{#1}{}{\csgdef{\csuse{PTag}Lattes}{\Lattes{#1}}}}}
+\define@key{Person}{ORCID}{\ifcsvoid{PTag}{}{\ifblank{#1}{}{\csgdef{\csuse{PTag}ORCID}{\ORCID{#1}}}}}
+\csletcs{KV@Person@gender}{KV@Person@Gender}
+\csletcs{KV@Person@title}{KV@Person@Title}
+\csletcs{KV@Person@forename}{KV@Person@Forename}
+\csletcs{KV@Person@surname}{KV@Person@Surname}
+\csletcs{KV@Person@email}{KV@Person@Email}
+\csletcs{KV@Person@lattes}{KV@Person@Lattes}
+\csletcs{KV@Person@orcid}{KV@Person@ORCID}
+\newcommand*{\Person}[3][]{%
+  \ifboolexpr{ test {\ifcsundef{the#1Num}} or test {\ifcsundef{the#1Tmp}} }{}{%
+    \checkifinteger{#2}%
+    \ifbool{integer}{%
+      \global\boolfalse{integer}%
+      \ifblank{#3}{}{%
+        \setcounter{#1Tmp}{#2}%
+        \csgdef{PTag}{#1\Alph{#1Tmp}}%
+        \setkeys{Person}{%
+          Gender   = {},%
+          Title    = {\AcademicTitleName},%
+          Forename = {},%
+          Surname  = {},%
+          Email    = {},%
+          Lattes   = {},%
+          ORCID    = {},%
+          #3,%
+        }%
+        \ifboolexpr{ test {\ifcsvoid{\csuse{PTag}Frnm}} and test {\ifcsvoid{\csuse{PTag}Srnm}} }{%
+          \csgdef{\csuse{PTag}Gen}{}%
+          \csgdef{\csuse{PTag}Ttl}{}%
+          \csgdef{\csuse{PTag}Email}{}%
+          \csgdef{\csuse{PTag}Lattes}{}%
+          \csgdef{\csuse{PTag}ORCID}{}%
+        }{%
+          \csgpreto{\csuse{PTag}Ttl}{\csuse{\csuse{PTag}Gen}}%
+          \csgdef{\csuse{PTag}FlNm}{%
+            \ifcsvoid{\csuse{PTag}Frnm}{}{\csuse{\csuse{PTag}Frnm}}%
+            \ifcsvoid{\csuse{PTag}Srnm}{}{ \csuse{\csuse{PTag}Srnm}}%
+          }%
+          \ifstrequal{#1}{Adv}{\csgdef{\csuse{PTag}Call}{\csuse{\csuse{PTag}Gen}\@AdvCall{#2}}}{}%
+          \ifstrequal{#1}{Mmbr}{%
+            \csgdef{\csuse{PTag}FlNm}{\csuse{\csuse{PTag}Frnm}}%
+            \csgdef{\csuse{PTag}Inst}{\csuse{\csuse{PTag}Srnm}}%
+          }{}%
+        }%
+        \ifnumless{\value{#1Num}}{\value{#1Tmp}}{\setcounter{#1Num}{\value{#1Tmp}}}{}%
+        \setcounter{#1Tmp}{0}%
+        \csgundef{PTag}%
+      }%
+    }{}%
+  }%
+}
+\newcommand*{\MakeList}[4][]{%
+  \ifboolexpr{ test {\ifcsundef{the#3Ctr}} or test {\ifcsundef{the#3Num}} or test {\ifcsundef{the#3Tmp}} }{}{%
+    \setcounter{#3Tmp}{\ifnumgreater{\value{#3Num}}{#2}{#2}{\value{#3Num}}}%
+    \@whilenum\value{#3Ctr}<\value{#3Tmp}\do{%
+      \stepcounter{#3Ctr}%
+      \ifblank{#1}{}{\csdef{#1}{#3\Alph{#3Ctr}}}%
+      #4%
+    }%
+    \ifblank{#1}{}{\csundef{#1}}%
+    \setcounter{#3Ctr}{0}%
+    \setcounter{#3Tmp}{0}%
+  }%
+}
+\newcommand*{\Attrib@Num@Ex}[3][1]{%
+  \ifboolexpr{ test {\ifcsundef{the#2Ctr}} or test {\ifcsundef{the#2Num}} }{}{%
+    \setcounter{#2Num}{\ifblank{#1}{1}{#1}}%
+    \@whilenum\value{#2Ctr}<\value{#2Num}\do{%
+      \stepcounter{#2Ctr}%
+      #3%
+    }%
+    \setcounter{#2Ctr}{0}%
+  }%
+}
+\newcommand*{\Gen}[2][]{\ifbool{@Male}{#1}{#2}}
+\newcommand*{\Male}{\@bsphack\booltrue{@Male}\@esphack}
+\newcommand*{\Female}{\@bsphack\boolfalse{@Male}\@esphack}
+\csletcs{male}{Male}
+\csletcs{female}{Female}
+%%%%%% Aluno(s)
+\newcounter{StdtCtr}
+\newcounter{StdtNum}
+\newcounter{StdtTmp}
+\newcommand*{\Student}[2]{\Person[Stdt]{#1}{#2}}
+\NewDocumentCommand{\StudentsList}{ s O{} m m }{%
+  \MakeList[PTag]{5}{Stdt}{%
+    \ifcsvoid{\csuse{PTag}FlNm}{}{%
+      {#2{\csuse{\csuse{PTag}FlNm}}}%
+      \IfBooleanT{#1}{%
+        \ifcsvoid{\csuse{PTag}Email}{}{~\csuse{\csuse{PTag}Email}}%
+        \ifcsvoid{\csuse{PTag}Lattes}{}{~\csuse{\csuse{PTag}Lattes}}%
+        \ifcsvoid{\csuse{PTag}ORCID}{}{~\csuse{\csuse{PTag}ORCID}}%
+      }%
+      \ifnumless{\value{StdtCtr}}{\value{StdtTmp}}{#3}{#4}%
+    }%
+  }%
+}
+\newcommand*{\ABNTStudentsList}{%
+  \MakeList[PTag]{5}{Stdt}{%
+    \ifboolexpr{ test {\ifcsvoid{\csuse{PTag}Frnm}} or test {\ifcsvoid{\csuse{PTag}Srnm}} }{}{%
+      \MakeTextUppercase{\csuse{\csuse{PTag}Srnm}}, \csuse{\csuse{PTag}Frnm}%
+      \ifnumless{\value{StdtCtr}}{\value{StdtTmp}}{; }{.}%
+    }%
+  }%
+}
+\newcommand*{\StudentsTitlesList}{%
+  \MakeList[PTag]{5}{Stdt}{%
+    \ifcsvoid{\csuse{PTag}Ttl}{}{%
+      \csuse{\csuse{PTag}Ttl}%
+      \ifnumless{\value{StdtCtr}}{\value{StdtTmp}}{/}{}%
+    }%
+  }%
+}
+\newcommand*{\StudentsNumber}[1][1]{%
+  \Attrib@Num@Ex[#1]{Stdt}{%
+    \Student{\arabic{StdtCtr}}{%
+      Forename = {\FrnmCall},%
+      Surname  = {\SrnmCall-A\arabic{StdtCtr}},%
+    }%
+  }%
+}
+\StudentsNumber%
+%%%%%% Orientador(es)
+\newcounter{AdvCtr}
+\newcounter{AdvNum}
+\newcounter{AdvTmp}
+%% modificação para evitar abreviação, conforme requerido no modelo da UTFPR
+%% o original com abreviação esta abaixo
+\AddToLang{ProfCall}{Prof\Gen{a}.}{Prof.}
+\AddToLang{PhDCall}{Doutor\Gen{a}}{Ph.D.}
+\AddToLang{DScCall}{Doutor\Gen{a}}{D.Sc.}
+\AddToLang{MScCall}{Mestr\Gen[e]{a}}{M.Sc.}
+\AddToLang{EngCall}{Engenheir\Gen[o]{a}}{Eng.}
+%% \AddToLang{ProfCall}{Prof\Gen{a}.}{Prof.}
+%% \AddToLang{PhDCall}{Dr\Gen{a}.}{Ph.D.}
+%% \AddToLang{DScCall}{Dr\Gen{a}.}{D.Sc.}
+%% \AddToLang{MScCall}{M\Gen[e]{a}.}{M.Sc.}
+%% \AddToLang{EngCall}{Eng\Gen{a}.}{Eng.}
+\csletcs{KV@Person@Fullname}{KV@Person@Forename}
+\csletcs{KV@Person@fullname}{KV@Person@Forename}
+\newcommand*{\@AdvCall}[1]{\ifnumequal{#1}{1}{\AdvCall}{\CoAdvCall}}
+\newcommand*{\AdvisorCall}[2]{\AddToLang{AdvCall}{#1}{#2}}
+\newcommand*{\CoAdvisorCall}[2]{\AddToLang{CoAdvCall}{#1}{#2}}
+\AdvisorCall{Orientador\Gen{a}}{Advisor}
+\CoAdvisorCall{Coorientador\Gen{a}}{Co-Advisor}
+\newcommand*{\Advisor}[2]{\Person[Adv]{#1}{#2}}
+\NewDocumentCommand{\AdvisorsList}{ s O{} m }{%
+  \MakeList[PTag]{3}{Adv}{%
+    \ifcsvoid{\csuse{PTag}FlNm}{}{%
+      \ifcsvoid{\csuse{PTag}Call}{}{{#2{\csuse{\csuse{PTag}Call}: }}}%
+      \ifcsvoid{\csuse{PTag}Ttl}{}{\csuse{\csuse{PTag}Ttl} }%
+      \csuse{\csuse{PTag}FlNm}%
+      \IfBooleanT{#1}{%
+        \ifcsvoid{\csuse{PTag}Email}{}{~\csuse{\csuse{PTag}Email}}%
+        \ifcsvoid{\csuse{PTag}Lattes}{}{~\csuse{\csuse{PTag}Lattes}}%
+        \ifcsvoid{\csuse{PTag}ORCID}{}{~\csuse{\csuse{PTag}ORCID}}%
+      }%
+      \ifnumless{\value{AdvCtr}}{\value{AdvTmp}}{#3}{}%
+    }%
+  }%
+}
+\newcommand*{\AdvisorsNumber}[1][1]{%
+  \Attrib@Num@Ex[#1]{Adv}{%
+    \Advisor{\arabic{AdvCtr}}{%
+      Title    = {\ProfCall\ \PhDCall},%
+      Fullname = {\FrnmCall\ \SrnmCall-B\arabic{AdvCtr}},%
+    }%
+  }%
+}
+\AdvisorsNumber%
+%%%%%% Membros da banca examinadora
+\newbool{@MmbrTtlAfter}
+\newcounter{MmbrCtr}
+\newcounter{MmbrNum}
+\newcounter{MmbrTmp}
+\newlength{\SignLineWd}{}
+\setlength{\SignLineWd}{\z@}
+\AddToLang{MmbrCall}{Membro}{Member}
+\AddToLang{InstCall}{Instituição}{Institution}
+\csletcs{KV@Person@Institution}{KV@Person@Surname}
+\csletcs{KV@Person@institution}{KV@Person@Surname}
+\newcommand*{\Member}[2]{\Person[Mmbr]{#1}{#2}}
+\NewDocumentCommand{\MembersList}{ s m }{%
+  \MakeList[PTag]{6}{Mmbr}{%
+    \ifcsvoid{\csuse{PTag}FlNm}{}{%
+      \parbox{\linewidth}{%
+        \ifbool{DScOrMSc}{}{\Centering}\scriptsize%
+        \ifbool{DScOrMSc}{}{\ifdimgreater{\SignLineWd}{\z@}{\hrule\@width\SignLineWd\@height0.5\p@\vskip0.5ex}{}}%
+        \csuse{\csuse{PTag}FlNm}%
+        \\% Nome e titulo em linhas diferentes
+        \ifbool{@MmbrTtlAfter}{}{\csuse{\csuse{PTag}Ttl} }%
+        %%% original (Prof. Titulo Nome Completo)
+        % {\hrule\@width\SignLineWd\@height0.5\p@\vskip0.5ex}{}}%
+        % \ifcsvoid{\csuse{PTag}Ttl}{}{\ifbool{@MmbrTtlAfter}{}{\csuse{\csuse{PTag}Ttl} }}%
+        % \csuse{\csuse{PTag}FlNm}%
+        \IfBooleanT{#1}{%
+          \ifcsvoid{\csuse{PTag}Email}{}{~\csuse{\csuse{PTag}Email}}%
+          \ifcsvoid{\csuse{PTag}Lattes}{}{~\csuse{\csuse{PTag}Lattes}}%
+          \ifcsvoid{\csuse{PTag}ORCID}{}{~\csuse{\csuse{PTag}ORCID}}%
+        }%
+        \ifcsvoid{\csuse{PTag}Ttl}{}{\ifbool{@MmbrTtlAfter}{\ifbool{DScOrMSc}{, }{\\}\csuse{\csuse{PTag}Ttl}}{}}%
+        \ifcsvoid{\csuse{PTag}Inst}{}{\ifbool{DScOrMSc}{ \textemdash\ }{\\}\csuse{\csuse{PTag}Inst}}%
+      }%
+      \ifnumless{\value{MmbrCtr}}{\value{MmbrTmp}}{#2}{}%
+    }%
+  }%
+}
+\newcommand*{\MembersNumber}[1][3]{%
+  \Attrib@Num@Ex[#1]{Mmbr}{%
+    \Member{\arabic{MmbrCtr}}{%
+      Title       = {\ProfCall\ \PhDCall},%
+      Fullname    = {\FrnmCall\ \SrnmCall-C\arabic{MmbrCtr}},%
+      Institution = {\InstCall\ (\MmbrCall-C\arabic{MmbrCtr})},%
+    }%
+  }%
+}
+\MembersNumber%
+%%%%%% Palavras-chave
+\newcounter{KWCtr}
+\newcounter{KWNum}
+\newcounter{KWTmp}
+\AddToLang{KeywordsCall}{Palavras-chave}{Keywords}
+\newcommand*{\KWCallFrmt}{}
+\newcommand*{\KeywordsCallFormat}[1]{\ifblank{#1}{}{\renewcommand*{\KWCallFrmt}{#1}}}
+\newcommand*{\Keyword}[3]{%
+  \ifboolexpr{ test {\ifcsundef{theKWNum}} or test {\ifcsundef{theKWTmp}} }{}{%
+    \checkifinteger{#1}%
+    \ifbool{integer}{%
+      \boolfalse{integer}%
+      \setcounter{KWTmp}{#1}%
+      \csdef{KW\Alph{KWTmp}}{}%
+      \cseappto{extrasbrazilian}{\csdef{KW\Alph{KWTmp}}{}}%
+      \cseappto{extrasenglish}{\csdef{KW\Alph{KWTmp}}{}}%
+      \ifblank{#2}{}{%
+        \csdef{KW\Alph{KWTmp}}{#2}%
+        \cseappto{extrasbrazilian}{\csdef{KW\Alph{KWTmp}}{#2}}%
+      }%
+      \ifblank{#3}{}{%
+        \cseappto{extrasenglish}{\csdef{KW\Alph{KWTmp}}{#3}}%
+      }%
+      \ifnumless{\value{KWNum}}{\value{KWTmp}}{\setcounter{KWNum}{\value{KWTmp}}}{}%
+      \setcounter{KWTmp}{0}%
+    }{}%
+  }%
+}
+\newcommand*{\KeywordsList}[3][]{%
+  \MakeList{6}{KW}{%
+    \ifcsvoid{KW\Alph{KWCtr}}{}{%
+      {#1{\csuse{KW\Alph{KWCtr}}}}%
+      \ifnumless{\value{KWCtr}}{\value{KWTmp}}{#2}{#3}%
+    }%
+  }%
+}
+\newcommand*{\KeywordsNumber}[1][3]{%
+  \Attrib@Num@Ex[#1]{KW}{%
+    \Keyword{\arabic{KWCtr}}{%
+      palavra-chave-\arabic{KWCtr}%
+    }{%
+      keyword-\arabic{KWCtr}%
+    }%
+  }%
+}
+\KeywordsNumber%
+
+%% Texto
+\setulmarginsandblock{30mm}{20mm}{*}
+\setlrmarginsandblock{30mm}{20mm}{*}
+\setheadfoot{10mm}{10mm}
+\setheaderspaces{*}{10mm}{*}
+\setmarginnotes{2.5mm}{15mm}{\onelineskip}
+\checkandfixthelayout%
+\setlength{\parindent}{15mm}
+\setSpacing{1.5}
+\ifbool{@twoside}{%
+  \ifboolexpr{ bool {@TwoSideFront} and bool {@TwoSideMain} }{}{%
+    \boolfalse{@twoside}%
+    \boolfalse{@mparswitch}%
+  }%
+}{%
+  \boolfalse{@TwoSideFront}%
+  \boolfalse{@TwoSideMain}%
+}
+\ifbool{@openleft}{\openright}{}
+\newrobustcmd*{\ENLangIt}[1]{\foreignlanguage{english}{\textit{#1}}}
+\newrobustcmd*{\ENLangNoIt}[1]{\foreignlanguage{english}{#1}}
+\newrobustcmd*{\ENLang}{\@ifstar{\ENLangIt}{\ENLangNoIt}}
+\newcommand*{\@AddPeriod}[2][.]{\ifblank{#2}{}{#2\@addpunct{#1}}}
+\newcommand*{\LessSloppy}{%
+  \setlength{\emergencystretch}{3em}%
+  \hbadness\@M%
+}
+\csgappto{Centering}{%
+  \sloppy%
+  \hbadness\@M%
+  \hyphenpenalty\@M%
+  \exhyphenpenalty\@M%
+}
+\renewcommand*{\memfblineboxtwo}[1]{\@@line{\hss#1\hss}}
+\renewcommand*{\memfblineboxa}[1]{\@@line{\hss#1\hss}}
+\raggedbottom%
+\iflanguage{english}{}{\frenchspacing}
+\ifboolexpr{ bool {xetex} or test {\ifdraft} }{\LessSloppy}{}
+%%%% Texto verbatim
+\setverbatimfont{\normalfont\ttfamily\footnotesize}
+\AtBeginEnvironment{verbatim}{%
+  \setlength{\ragrparindent}{\z@}%
+  \setlength{\verbatimindent}{\z@}%
+  \setSpacing{1}%
+  \wrappingon%
+}
+\cspreto{verb}{\csdef{@xobeysp}{\space\discretionary{}{}{}}}
+\fvinlineset{%
+  breaklines    = true,%
+  breakafter    = \space,%
+  breakanywhere = true,%
+}
+
+%% Cabeçalhos e rodapés
+\makepagestyle{ABNTHdg}
+\makeoddhead{ABNTHdg}{}{}{\footnotesize\thepage}
+\makeevenhead{ABNTHdg}{\footnotesize\thepage}{}{}
+\makepagestyle{TtlPgHdg}
+\makeoddhead{TtlPgHdg}{}{}{\ifbool{@PageNumFront}{\footnotesize\thepage}{}}
+\makeoddfoot{TtlPgHdg}{%
+  \footnotesize%
+  \parbox[b][4.5ex][t]{12.9ex}{\CCLicLogo}\hskip1ex%
+  \parbox[b][4.5ex][t]{\textwidth-13.9ex}{\scriptsize\sffamily\CCLicDescr}%
+}{}{}
+
+%% Níveis de divisões: documento e sumário
+\setcounter{secnumdepth}{5}
+\setsecnumdepth{subparagraph}
+\maxsecnumdepth{subparagraph}
+\setcounter{tocdepth}{4}
+\settocdepth{paragraph}
+\maxtocdepth{paragraph}
+
+%% Partes
+\newcommand*{\PhantomPart}{\bookmarksetup{startatroot}}
+\renewcommand*{\beforepartskip}{\ifbool{@TwoSideMain}{\OpenPgOdd}{}\null\vfill}
+\renewcommand*{\midpartskip}{\vskip\baselineskip}
+\renewcommand*{\afterpartskip}{\vfill\null\clearforchapter}
+\renewcommand*{\partnamefont}{\normalfont\normalsize\bfseries}
+\renewcommand*{\partnumfont}{\partnamefont}
+\renewcommand*{\parttitlefont}{\partnamefont}
+\renewcommand*{\printpartname}{\partnamefont\MakeTextUppercase{\partname}}
+\renewcommand*{\printparttitle}[1]{\parttitlefont\MakeTextUppercase{#1}}
+
+%% Capítulos
+\gluedef{\Chap@Skip}{\baselineskip\@plus0.2\baselineskip\@minus0.2\baselineskip}
+\newcommand*{\OpenPgOdd}{\ifbool{@OpenPgOdd}{\ifbool{@openright}{}{\ifnumodd{\value{page}}{}{\addtocounter{page}{1}}}}{}}
+\makechapterstyle{UnnumberedChapter}{%
+  \chapterstyle{article}%
+  \setlength{\beforechapskip}{\z@}%
+  \setlength{\afterchapskip}{\Chap@Skip}%
+  \renewcommand*{\chapterheadstart}{\ifbool{@TwoSideFront}{\OpenPgOdd}{}}%
+  \renewcommand*{\chapnamefont}{\normalfont\normalsize\bfseries}%
+  \renewcommand*{\chapnumfont}{\chapnamefont}%
+  \renewcommand*{\chaptitlefont}{\chapnamefont}%
+  \renewcommand*{\printchaptertitle}[1]{\Centering\chaptitlefont\MakeTextUppercase{##1}}%
+  \indentafterchapter%
+}
+\makechapterstyle{NumberedChapter}{%
+  \chapterstyle{UnnumberedChapter}%
+  \renewcommand*{\chapterheadstart}{\ifbool{@TwoSideMain}{\OpenPgOdd}{}}%
+  \renewcommand*{\afterchapternum}{\quad}%
+  \renewcommand*{\printchapternum}{\chapnumfont\thechapter}%
+  \renewcommand*{\printchaptertitle}[1]{\chaptitlefont\MakeTextUppercase{##1}}%
+}
+\makechapterstyle{AppendixChapter}{%
+  \chapterstyle{UnnumberedChapter}%
+  \setlength{\afterchapskip}{\z@}%
+  \renewcommand*{\chapterheadstart}{%
+    \ifbool{@TwoSideMain}{\OpenPgOdd}{}%
+    \null\vfill%
+  }%
+  \renewcommand*{\chapternamenum}{\space}%
+  \renewcommand*{\afterchapternum}{\space\textemdash\space}%
+  \renewcommand*{\printchaptername}{\chapnamefont\MakeTextUppercase{\appendixname}}%
+  \renewcommand*{\printchapternum}{\chapnumfont\thechapter}%
+  \renewcommand*{\memendofchapterhook}{\vfill\null\clearforchapter}%
+}
+
+%% Seções
+\newcommand*{\Sect@Name}[1]{\AddToLang{#1autorefname}{\Cref@section@name}{\Cref@section@name}}
+\forcsvlist{\Sect@Name}{section, subsection, subsubsection, paragraph, subparagraph}
+\crefalias{paragraph}{section}
+\crefalias{subparagraph}{section}
+\newcommand*{\Sect@Fmt}[1]{%
+  \csuse{setbefore#1skip}{\Chap@Skip}%
+  \csuse{setafter#1skip}{\Chap@Skip}%
+  \csuse{set#1headstyle}{\normalfont\normalsize}%
+}
+\forcsvlist{\Sect@Fmt}{sec, subsec, subsubsec, para, subpara}
+\setbeforesubparaskip{\parskip}
+\setaftersubparaskip{-1ex}
+\setsubparaindent{\parindent}
+\csappto{secheadstyle}{\bfseries}
+\csappto{paraheadstyle}{\noindent\emph}
+\csappto{subparaheadstyle}{\@AddPeriod[:]}
+\setsecnumformat{%
+  \ifcsundef{#1secnumformat}{%
+    \csuse{the#1}\quad%
+  }{%
+    \csuse{#1secnumformat}%
+  }%
+}
+\newcommand*{\subsubsectionsecnumformat}{\uline{\thesubsubsection\quad}}
+\newcommand*{\subparagraphsecnumformat}{\S\,\arabic{subparagraph}\iflanguage{brazilian}{.\textordmasculine}{}\quad}
+\csletcs{old@subsubsection}{subsubsection}
+\RenewDocumentCommand{\subsubsection}{ s O{} O{} m }{%
+  \IfBooleanTF{#1}{%
+    \old@subsubsection*{\uline{#4}}%
+  }{%
+    \old@subsubsection[\ifblank{#2}{\uline{#4}}{#2}][\ifblank{#3}{#4}{#3}]{\uline{#4}}%
+  }%
+}
+\ifpatchable*{\thesubparagraph}{%
+  \xpatchcmd{\thesubparagraph}{\theparagraph.\@arabic\c@subparagraph}{%
+    \theparagraph, \S\,\@arabic\c@subparagraph\iflanguage{brazilian}{.\textordmasculine}{}%
+  }{}{}
+}{}
+
+%% Listas de itens
+\AtBeginEnvironment{itemize}{\LessSloppy}
+\AtBeginEnvironment{enumerate}{\LessSloppy}
+\setlist{%
+  topsep     = \z@,%
+  partopsep  = \z@,%
+  parsep     = \z@,%
+  itemsep    = \z@,%
+  leftmargin = *,%
+  align      = left,%
+}
+\setlist[1]{labelindent = \parindent}
+\newcommand*{\alphsect}{\alph*^^29}
+\renewcommand*{\@listI}{%
+  \leftmargin\leftmargini%
+  \topsep\z@%
+  \parsep\z@%
+  \itemsep\z@%
+}
+
+%% Notas de rodapé
+% \counterwithout{footnote}{chapter}%% Usa numeração consecutiva e independente
+\setlength{\footmarkwidth}{1em}
+\setlength{\footmarksep}{\z@}
+\setfootins{\baselineskip}{\baselineskip}
+\footmarkstyle{\textsuperscript{#1}\hfill}
+\csletcs{old@footnotetext}{@footnotetext}
+\renewcommand*{\@footnotetext}[1]{\old@footnotetext{\@AddPeriod{#1}}}
+\renewcommand*{\footnoterule}{\kern-3\p@\hrule\@width50mm\kern2.5\p@}
+%%%% Notas laterais
+\sideparmargin{outer}
+\renewcommand*{\sideparfont}{\tiny}
+\renewcommand*{\sideparform}{\ifbool{memtortm}{\RaggedRight}{\RaggedLeft}}
+%%%% Barras laterais
+\sidebarmargin{outer}
+\setsidebars{\marginparsep}{\marginparwidth}{*}{*}{*}{*}
+\renewcommand*{\sidebarfont}{\tiny}
+\renewcommand*{\sidebarform}{\ifbool{memtortm}{\RaggedRight}{\RaggedLeft}}
+
+%% Citação direta: de até 3 linhas e com mais de 3 linhas
+\dimdef{\CitLeftSkip}{40mm}
+\NewDocumentCommand{\Citation}{ O{\languagename} m m O{} }{%
+  \hyphenblockquote{#1}[%
+    \ignorespaces\ifblank{#2}{}{#2}\ifblank{#4}{}{\csdisplayfalse\footnote{#4}}\unskip%
+  ]{%
+    \ignorespaces\ifcsstring{languagename}{#1}{#3}{\textit{#3}}\unskip%
+  }%
+}
+\NewDocumentEnvironment{DisplayCitation}{ O{\languagename} m O{} }{ %
+  \begin{hyphendisplayquote}{#1}[%
+    \ifblank{#2}{}{\ignorespaces#2\unskip}%
+    \ifblank{#3}{}{\csdisplayfalse\footnote{\ignorespaces#3\unskip}}\@addpunct{.}%
+  ]%
+  \begingroup%
+  \ifcsstring{languagename}{#1}{}{\itshape}%
+  }{%
+  \endgroup%
+  \end{hyphendisplayquote}%
+}
+\newenvironment*{DisplayCitationBlock}{%
+  \list{}{\setlength{\leftmargin}{\z@}}%
+  \item%
+  \LessSloppy%
+  \ifbool{@twocolumn}{%
+    \addtolength{\leftskip}{0.25\linewidth}%
+  }{%
+    \addtolength{\leftskip}{\CitLeftSkip}%
+  }%
+  \begin{SingleSpace}%
+  \footnotesize%
+}{%
+  \end{SingleSpace}%
+  \endlist%
+}
+\renewcommand*{\mkcitation}[1]{\ifblank{#1}{}{ #1}}
+\SetBlockEnvironment{DisplayCitationBlock}
+
+%% Equações
+\usepackage{helvet} 
+\counterwithout{equation}{chapter}
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{\onelineskip-\baselineskip}%
+  \setlength{\belowdisplayskip}{\onelineskip}%
+  \setlength{\abovedisplayshortskip}{\abovedisplayskip}%
+  \setlength{\belowdisplayshortskip}{\belowdisplayskip}%
+}
+\ifboolexpr{ bool {@FontCM} or bool {@FontTimes} }{%
+  \csletcs{mathrm@mathsf}{mathrm}%
+}{%
+  \csletcs{mathrm@mathsf}{mathsf}%
+}
+\renewcommand{\familydefault}{\sfdefault} 
+\newrobustcmd*{\Unit}[2][]{%
+  \ifbool{mmode}{%
+    \mathrm@mathsf{\ifblank{#1}{}{#1\,}#2}%
+  }{%
+    \ensuremath{\mathrm@mathsf{\ifblank{#1}{}{#1\,}#2}}%
+  }%
+}
+\newrobustcmd*{\MathBF}[1]{%
+  \ifboolexpr{ bool {luatex} or bool {xetex} }{%
+    \begingroup%
+    \ifboolexpr{ bool {@FontCM} or bool {@FontTimes} }{%
+      \csletcs{mathrm@mathsf}{symbfup}%
+    }{%
+      \csletcs{mathrm@mathsf}{symbfsf}%
+    }%
+    \ifbool{mmode}{\symbf{#1}}{\ensuremath{\symbf{#1}}}%
+    \endgroup%
+  }{%
+    \ifbool{mmode}{\text{\boldmath\ensuremath{#1}}}{{\boldmath\ensuremath{#1}}}%
+  }%
+}
+
+%% Objetos flutuantes: figuras, tabelas, etc.
+\newbool{LTMoreThanOnePage}
+\Crefname{flowchart}{Fluxograma}{Fluxogramas}
+\Crefname{photograph}{Fotografia}{Fotografias}
+\Crefname{graph}{Gráfico}{Gráficos}
+\Crefname{tabframed}{Quadro}{Quadros}
+\ifbool{@cref@capitalise}{%
+  \ifbool{@cref@abbrev}{%
+    \crefname{flowchart}{Flux.}{Fluxs.}%
+    \crefname{photograph}{Fot.}{Fots.}%
+    \crefname{graph}{Gráf.}{Gráfs.}%
+    \crefname{tabframed}{Quad.}{Quads.}%
+  }{%
+    \crefname{flowchart}{Fluxograma}{Fluxogramas}%
+    \crefname{photograph}{Fotografia}{Fotografias}%
+    \crefname{graph}{Gráfico}{Gráficos}%
+    \crefname{tabframed}{Quadro}{Quadros}%
+  }%
+}{%
+  \ifbool{@cref@abbrev}{%
+    \crefname{flowchart}{flux.}{fluxs.}%
+    \crefname{photograph}{fot.}{fots.}%
+    \crefname{graph}{gráf.}{gráfs.}%
+    \crefname{tabframed}{quad.}{quads.}%
+  }{%
+    \crefname{flowchart}{fluxograma}{fluxogramas}%
+    \crefname{photograph}{fotografia}{fotografias}%
+    \crefname{graph}{gráfico}{gráficos}%
+    \crefname{tabframed}{quadro}{quadros}%
+  }%
+}
+\csappto{extrasbrazilian}{%
+  \Crefname{flowchart}{Fluxograma}{Fluxogramas}%
+  \Crefname{photograph}{Fotografia}{Fotografias}%
+  \Crefname{graph}{Gráfico}{Gráficos}%
+  \Crefname{tabframed}{Quadro}{Quadros}%
+  \ifbool{@cref@capitalise}{%
+    \ifbool{@cref@abbrev}{%
+      \crefname{flowchart}{Flux.}{Fluxs.}%
+      \crefname{photograph}{Fot.}{Fots.}%
+      \crefname{graph}{Gráf.}{Gráfs.}%
+      \crefname{tabframed}{Quad.}{Quads.}%
+    }{%
+      \crefname{flowchart}{Fluxograma}{Fluxogramas}%
+      \crefname{photograph}{Fotografia}{Fotografias}%
+      \crefname{graph}{Gráfico}{Gráficos}%
+      \crefname{tabframed}{Quadro}{Quadros}%
+    }%
+  }{%
+    \ifbool{@cref@abbrev}{%
+      \crefname{flowchart}{flux.}{fluxs.}%
+      \crefname{photograph}{fot.}{fots.}%
+      \crefname{graph}{gráf.}{gráfs.}%
+      \crefname{tabframed}{quad.}{quads.}%
+    }{%
+      \crefname{flowchart}{fluxograma}{fluxogramas}%
+      \crefname{photograph}{fotografia}{fotografias}%
+      \crefname{graph}{gráfico}{gráficos}%
+      \crefname{tabframed}{quadro}{quadros}%
+    }%
+  }%
+  \renewcommand*{\algorithmicrequire}{\textbf{Requer:}}%
+  \renewcommand*{\algorithmicensure}{\textbf{Garantir:}}%
+  \renewcommand*{\algorithmicend}{\textbf{finaliza}}%
+  \renewcommand*{\algorithmicif}{\textbf{se}}%
+  \renewcommand*{\algorithmicthen}{\textbf{então}}%
+  \renewcommand*{\algorithmicelse}{\textbf{senão}}%
+  \renewcommand*{\algorithmicelsif}{\algorithmicelse, \algorithmicif}%
+  \renewcommand*{\algorithmicfor}{\textbf{para}}%
+  \renewcommand*{\algorithmicforall}{\textbf{para todos}}%
+  \renewcommand*{\algorithmicdo}{\textbf{faz}}%
+  \renewcommand*{\algorithmicwhile}{\textbf{enquanto}}%
+  \renewcommand*{\algorithmicloop}{\textbf{ciclo}}%
+  \renewcommand*{\algorithmicrepeat}{\textbf{repete}}%
+  \renewcommand*{\algorithmicuntil}{\textbf{até}}%
+  \renewcommand*{\algorithmicprint}{\textbf{imprime}}%
+  \renewcommand*{\algorithmicreturn}{\textbf{retorna}}%
+  \renewcommand*{\algorithmicand}{\textbf{e}}%
+  \renewcommand*{\algorithmicor}{\textbf{ou}}%
+  \renewcommand*{\algorithmicxor}{\textbf{exou}}%
+  \renewcommand*{\algorithmicnot}{\textbf{não}}%
+  \renewcommand*{\algorithmicto}{\textbf{a}}%
+  \renewcommand*{\algorithmicinputs}{\textbf{entrada{(s)}}}%
+  \renewcommand*{\algorithmicoutputs}{\textbf{saída{(s)}}}%
+  \renewcommand*{\algorithmicglobals}{\textbf{global{(is)}}}%
+  \renewcommand*{\algorithmicbody}{\textbf{faz}}%
+  \renewcommand*{\algorithmictrue}{\textbf{verdadeiro}}%
+  \renewcommand*{\algorithmicfalse}{\textbf{falso}}%
+}
+\csappto{extrasenglish}{%
+  \Crefname{flowchart}{Flowchart}{Flowcharts}%
+  \Crefname{photograph}{Photograph}{Photographs}%
+  \Crefname{graph}{Graph}{Graphs}%
+  \Crefname{tabframed}{Frame}{Frames}%
+  \ifbool{@cref@capitalise}{%
+    \ifbool{@cref@abbrev}{%
+      \crefname{flowchart}{Flow.}{Flows.}%
+      \crefname{photograph}{Phot.}{Phots.}%
+    }{%
+      \crefname{flowchart}{Flowchart}{Flowcharts}%
+      \crefname{photograph}{Photograph}{Photographs}%
+    }%
+    \crefname{graph}{Graph}{Graphs}%
+    \crefname{tabframed}{Frame}{Frames}%
+  }{%
+    \ifbool{@cref@abbrev}{%
+      \crefname{flowchart}{flow.}{flows.}%
+      \crefname{photograph}{phot.}{phots.}%
+    }{%
+      \crefname{flowchart}{flowchart}{flowcharts}%
+      \crefname{photograph}{photograph}{photographs}%
+    }%
+    \crefname{graph}{graph}{graphs}%
+    \crefname{tabframed}{frame}{frames}%
+  }%
+}
+\newcommand*{\Flt@Name}[1]{%
+  \crefalias{sub#1}{#1}%
+  \csdef{#1name}{\csuse{Cref@#1@name}}%
+  \csdef{#1autorefname}{\csuse{Cref@#1@name}}%
+  \csdef{sub#1autorefname}{\csuse{Cref@#1@name}}%
+}
+\forcsvlist{\Flt@Name}{algorithm, flowchart, photograph, graph, tabframed}
+\newcommand*{\subfigureautorefname}{\figurename}
+\newcommand*{\subtableautorefname}{\tablename}
+\renewcommand*{\graphicspath}[1]{%
+  \providecommand*{\Ginput@path}{}%
+  \csgappto{Ginput@path}{#1}%
+}
+\graphicspath{%
+  {./Pre-Textual/}%
+  {./Pre-Textual/Backgrounds/}%
+  {./Pre-Textual/Logos/}%
+  {./Pre-Textual/Logos/Campi/}%
+}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\setlength{\aboverulesep}{\z@}
+\setlength{\belowrulesep}{\z@}
+\setlength{\extrarowheight}{0.25ex}
+\setlength{\arrayrulewidth}{\lightrulewidth}
+\newcolumntype{?}[1]{!{\vrule\@width\ifblank{#1}{\heavyrulewidth}{#1}}}
+\newcolumntype{e}[1]{@{\extracolsep{\ifblank{#1}{\fill}{#1}}}}
+\newcolumntype{,}[1]{\DT{,}{\mathord\mathcomma}{\ifblank{#1}{-1}{#1}}}
+\newcolumntype{.}[1]{\DT{.}{.}{\ifblank{#1}{-1}{#1}}}
+\newcolumntype{;}[1]{\DTB{,}{\mathord\mathcomma}{\ifblank{#1}{-1}{#1}}}
+\newcolumntype{:}[1]{\DTB{.}{.}{\ifblank{#1}{-1}{#1}}}
+\newcolumntype{\DT}[3]{>{\textfont0=\the\font\DC@{#1}{#2}{#3}}c<{\DC@end}}
+\newcolumntype{\DTB}[3]{>{\bfseries\textfont0=\the\font\DC@{#1}{#2}{#3}}c<{\DC@end}}
+\newcolumntype{U}{>{$\left[\mathrm@mathsf\bgroup}Z<{\egroup\right]$}}%% CHKTEX 9
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedleft\arraybackslash}X}
+\renewcommand*{\@memfront@floats}{}
+\renewcommand*{\@memmain@floats}{}
+\renewcommand*{\@memback@floats}{}
+\newfloat{algorithm}{loa}{\algorithmname}
+\newfloat{flowchart}{low}{\flowchartname}
+\newfloat{photograph}{lop}{\photographname}
+\newfloat{graph}{loh}{\graphname}
+\newfloat{tabframed}{lod}{\tabframedname}
+\newcommand*{\Flt@Sub@Adj}[1]{%
+  \newsubfloat{#1}%
+  \setfloatadjustment{#1}{\centering\footnotesize}%
+}
+\forcsvlist{\Flt@Sub@Adj}{algorithm, figure, flowchart, photograph, graph, tabframed, table}
+\algsetup{linenosize = {\color{gray}\tiny}, linenodelimiter = {:}}
+\renewcommand*{\algorithmiccomment}[1]{\hskip2em\@plus0.25fil\@minus1em\textcolor{gray}{\#\ #1}}
+\AtBeginEnvironment{longtable}{%
+  \setlength{\LTleft}{\z@}%
+  \setlength{\LTright}{\z@}%
+  \setlength{\LTcapwidth}{\linewidth-0.5\tabcolsep}%
+  \setlength{\JustifyingParindent}{\z@}%
+  \setSpacing{1}\centering\footnotesize%
+}
+\newsavebox{\LT@lasthead}
+\csdef{endlasthead}{\LT@end@hd@ft\LT@lasthead}
+\ifpatchable*{\LT@output}{%
+  \xpatchcmd{\LT@output}{%
+    \ifnum\outputpenalty<-\@Mi%
+  }{%
+    \ifnum\outputpenalty<-\@Mi%
+    \ifbool{LTMoreThanOnePage}{\copy\LT@lasthead}{}%
+    \setbox\LT@head\vsplit\@cclv to \ht\LT@lasthead%
+  }{}{}%
+  \xpatchcmd{\LT@output}{%
+    \setbox\z@\vbox{\box\LT@head}%
+  }{%
+    \setbox\z@\vbox{\box\LT@lasthead}%
+  }{}{}%
+  \xpatchcmd{\LT@output}{%
+    \setbox\@cclv\vbox{\unvbox\@cclv\copy\LT@foot\vss}%
+  }{%
+    \global\booltrue{LTMoreThanOnePage}%
+    \setbox\@cclv\vbox{\unvbox\@cclv\copy\LT@foot\vss}%
+  }{}{}%
+  \xpatchcmd{\LT@output}{%
+    \copy\LT@head\nobreak%
+  }{%
+    \copy\LT@head%
+  }{}{}%
+}{}
+\BeforeBeginEnvironment{algorithmic}{\vskip0.25ex\hrule\@height\heavyrulewidth}
+\AfterEndEnvironment{algorithmic}{\hrule\@height\heavyrulewidth\vskip-0.25ex}
+%%%% Legendas
+\setlength{\abovecaptionskip}{\p@}
+\setlength{\belowcaptionskip}{\p@}
+\captiondelim{\space\textendash\space}
+\captionnamefont{\footnotesize\bfseries}
+\captiontitlefont{\footnotesize\bfseries}
+% \captiontitlefinal{\@addpunct{.}}%% Adiciona ponto final, se não houver um
+\ifbool{@CaptionCenter}{%
+  \captionstyle[\centering]{\centering}%
+  \subcaptionstyle{\centering}%
+  \normalcaption%
+  \normalsubcaption%
+}{%
+  \captionstyle[\justifying]{\justifying}%
+  \subcaptionstyle{\justifying}%
+  \hangcaption%
+  \hangsubcaption%
+}
+\subcaptionlabelfont{\scriptsize\bfseries}
+\subcaptionfont{\scriptsize\bfseries}
+\newcommand*{\SetCaptionWidth}[1]{%
+  \ifblank{#1}{}{%
+    \captionwidth{#1}%
+    \changecaptionwidth%
+  }%
+}
+\csletcs{CaptionWidth}{@contcwidth}
+
+%% Inicialização do documento
+\newcounter{RomanPage}
+\AtBeginDocument{%
+  \newcommand*{\TheTitle}{\protect\textbf{\@Ttl}\ifcsvoid{@SubTtl}{}{\protect\textbf{:} \@SubTtl}}%
+  \newcommand*{\TheAuthors}{}%
+  \newcommand*{\TheSubject}{\DocumentTypeName\ (\AcadDegInCrs)}%
+  \MakeList[PTag]{5}{Stdt}{%
+    \csxappto{TheAuthors}{%
+      \csuse{\csuse{PTag}FlNm}%
+      \ifnumless{\value{StdtCtr}}{\value{StdtTmp}}{, }{}%
+    }%
+  }%
+  \title{\TheTitle}%
+  \author{\TheAuthors}%
+  \hypersetup{%
+    pdftitle    = {\thetitle},%
+    pdfauthor   = {\theauthor},%
+    pdfsubject  = {\TheSubject},%
+  }%
+  \ifboolexpr{%
+    test {\ifnumgreater{\value{AcadDegOpt}}{0}} and %
+    test {\ifnumless{\value{AcadDegOpt}}{7}}%
+  }{}{\boolfalse{@CoverBGOn}}%
+  \ifbool{@TwoSideFront}{%
+    \booltrue{@twoside}%
+    \booltrue{@mparswitch}%
+  }{}%
+  \ifbool{@openright}{}{\csletcs{cleardoublepage}{clearpage}}%
+  \pagenumbering{Roman}%
+  \begin{titlingpage}%
+  \maketitle%
+  \end{titlingpage}%
+  \setcounter{RomanPage}{\value{page}}%
+  \ifbool{@twoside}{\ifbool{@openright}{\addtocounter{RomanPage}{1}}{}}{}%
+  \PreTextual%
+}
+
+%% Capa
+\AddToLang{CvrName}{Capa}{Cover}
+\renewcommand*{\@maketitle}{%
+  \csletcs{footnote}{@mem@titlefootkill}%
+  \ifdimgreater{\pagetotal}{\z@}{\clearpage}{}%
+  \PDFBookmark{\CvrName}{cvr}%
+  \begingroup%
+  \ifbool{@CoverBGOn}{%
+    \ifdraft{}{\ifbool{Graduate}{\color{white}}{}}%
+    \AddToShipoutPictureBG*{%
+      \ifcsvoid{CmpsAcr}{%
+        \colorlet{CoverBGAltColor}{\ifbool{Graduate}{CoverBGColor}{UTFPRLightBeige}}%
+        \AtPageLowerLeft{\makebox{\color{CoverBGAltColor}\rule{\paperwidth}{\paperheight}}}%
+      }{%
+        \AtPageLowerLeft{\includegraphics[width = \paperwidth, height = \paperheight]{\CmpsBGFile}}%
+      }%
+      \ifbool{Graduate}{}{%
+        \ifbool{xetex}{}{\transparent{0.5}}%
+        \AtPageUpperLeft{\raisebox{-60mm}{\makebox{\color{CoverBGColor}\rule{\paperwidth}{60mm}}}}%
+        \AtPageLowerLeft{\raisebox{12mm}{\makebox{\color{CoverBGColor}\rule{\paperwidth}{24mm}}}}%
+      }%
+    }%
+  }{}%
+  \centering\bfseries%
+  \begin{minipage}[t][13\baselineskip][t]{\textwidth}%
+  \strut\Centering%
+  \MakeTextUppercase{\UTFPRName}\\%
+  \ifbool{@CoverIdAll}{\MakeTextUppercase{\DepartmentName}}{\strut}\\%
+  \ifbool{@CoverIdAll}{\MakeTextUppercase{\AcadDegInCrs}}{\strut}\vfill%
+  \StudentsList[\MakeTextUppercase]{\\}{\vfill}%
+  \strut%
+  \end{minipage}%
+  \par%
+  \begin{Center}%
+  \MakeTextUppercase{\TheTitle}%
+  \end{Center}%
+  \vfill%
+  \ifbool{@CoverIdAll}{\MakeTextUppercase{\DocumentTypeName}}{\strut}\vfill%
+  \MakeTextUppercase{\CmpsName}\\%
+  \YearNum\\%
+  \endgroup%
+}
+%%%% Contracapa
+\AddToLang{BckCvrName}{Contracapa}{Back Cover}
+\newcommand*{\BackCover}{%
+  \clearforchapter%
+  \ifbool{@CoverBGOn}{%
+    \savepagenumber%
+    \pagenumbering{Roman}%
+    \addtocounter{RomanPage}{1}%
+    \setcounter{page}{\value{RomanPage}}%
+    \PDFBookmark{\BckCvrName}{bckcvr}%
+    \pagestyle{titlingpage}%
+    \ifbool{@twoside}{%
+      \cleartoevenpage%
+    }{%
+      \booltrue{@twoside}%
+      \booltrue{@mparswitch}%
+    }%
+    \AddToShipoutPictureBG*{%
+      \AtPageLowerLeft{\makebox{\color{CoverBGColor}\rule{\paperwidth}{\paperheight}}}%
+      \ifcsvoid{CmpsAcr}{}{%
+        \AtPageLowerLeft{%
+          \raisebox{20mm}{%
+            \parbox[b]{\paperwidth}{\centering\includegraphics[height = 2\baselineskip]{\CmpsFile}}%
+          }%
+        }%
+      }%
+    }%
+    \null%
+    \clearpage%
+    \restorepagenumber%
+  }{}%
+}
+
+%% Elementos pré-textuais
+\newcommand*{\PreTextual}{%
+  \frontmatter%
+  \ifbool{@PageNumFront}{%
+    \pagestyle{ABNTHdg}%
+    \aliaspagestyle{chapter}{ABNTHdg}%
+    \aliaspagestyle{cleared}{ABNTHdg}%
+    \aliaspagestyle{part}{ABNTHdg}%
+    \nopartblankpage%
+  }{%
+    \pagestyle{empty}%
+    \aliaspagestyle{chapter}{empty}%
+    \aliaspagestyle{cleared}{empty}%
+    \aliaspagestyle{part}{empty}%
+  }%
+  \chapterstyle{UnnumberedChapter}%
+}
+
+%% Folha de rosto
+\newbool{@FrgnTtlUpperCase}
+\AddToLang{TtlPgName}{Folha de Rosto}{Title Page}
+\AddToLang{ConcAreaCall}{Área de Concentração}{Concentration Area}
+\newcommand*{\ConcentrationArea}[2]{\AddToLang{ConcAreaName}{#1}{#2}}
+\ConcentrationArea{Nome da \ConcAreaCall}{\ConcAreaCall\ Name}
+\providecommand*{\ttlpgref}{\TtlPgName}
+\NewDocumentEnvironment{TitlePage}{ O{} O{} }{%
+  \ifblank{#1}{}{%
+    \ifstrequal{#1}{BY}{}{}%
+    \ifstrequal{#1}{BY-SA}{\global\booltrue{@CCLicSA}}{}%
+    \ifstrequal{#1}{BY-ND}{\global\booltrue{@CCLicND}}{}%
+    \ifstrequal{#1}{BY-NC}{\global\booltrue{@CCLicNC}}{}%
+    \ifstrequal{#1}{BY-NC-SA}{%
+      \global\booltrue{@CCLicSA}%
+      \global\booltrue{@CCLicNC}%
+    }{}%
+    \ifstrequal{#1}{BY-NC-ND}{%
+      \global\booltrue{@CCLicND}%
+      \global\booltrue{@CCLicNC}%
+    }{}%
+    \ifblank{#2}{}{\CCLicenseDescription*{#2}}%
+    \thispagestyle{TtlPgHdg}%
+  }%
+  \ifbool{@TwoSideFront}{\OpenPgOdd}{}%
+  \PDFBookmark{\TtlPgName}{ttlpg}%
+  \begin{center}%
+  \begin{minipage}[t][13\baselineskip][t]{\textwidth}%
+  \strut\Centering%
+  \StudentsList*[\bfseries\MakeTextUppercase]{\\}{}%
+  \strut%
+  \end{minipage}%
+  \par%
+  \begin{Center}%
+  \iflanguage{brazilian}{\selectlanguage{brazilian}}{\selectlanguage{english}}%
+  \bfseries\MakeTextUppercase{\TheTitle}%
+  \end{Center}%
+  \vskip\baselineskip%
+  \begin{Center}%
+  \iflanguage{brazilian}{\selectlanguage{english}}{\selectlanguage{brazilian}}%
+  \bfseries\ifbool{@FrgnTtlUpperCase}{\MakeTextUppercase{\TheTitle}}{\TheTitle}%
+  \end{Center}%
+  \end{center}%
+  \vskip\baselineskip%
+  \begin{SingleSpace}%
+  \raggedleft\footnotesize%
+  \begin{minipage}{0.5\textwidth}%
+  \LessSloppy%
+}{%
+  \ifbool{DScOrMSc}{\space\ConcAreaCall: \ConcAreaName.}{}%
+  \end{minipage}%
+  \ifnumgreater{\value{AdvNum}}{0}{%
+    \vskip\baselineskip%
+    \parbox{0.5\textwidth}{\raggedright\AdvisorsList*{\\}}%
+  }{}%
+  \end{SingleSpace}%
+  \vfill%
+  \begingroup%
+  \centering\bfseries%
+  \MakeTextUppercase{\CmpsName}\\%
+  \YearNum\\%
+  \endgroup%
+  \TtlPgBack%
+}
+\csletcs{TitlePage*}{TitlePage}
+\csletcs{endTitlePage*}{endTitlePage}
+\AtBeginEnvironment{TitlePage*}{\booltrue{@FrgnTtlUpperCase}}
+%%%% Termo de licenciamento
+\newbool{@CCLicUTFPR}
+\newbool{@CCLicNC}
+\newbool{@CCLicND}
+\newbool{@CCLicSA}
+\AddToLang{CCLicInt}{Internacional}{International}
+\newcommand*{\CCLicAcr}[1]{%
+  \ifbool{@CCLicNC}{#1nc}{}%
+  \ifbool{@CCLicND}{#1nd}{}%
+  \ifbool{@CCLicSA}{#1sa}{}%
+}
+\newcommand*{\CCLicURL}{http://creativecommons.org/licenses/by\CCLicAcr{-}/4.0/}
+\newcommand*{\CCLicLogo}{\href{\CCLicURL}{\XeTeXLinkBox{\includegraphics[height = 4.5ex]{cc-by\CCLicAcr{-}}}}}
+\NewDocumentCommand{\CCLicenseDescription}{ s O{} m }{%
+  \IfBooleanT{#1}{%
+    \global\booltrue{@CCLicUTFPR}%
+    \renewcommand*{\CCLicLogo}{%
+      \begin{minipage}{12.9ex}%
+      \centering%
+      \includegraphics[height = 4.5ex]{cc-by\CCLicAcr{-}}\\%
+      \href{\CCLicURL}{{\scriptsize 4.0 \CCLicInt}}%
+      \end{minipage}%
+    }%
+  }%
+  \ifblank{#2}{%
+    \AddToLang{CCLicDescr}{#3}{#3}%
+  }{%
+    \AddToLang{CCLicDescr}{#3}{#2}%
+  }%
+}
+\CCLicenseDescription[%
+  This \DocumentTypeName\ is licensed under a %
+  \href{\CCLicURL}{%
+    Creative Commons Attribution%
+    \ifbool{@CCLicNC}{\csuse{textendash}Non\-Com\-mer\-cial}{}%
+    \ifbool{@CCLicND}{\csuse{textendash}No\-De\-riv\-a\-tives}{}%
+    \ifbool{@CCLicSA}{\csuse{textendash}Share\-Alike}{} %
+    4.0 International License%
+  }, %
+  which permits use and distribution in any medium or format, %
+  provided that the original work is properly cited%
+  \ifbool{@CCLicNC}{\ifboolexpr{ bool {@CCLicND} or bool {@CCLicSA} }{,}{ and} use is non-commercial}{}%
+  \ifbool{@CCLicND}{\ifbool{@CCLicNC}{,}{} and no modification or adaptation is made}{}%
+  \ifbool{@CCLicSA}{\ifbool{@CCLicNC}{,}{} and the modifications or adaptations are licensed under identical terms}{}.%
+]{%
+  Est\ifbool{Graduate}{a}{e} \DocumentTypeName\ está licenciad\ifbool{Graduate}{a}{o} sob uma Licença %
+  \href{\CCLicURL}{%
+    Cre\-ative Com\-mons Atribuição%
+    \ifbool{@CCLicNC}{\csuse{textendash}Não\-Co\-mer\-cial}{}%
+    \ifbool{@CCLicND}{\csuse{textendash}Sem\-De\-ri\-va\-ções}{}%
+    \ifbool{@CCLicSA}{\csuse{textendash}Com\-par\-ti\-lha\-Igual}{} %
+    4.0 Internacional%
+  }, %
+  que permite uso e distribuição em qualquer meio ou formato, %
+  desde que o trabalho original seja devidamente citado%
+  \ifbool{@CCLicNC}{\ifboolexpr{ bool {@CCLicND} or bool {@CCLicSA} }{,}{ e} o uso não seja comercial}{}%
+  \ifbool{@CCLicND}{ e nenhuma modificação ou adaptação seja feita}{}%
+  \ifbool{@CCLicSA}{ e as modificações ou adaptações sejam licenciadas sob termos idênticos}{}.%
+}
+%%%% Ficha catalográfica
+\AddToLang{IdxCardName}{Ficha Catalográfica}{Index Card}
+\AddToLang{PDFCall}{Inserir Arquivo PDF}{Insert PDF File}
+\AddToLang{DebibWrng}{%
+  Elaborada pelo Departamento de Biblioteca%
+}{%
+  Elaborated by the Library Department%
+}
+\newcommand*{\TtlPgBack}{\clearforchapter}
+\newcommand*{\IndexCardPDF}[2][./Pre-Textual/]{%
+  \ifboolexpr{ bool {@VersionFinal} and bool {DScOrMSc} }{%
+    \csgdef{TtlPgBack}{%
+      \newpage%
+      \begingroup%
+      \ifbool{@twoside}{}{%
+        \savepagenumber%
+        \pagenumbering{gobble}%
+        \setcounter{page}{2}%
+        \booltrue{@twoside}%
+        \booltrue{@mparswitch}%
+      }%
+      \ifblank{#2}{%
+        \setlength{\fboxrule}{\heavyrulewidth}%
+        \setlength{\fboxsep}{\p@}%
+        \raggedright%
+        \null\vfill%
+        \fbox{%
+          \begin{minipage}[c][75mm][c]{125mm}%
+          \centering\scriptsize\color{gray}%
+          \faAddressCard\space\fbox{\textbf{\MakeTextUppercase{\IdxCardName}}}\space\faAddressCard\vfill%
+          \faBook\space\fbox{\DebibWrng}\space\faBook\vfill%
+          \faFilePdf\space\fbox{\PDFCall\space\InPrep\space\texttt{#1}}\space\faFilePdf%
+          \end{minipage}%
+        }\vskip-\fboxsep%
+      }{%
+        \AddToShipoutPictureFG*{\AtPageLowerLeft{\includegraphics[width = \paperwidth, height = \paperheight]{#1#2}}}%
+      }%
+      \null%
+      \clearpage%
+      \endgroup%
+      \ifbool{@twoside}{}{%
+        \pagenumbering{roman}%
+        \restorepagenumber%
+      }%
+    }%
+  }{}%
+}
+
+%% Errata
+\newcounter{alphpage}
+\AddToLang{WhereItReads}{Onde se lê}{Where it reads}
+\AddToLang{Read}{Leia-se}{Read}
+\providecommand*{\errref}{Errata}
+\NewEnviron{Errata}[1][]{%
+  \ifbool{@VersionFinal}{%
+    \savepagenumber%
+    \pagenumbering{alph}%
+    \setlength{\parindent}{\z@}%
+    \SectionPDFBookmark{\ifblank{#1}{Errata}{#1}}{err}%
+    \aliaspagestyle{chapter}{empty}%
+    \aliaspagestyle{cleared}{empty}%
+    \ifbool{@WorkRef}{%
+      \begin{SingleSpace}%
+      \raggedright%
+      \ABNTStudentsList\space\TheTitle. \DepYearNum. \thelastpage~\PgAbrv. %
+      \TheSubject\space\textemdash\space\UTFPRName, \CmpsName, \YearNum.%
+      \end{SingleSpace}%
+    }{%
+      \vskip-1.5ex%
+    }%
+    \begingroup%
+    \footnotesize%
+    \begin{tabularx}{\textwidth}[t]{?{}p{30mm}*{2}{|X}?{}}%% CHKTEX 44
+    \toprule%
+    \multicolumn{1}{?{}c|}{\textbf{\Cref@page@name{(s)}}} &%
+    \multicolumn{1}{c|}{\textbf{\WhereItReads}}           &%
+    \multicolumn{1}{c?{}}{\textbf{\Read}}                 \\%
+    \midrule%
+    \BODY%
+    \bottomrule%
+    \end{tabularx}%
+    \endgroup%
+    \clearforchapter%
+    \setcounter{alphpage}{\value{page}-1}%
+    \pagenumbering{roman}%
+    \restorepagenumber%
+  }{}%
+}
+\csletcs{Errata*}{Errata}
+\csletcs{endErrata*}{endErrata}
+\AtBeginEnvironment{Errata*}{\booltrue{@WorkRef}}
+
+%% Folha de aprovação
+\AddToLang{ApvlPgName}{Folha de Aprovação}{Approval Page}
+\AddToLang{ApvlDateCall}{Data de aprovação}{Approval date}
+\AddToLang{AcadSysWrng}{%
+  Gerada pelo Sistema Acadêmico e sem Assinaturas%
+}{%
+  Generated by the Academic System and without Signatures%
+}
+\AddToLang{AcadSysWrngGrad}{%
+  Documento gerado pelo Sistema Acadêmico da UTFPR a partir dos dados da Ata de Defesa em%
+}{%
+  Document generated by the UTFPR Academic System based on data from the Defense Act in%
+}
+\AddToLang{MECName}{Ministério da Educação}{Ministry of Education}
+\providecommand*{\apvlpgref}{\ApvlPgName}
+\newcommand*{\ApprovalPagePDF}[2][./Pre-Textual/]{%
+  \ifbool{@VersionFinal}{%
+    \ifbool{@TwoSideFront}{\OpenPgOdd}{}%
+    \PDFBookmark{\ApvlPgName}{apvlpgpdf}%
+    \global\csletcs{apvlpgref}{apvlpgpdfref}%
+    \ifblank{#2}{%
+      \noindent%
+      \begin{minipage}[c][\textheight][c]{\textwidth}%
+      \centering\color{gray}%
+      \faFileSignature\space\fbox{\textbf{\MakeTextUppercase{\ApvlPgName}}}\space\faFileSignature\vfill%
+      \faDatabase\space\fbox{\AcadSysWrng}\space\faDatabase\vfill%
+      \faFilePdf\space\fbox{\PDFCall\space\InPrep\space\texttt{#1}}\space\faFilePdf%
+      \end{minipage}%
+    }{%
+      \AddToShipoutPictureFG*{\AtPageLowerLeft{\includegraphics[width = \paperwidth, height = \paperheight]{#1#2}}}%
+    }%
+    \null%
+    \clearforchapter%
+  }{}%
+}
+\NewEnviron{ApprovalPage}[4][]{%
+  \ifbool{@VersionFinal}{%
+    \ifblank{#1}{}{\iflanguage{#1}{}{\selectlanguage{#1}}}%
+    \ifblank{#4}{}{\setlength{\SignLineWd}{#4}}%
+    \ifbool{@TwoSideFront}{\OpenPgOdd}{}%
+    \PDFBookmark{\ApvlPgName}{apvlpg}%
+    \begin{center}%
+    % Edita a quantia de linhas entre o nome e o titulo
+    % Coloquei 2 arbitrariamente
+    \begin{minipage}[t][2\baselineskip][t]{\textwidth}%
+    \Centering\bfseries%
+    \ifbool{DScOrMSc}{%
+      \begin{minipage}{35mm}%
+      \raggedright%
+      \includegraphics[width = 15mm]{republic-blazon}%
+      \end{minipage}%
+      \begin{minipage}{\linewidth-70mm}%
+      \OnehalfSpacing\centering\footnotesize%
+      \MECName\\%
+      \UTFPRName\\%
+      Campus \CmpsName%
+      \end{minipage}%
+      \begin{minipage}{35mm}%
+      \raggedleft%
+      \includegraphics[width = 30mm]{utfpr}%
+      \end{minipage}%
+      \vskip2\p@%
+      {\color{UTFPRBlack}\hrule\@height0.5\p@}\vskip\p@%
+      {\color{UTFPRYellow}\hrule\@height0.5\p@}%
+      \strut\vfill%
+    }{\strut}%
+    \StudentsList[\MakeTextUppercase]{\\}{}%
+    \vfill\strut%
+    \end{minipage}%
+    \par%
+    \begin{Center}%
+    \bfseries\MakeTextUppercase{\TheTitle}%
+    \end{Center}%
+    \end{center}%
+    % Edita a quantia de linhas entre o titulo e a descrição
+    \vskip3\baselineskip%
+    \begin{SingleSpace}%
+    \raggedleft\footnotesize%
+    \begin{minipage}{0.5\textwidth}%
+    \LessSloppy%
+    \BODY%
+    \ifbool{DScOrMSc}{\space\ConcAreaCall: \ConcAreaName.}{}%
+    \end{minipage}%
+    % Edita a quantia de linhas entre a descrição e a data de aprovacao
+    \vskip3\baselineskip%
+    \ifnumgreater{\value{MmbrNum}}{0}{%
+      \vskip\baselineskip%
+      \parbox{\textwidth}{\centering\ApvlDateCall: \ifblank{#2}{\today}{#2}}\vfill%
+      % Edita a data de aprovacao e o nome dos membros da banca
+      \vskip5\baselineskip%
+      \MembersList{\ifbool{DScOrMSc}{\vskip\baselineskip}{\vfill}}%
+    }{}%
+    \vfill%
+    \ifbool{DScOrMSc}{%
+      \parbox{\textwidth}{%
+        \scriptsize%
+        \AcadSysWrngGrad\ \ifblank{#3}{\two@digits{\the\day}/\two@digits{\the\month}/\YearNum}{#3}.%
+      }\vskip\dimexpr\baselineskip-\belowdisplayskip%
+    }{}%
+    \end{SingleSpace}%
+    \begingroup%
+    \centering\bfseries%
+    \MakeTextUppercase{\CmpsName}\\%
+    \YearNum\\%
+    \endgroup%
+    \cleardoublepage%
+  }{}%
+}
+\csletcs{ApprovalPage*}{ApprovalPage}
+\csletcs{endApprovalPage*}{endApprovalPage}
+\AtBeginEnvironment{ApprovalPage*}{\booltrue{@MmbrTtlAfter}}
+
+%% Dedicatória
+\AddToLang{DedName}{Dedicatória}{Dedication}
+\providecommand*{\dedref}{\DedName}
+\NewDocumentEnvironment{Dedication}{ O{} O{} }{%
+  \ifbool{@TwoSideFront}{\OpenPgOdd}{}%
+  \ifblank{#2}{%
+    \ifblank{#1}{\null\vfill}{\ifdimgreater{#1}{\z@}{\null\vskip\dimexpr#1}{}}%
+    \PDFBookmark{\DedName}{ded}%
+  }{%
+    \SectionPDFBookmark{#2}{ded}%
+    \ifblank{#1}{\vfill}{\ifdimgreater{#1}{\z@}{\vskip\dimexpr#1}{\bigskip}}%
+  }%
+  \raggedleft%
+  \begin{minipage}[b][][t]{0.5\textwidth}%
+  \raggedleft%
+}{%
+  \end{minipage}%
+  \clearforchapter%
+}
+
+%% Agradecimentos
+\AddToLang{AckName}{Agradecimentos}{Acknowledgments}
+\AddToLang{FundingText}{%
+  O presente trabalho foi realizado com apoio%
+}{%
+  This study was financed in part by the%
+}
+\newcommand*{\FundingAgency}[2]{\ifblank{#1}{}{\FundingText\ #1\ifblank{#2}{}{ #2}.}}
+\providecommand*{\ackref}{\AckName}
+\newenvironment*{Acknowledgments}[1][]{%
+  \SectionPDFBookmark{\ifblank{#1}{\AckName}{#1}}{ack}%
+}{%
+  \clearforchapter%
+}
+
+%% Epígrafe
+\newbool{@NoDisplayCitation}
+\AddToLang{EpiName}{Epígrafe}{Epigraph}
+\providecommand*{\epiref}{\EpiName}
+\NewDocumentEnvironment{Epigraph}{ O{} O{} }{%
+  \ifbool{@TwoSideFront}{\OpenPgOdd}{}%
+  \ifblank{#2}{%
+    \ifblank{#1}{\null\vfill}{\ifdimgreater{#1}{\z@}{\null\vskip\dimexpr#1}{}}%
+    \PDFBookmark{\EpiName}{epi}%
+  }{%
+    \SectionPDFBookmark{#2}{epi}%
+    \ifblank{#1}{\vfill}{\ifdimgreater{#1}{\z@}{\vskip\dimexpr#1}{\bigskip}}%
+  }%
+  \raggedleft%
+  \begin{minipage}[b][][t]{0.5\textwidth}%
+  \dimdef{\CitLeftSkip}{0.25\linewidth}%
+  \ifbool{@NoDisplayCitation}{}{\csdisplaytrue}%
+}{%
+  \end{minipage}%
+  \clearforchapter%
+}
+\csletcs{Epigraph*}{Epigraph}
+\csletcs{endEpigraph*}{endEpigraph}
+\AtBeginEnvironment{Epigraph*}{\booltrue{@NoDisplayCitation}}
+%%%% Epígrafe (alternativa) baseada na classe memoir
+\setlength{\beforeepigraphskip}{\z@}
+\setlength{\afterepigraphskip}{\z@}
+\setlength{\epigraphwidth}{0.5\textwidth}
+\setlength{\epigraphrule}{\z@}
+\epigraphfontsize{\normalsize}
+\epigraphtextposition{flushleftright}
+\epigraphsourceposition{flushleftright}
+\NewDocumentCommand{\QItem}{ O{\languagename} m m O{} }{%
+  \begingroup%
+  \raggedright\item%
+  \begin{minipage}{\epigraphwidth}%
+  \iflanguage{#1}{\@epitext{#3}}{\textit{\@epitext{#3}}}%
+  \ifblank{#2}{}{\vskip0.5ex\@episource{#2\ifblank{#4}{}{\footnote{#4}}}}%
+  \end{minipage}%
+  \endgroup%
+}
+\NewDocumentEnvironment{Epigraphs}{ O{} O{} }{%
+  \ifbool{@TwoSideFront}{\OpenPgOdd}{}%
+  \ifblank{#2}{%
+    \ifblank{#1}{\null\vfill}{\ifdimgreater{#1}{\z@}{\null\vskip\dimexpr#1}{}}%
+    \PDFBookmark{\EpiName}{epimmr}%
+  }{%
+    \SectionPDFBookmark{#2}{epimmr}%
+    \ifblank{#1}{\vfill}{\ifdimgreater{#1}{\z@}{\vskip\dimexpr#1}{\bigskip}}%
+  }%
+  \global\csletcs{epiref}{epimmrref}%
+  \begin{epigraphs}%
+  \setlength{\itemsep}{\onelineskip}%
+  \LessSloppy%
+}{%
+  \end{epigraphs}%
+  \clearforchapter%
+}
+
+%% Resumo e abstract
+\newbool{@WorkRef}
+\providecommand*{\resref}{\begingroup\selectlanguage{brazilian}\abstractname\endgroup}
+\providecommand*{\absref}{\begingroup\selectlanguage{english}\abstractname\endgroup}
+\AtBeginDocument{%
+  \abstractnum%
+  \setlength{\absleftindent}{\z@}%
+  \setlength{\absrightindent}{\z@}%
+  \setlength{\absparindent}{\z@}%
+  \renewcommand*{\abstracttextfont}{\normalfont\normalsize}%
+  \renewcommand*{\num@bs}{%
+    \iflanguage{brazilian}{%
+      \SectionPDFBookmark{\abstractname}{res}%
+    }{%
+      \SectionPDFBookmark{\abstractname}{abs}%
+    }%
+  }%
+}
+\newenvironment*{Abstract}[1][]{%
+  \ifblank{#1}{}{\iflanguage{#1}{}{\selectlanguage{#1}}}%
+  \begin{abstract}%
+  \SingleSpace%
+  \ifbool{@WorkRef}{%
+    \begin{flushleft}%
+    \ABNTStudentsList\space\TheTitle. \DepYearNum. \thelastpage~\PgAbrv. %
+    \TheSubject\space\textemdash\space\UTFPRName, \CmpsName, \YearNum.%
+    \end{flushleft}%
+    \vskip\baselineskip%
+  }{}%
+}{%
+  \vskip\baselineskip%
+  {\KWCallFrmt{\KeywordsCall}:} \KeywordsList{; }{.}%
+  \end{abstract}%
+  \clearforchapter%
+}
+\csletcs{Abstract*}{Abstract}
+\csletcs{endAbstract*}{endAbstract}
+\AtBeginEnvironment{Abstract*}{\booltrue{@WorkRef}}
+
+%% Listas: algoritmos; ilustrações; tabelas
+\newlistof{listofalgorithms}{loa}{\listalgorithmname}
+\newlistof{listofflowcharts}{low}{\listflowchartname}
+\newlistof{listofphotographs}{lop}{\listphotographname}
+\newlistof{listofgraphs}{loh}{\listgraphname}
+\newlistof{listoftabframeds}{lod}{\listtabframedname}
+\newcommand*{\Flt@Chk}[1]{%
+  \newbool{@print#1slist}%
+  \AddToLang[captions]{list#1name}{Lista de \csuse{#1name}s}{List of \csuse{#1name}s}%
+  \csdef{#1@in@doc}{%
+    \immediate\write\@mainaux{\global\booltrue{@print#1slist}}%
+    \global\csletcs{#1@in@doc}{empty}%
+  }%
+  \cspreto{#1}{\csuse{#1@in@doc}}%
+  \csdef{\csuse{ext@#1}ref}{\csuse{list#1name}}%
+}
+\forcsvlist{\Flt@Chk}{algorithm, figure, flowchart, photograph, graph, tabframed, table}
+\newcommand*{\LoX@Entry}[1]{\newlistentry{#1}{\csuse{ext@#1}}{0}}
+\forcsvlist{\LoX@Entry}{algorithm, flowchart, photograph, graph, tabframed}
+\newcommand*{\LoX@Fmt}[1]{%
+  \csdef{cft#1name}{\csuse{#1name}\space}%
+  \csdef{cft#1aftersnum}{\hfill\textendash\hfill}%
+  \csdef{cft#1font}{\bfseries}%
+  \csdef{cft#1leader}{\bfseries\cftdotfill{\csuse{cft#1dotsep}}}%
+  \csdef{cft#1pagefont}{\bfseries}%
+}
+\AtBeginDocument{\forcsvlist{\LoX@Fmt}{algorithm, figure, flowchart, photograph, graph, tabframed, table}}
+\newcommand*{\PrintFloatsList}[1]{%
+  \ifbool{@print#1slist}{%
+    \cftinserthook{\csuse{ext@#1}}{ToCLoXConf}%
+    \PDFBookmark{\csuse{list#1name}}{\csuse{ext@#1}}%
+    \csuse{listof#1s}*%
+    \clearforchapter%
+  }{}%
+}
+\renewcommand*{\insertchapterspace}{}
+%%%% Lista de ilustrações
+\AddToLang[captions]{listillustrationname}{Lista de Ilustrações}{List of Illustrations}
+\providecommand*{\loiref}{\listillustrationname}
+\newcommand*{\LoI@Cfg}[1]{%
+  \ifbool{@print#1slist}{%
+    \csletcs{list#1name}{relax}%
+    \cftinserthook{\csuse{ext@#1}}{ToCLoXConf}%
+    \csdef{after\csuse{ext@#1}title}{\vskip\z@}%
+  }{}%
+}
+\newcommand*{\@LoI}[1]{\ifbool{@print#1slist}{\csuse{listof#1s}*}{}}
+\newcommand*{\PrintIllustrationsList}[1]{%
+  \begingroup%
+  \forcsvlist{\LoI@Cfg}{#1}%
+  \SectionPDFBookmark{\listillustrationname}{loi}%
+  \forcsvlist{\@LoI}{#1}%
+  \endgroup%
+  \clearforchapter%
+}
+
+%% Listas: abreviaturas e siglas; símbolos
+\AddToLang{UnclName}{Não Classificados}{Unclassifieds}
+%%%% Abreviaturas e siglas
+\newcommand*{\Acr@Entry}[1]{%
+  \csdef{New#1Entry}##1##2{%
+    \ifblank{##2}{}{%
+      \ifstrequal{#1}{Abbreviation}{\csdef{GTag}{Abrv@##1}}{}%
+      \ifstrequal{#1}{Initials}{\csdef{GTag}{Intl@##1}}{}%
+      \setkeys{Glossary}{%
+        Key         = {##1},%
+        Sort        = {},%
+        Term        = {},%
+        Description = {},%
+        Plural      = {},%
+        Parent      = {},%
+        Unit        = {},%
+        Type        = {Acronym},%
+        AcronymType = {#1},%
+        SymbolType  = {},%
+        ##2,%
+      }%
+      \csundef{GTag}%
+    }%
+  }%
+}
+\forcsvlist{\Acr@Entry}{Abbreviation, Initials}
+%%%%%% Abreviaturas
+\AddToLang{AbrvName}{Abreviaturas}{Abbreviations}
+\NewDocumentCommand{\abrv}{ s m }{\IfBooleanTF{#1}{\gly*{Abrv@#2}}{\gly{Abrv@#2}}}
+\NewDocumentCommand{\Abrv}{ s m }{\IfBooleanTF{#1}{\Gly*{Abrv@#2}}{\Gly{Abrv@#2}}}
+\NewDocumentCommand{\abrvpl}{ s m }{\IfBooleanTF{#1}{\glypl*{Abrv@#2}}{\glypl{Abrv@#2}}}
+\NewDocumentCommand{\AbrvPl}{ s m }{\IfBooleanTF{#1}{\GlyPl*{Abrv@#2}}{\GlyPl{Abrv@#2}}}
+\newcommand*{\abrvdescr}[1]{\glydescr{Abrv@#1}}
+\newcommand*{\AbrvDescr}[1]{\GlyDescr{Abrv@#1}}
+%%%%%% Siglas
+\AddToLang{IntlName}{Siglas}{Initials}
+\NewDocumentCommand{\intl}{ s m }{\IfBooleanTF{#1}{\gly*{Intl@#2}}{\gly{Intl@#2}}}
+\NewDocumentCommand{\Intl}{ s m }{\IfBooleanTF{#1}{\Gly*{Intl@#2}}{\Gly{Intl@#2}}}
+\NewDocumentCommand{\intlpl}{ s m }{\IfBooleanTF{#1}{\glypl*{Intl@#2}}{\glypl{Intl@#2}}}
+\NewDocumentCommand{\IntlPl}{ s m }{\IfBooleanTF{#1}{\GlyPl*{Intl@#2}}{\GlyPl{Intl@#2}}}
+\newcommand*{\intldescr}[1]{\glydescr{Intl@#1}}
+\newcommand*{\IntlDescr}[1]{\GlyDescr{Intl@#1}}
+%%%% Lista de abreviaturas e siglas
+\newbool{@PrintAcrHdg}
+\newbool{@PrevAcrList}
+\AddToLang{AcrLstName}{%
+  Lista de Abreviaturas e Siglas%
+}{%
+  List of Abbreviations and Initials%
+}
+\AddToLang{AcronymsListName}{%
+  Lista de %
+  \ifbool{@printabrvttl}{%
+    \ifbool{@printintlttl}{\AbrvName\ e \IntlName}{\AbrvName}%
+  }{%
+    \ifbool{@printintlttl}{\IntlName}{\UnclName}%
+  }%
+}{%
+  List of %
+  \ifbool{@printabrvttl}{%
+    \ifbool{@printintlttl}{\AbrvName\ and \IntlName}{\AbrvName}%
+  }{%
+    \ifbool{@printintlttl}{\IntlName}{\UnclName}%
+  }%
+}
+\newcommand*{\Acr@In@Doc}[1]{%
+  \newbool{@print#1ttl}%
+  \csdef{#1@in@doc}{%
+    \immediate\write\@mainaux{\global\booltrue{@print#1ttl}}%
+    \global\csletcs{#1@in@doc}{empty}%
+  }%
+}
+\forcsvlist{\Acr@In@Doc}{abrv, intl}
+\newcommand*{\AcrHdg}[1]{%
+  \ifbool{@PrintAcrHdg}{%
+    \ifstrequal{#1}{0}{\SectionPDFBookmark[section]{\UnclName}{unclacr}}{%
+      \ifstrequal{#1}{A}{\SectionPDFBookmark[section]{\AbrvName}{abrvacr}}{%
+        \ifstrequal{#1}{B}{\SectionPDFBookmark[section]{\IntlName}{intlacr}}{}%
+      }%
+    }%
+  }{%
+    \ifstrequal{#1}{0}{\booltrue{@PrevAcrList}}{%
+      \ifstrequal{#1}{Acrn@}{\ifbool{@PrevAcrList}{\vskip-\baselineskip}{\booltrue{@PrevAcrList}}}{}%
+    }%
+  }%
+}
+\NewDocumentCommand{\MakeAcronyms}{ s O{} }{%
+  \IfBooleanTF{#1}{\booltrue{@PrintAcrHdg}}{\boolfalse{@PrintAcrHdg}}%
+  \ifblank{#2}{}{\MakeGlossary[#2][acr]}%
+}
+\newcommand*{\PrintAcronymsList}{\printglossary[acr]}
+\providecommand*{\acrref}{\AcrLstName}
+\newcommand*{\AcronymsListLabelFont}[1]{\normalfont#1}
+\newenvironment*{AcronymsList}[1][]{%
+  \SectionPDFBookmark{\ifblank{#1}{\AcrLstName}{#1}}{acrlst}%
+  \global\csletcs{acrref}{acrlstref}%
+  \vskip-0.5\onelineskip%
+  \setlength{\parindent}{\z@}%
+  \begin{description}[%
+    style         = multiline,%
+    font          = \AcronymsListLabelFont,%
+    first         = \SingleSpacing,%
+    leftmargin    = 0.15\linewidth,%
+    listparindent = -\leftmargin,%
+  ]%
+}{%
+  \end{description}%
+  \clearforchapter%
+}
+%%%% Símbolos
+\newcommand*{\Sym@Entry}[1]{%
+  \csdef{New#1Entry}##1##2{%
+    \ifblank{##2}{}{%
+      \ifstrequal{#1}{Notation}{\csdef{GTag}{Nttn@##1}}{}%
+      \ifstrequal{#1}{Superscript}{\csdef{GTag}{Sprs@##1}}{}%
+      \ifstrequal{#1}{Subscript}{\csdef{GTag}{Sbsc@##1}}{}%
+      \ifstrequal{#1}{GreekLetter}{\csdef{GTag}{GrkL@##1}}{}%
+      \ifstrequal{#1}{LatinLetter}{\csdef{GTag}{LtnL@##1}}{}%
+      \setkeys{Glossary}{%
+        Key         = {##1},%
+        Sort        = {},%
+        Term        = {},%
+        Description = {},%
+        Plural      = {},%
+        Parent      = {},%
+        Unit        = {},%
+        Type        = {Symbol},%
+        AcronymType = {},%
+        SymbolType  = {#1},%
+        ##2,%
+      }%
+      \csundef{GTag}%
+    }%
+  }%
+}
+\forcsvlist{\Sym@Entry}{Notation, Superscript, Subscript, GreekLetter, LatinLetter}
+%%%%%% Notações
+\AddToLang{NttnName}{Notações}{Notations}
+\newcommand*{\MrkSym}{\DottedCircle}
+\newcommand*{\Phantom}[1][A]{\protect\phantom{#1}}
+\NewDocumentCommand{\nttn}{ s m O{} }{%
+  \ifblank{#3}{%
+    \csdef{@MrkSym}{}%
+  }{%
+    \csdef{@MrkSym}{#3}%
+  }%
+  \IfBooleanTF{#1}{\gly*{Nttn@#2}}{\gly{Nttn@#2}}%
+}
+\newcommand*{\nttndescr}[1]{\glydescr{Nttn@#1}}
+\newcommand*{\NttnDescr}[1]{\GlyDescr{Nttn@#1}}
+\newcommand*{\nttnunit}[1]{\ifblank{#1}{}{\ifcsvoid{Nttn@#1Unit}{}{\csuse{Nttn@#1Unit}}}}
+%%%%%% Sobrescritos
+\AddToLang{SprsName}{Sobrescritos}{Superscripts}
+\NewDocumentCommand{\sprs}{ s m }{\IfBooleanTF{#1}{\gly*{Sprs@#2}}{\gly{Sprs@#2}}}
+\newcommand*{\sprsdescr}[1]{\glydescr{Sprs@#1}}
+\newcommand*{\SprsDescr}[1]{\GlyDescr{Sprs@#1}}
+\newcommand*{\sprsunit}[1]{\ifblank{#1}{}{\ifcsvoid{Sprs@#1Unit}{}{\csuse{Sprs@#1Unit}}}}
+%%%%%% Subscritos
+\AddToLang{SbscName}{Subscritos}{Subscripts}
+\NewDocumentCommand{\sbsc}{ s m }{\IfBooleanTF{#1}{\gly*{Sbsc@#2}}{\gly{Sbsc@#2}}}
+\newcommand*{\sbscdescr}[1]{\glydescr{Sbsc@#1}}
+\newcommand*{\SbscDescr}[1]{\GlyDescr{Sbsc@#1}}
+\newcommand*{\sbscunit}[1]{\ifblank{#1}{}{\ifcsvoid{Sbsc@#1Unit}{}{\csuse{Sbsc@#1Unit}}}}
+%%%%%% Letras gregas
+\AddToLang{GrkLName}{Letras gregas}{Greek letters}
+\NewDocumentCommand{\grkl}{ s m }{\IfBooleanTF{#1}{\gly*{GrkL@#2}}{\gly{GrkL@#2}}}
+\newcommand*{\grkldescr}[1]{\glydescr{GrkL@#1}}
+\newcommand*{\GrkLDescr}[1]{\GlyDescr{GrkL@#1}}
+\newcommand*{\grklunit}[1]{\ifblank{#1}{}{\ifcsvoid{GrkL@#1Unit}{}{\csuse{GrkL@#1Unit}}}}
+%%%%%% Letras latinas
+\AddToLang{LtnLName}{Letras latinas}{Latin letters}
+\NewDocumentCommand{\ltnl}{ s m }{\IfBooleanTF{#1}{\gly*{LtnL@#2}}{\gly{LtnL@#2}}}
+\newcommand*{\ltnldescr}[1]{\glydescr{LtnL@#1}}
+\newcommand*{\LtnLDescr}[1]{\GlyDescr{LtnL@#1}}
+\newcommand*{\ltnlunit}[1]{\ifblank{#1}{}{\ifcsvoid{LtnL@#1Unit}{}{\csuse{LtnL@#1Unit}}}}
+%%%% Lista de símbolos
+\newbool{@PrintSymHdg}
+\newbool{@PrevSymList}
+\newbool{@UnitRightMargin}
+\AddToLang{SymbolsListName}{Lista de Símbolos}{List of Symbols}
+\newcommand*{\SymHdg}[1]{%
+  \ifbool{@PrintSymHdg}{%
+    \ifstrequal{#1}{0}{\SectionPDFBookmark[section]{\UnclName}{unclsym}}{%
+      \ifstrequal{#1}{A}{\SectionPDFBookmark[section]{\NttnName}{nttnsym}}{%
+        \ifstrequal{#1}{B}{\SectionPDFBookmark[section]{\SprsName}{sprssym}}{%
+          \ifstrequal{#1}{C}{\SectionPDFBookmark[section]{\SbscName}{sbscsym}}{%
+            \ifstrequal{#1}{D}{\SectionPDFBookmark[section]{\GrkLName}{grklsym}}{%
+              \ifstrequal{#1}{E}{\SectionPDFBookmark[section]{\LtnLName}{ltnlsym}}{}%
+            }%
+          }%
+        }%
+      }%
+    }%
+  }{%
+    \ifstrequal{#1}{0}{\booltrue{@PrevSymList}}{%
+      \ifstrequal{#1}{Symb@}{\ifbool{@PrevSymList}{\vskip-\baselineskip}{\booltrue{@PrevSymList}}}{}%
+    }%
+  }%
+}
+\NewDocumentCommand{\MakeSymbols}{ s O{} }{%
+  \IfBooleanTF{#1}{\booltrue{@PrintSymHdg}}{\boolfalse{@PrintSymHdg}}%
+  \ifblank{#2}{}{\MakeGlossary[#2][sym]}%
+}
+\NewDocumentCommand{\PrintSymbolsList}{ s }{%
+  \IfBooleanTF{#1}{\booltrue{@UnitRightMargin}}{\boolfalse{@UnitRightMargin}}%
+  \printglossary[sym]%
+}
+\providecommand*{\symref}{\SymbolsListName}
+\newcommand*{\SymbolsListLabelFont}[1]{\ensuremath{#1}}
+\newenvironment*{SymbolsList}[1][]{%
+  \SectionPDFBookmark{\ifblank{#1}{\SymbolsListName}{#1}}{symlst}%
+  \global\csletcs{symref}{symlstref}%
+  \vskip-0.5\onelineskip%
+  \setlength{\parindent}{\z@}%
+  \begin{description}[%
+    style         = multiline,%
+    font          = \SymbolsListLabelFont,%
+    first         = \SingleSpacing,%
+    leftmargin    = 0.15\linewidth,%
+    listparindent = -\leftmargin,%
+  ]%
+}{%
+  \end{description}%
+  \clearforchapter%
+}
+
+%% Sumário
+\AddToLang[captions]{contentsname}{}{Summary}
+\newcommand*{\Part@Chap@U@ToC}[1]{%
+  \settocpreprocessor{#1}{%
+    \csletcs{tempf@rtoc}{f@rtoc}%
+    \csdef{f@rtoc}{\MakeTextUppercase{\tempf@rtoc}}%
+  }%
+}
+\forcsvlist{\Part@Chap@U@ToC}{part, chapter}
+\csletcs{old@numberline}{numberline}
+\csletcs{old@contentsline}{contentsline}
+\renewcommand*{\contentsline}[3]{%
+  \ifcsequal{l@#1}{l@subsubsection}{%
+    \csletcs{numberline}{uline@numberline}%
+  }{%
+    \csletcs{numberline}{old@numberline}%
+  }%
+  \old@contentsline{#1}{#2}{#3}%
+}
+\newcommand*{\uline@numberline}[1]{%
+  \numberlinehook{#1}%
+  \numberlinebox\@tempdima{\@cftn@me\@cftbsnum\uline{#1}\@cftasnum}\@cftasnumb%
+}
+\newlength{\cftlastnumwidth}
+\setlength{\cftlastnumwidth}{\cftsubsubsectionnumwidth}
+\addtolength{\cftlastnumwidth}{1em}
+\newcommand*{\cft@set@indents}[1]{\cftsetindents{#1}{\z@}{\cftlastnumwidth}}
+\forcsvlist{\cft@set@indents}{part, chapter, section, subsection, subsubsection, paragraph, subparagraph}
+\renewcommand*{\cftpartbreak}{%
+  \addpenalty{-\@highpenalty}%
+  \vskip\cftbeforepartskip%
+}
+\renewcommand*{\cftpartfont}{\normalfont\normalsize\bfseries}
+\renewcommand*{\cftpartdotsep}{\cftdotsep}
+\renewcommand*{\cftpartpagefont}{\cftpartfont}
+\renewcommand*{\cftchapterdotsep}{\cftdotsep}
+\renewcommand*{\cftsectionfont}{\normalfont\normalsize\bfseries}
+\renewcommand*{\cftsectionleader}{\bfseries\cftdotfill{\cftsectiondotsep}}
+\renewcommand*{\cftsectionpagefont}{\bfseries}
+\renewcommand*{\cftsubsubsectionformatpnum}[1]{%
+  \cftsubsubsectionformatpnumhook{#1}%
+  \hb@xt@\@pnumwidth{\hfil{\cftsubsubsectionpagefont\uline{#1}}}%
+}
+\renewcommand*{\cftparagraphfont}{\normalfont\normalsize\emph}
+\renewcommand*{\cftparagraphformatpnum}[1]{%
+  \cftparagraphformatpnumhook{#1}%
+  \hb@xt@\@pnumwidth{\hfil{\cftparagraphpagefont\itshape#1}}%
+}
+\cftinsertcode{ToCLoXConf}{%
+  \LessSloppy%
+  \SingleSpace%
+}
+\providecommand*{\tocref}{\contentsname}
+\NewDocumentCommand{\PrintSummary}{ s }{%
+  \IfBooleanTF{#1}{%
+    \setlength{\cftbeforepartskip}{\z@}%
+    \setlength{\cftbeforechapterskip}{\z@}%
+  }{%
+    \setlength{\cftbeforepartskip}{1ex}%
+    \setlength{\cftbeforechapterskip}{1ex}%
+    \addtocontents{toc}{\vskip-1ex}%
+  }%
+  \cftinserthook{toc}{ToCLoXConf}%
+  \PDFBookmark{\contentsname}{toc}%
+  \tableofcontents*%
+  \clearforchapter%
+}
+
+%% Elementos textuais
+\newcommand*{\Textual}{%
+  \MakeList{6}{KW}{%
+    \protected@csxappto{TheKeywords}{%
+      \csuse{KW\Alph{KWCtr}}%
+      \ifnumless{\value{KWCtr}}{\value{KWTmp}}{, }{}%
+    }%
+  }%
+  \pdfstringdef{\@TheKeywords}{\TheKeywords}%
+  \ifbool{xetex}{%
+    \special{pdf:docinfo<</Keywords (\@TheKeywords)>>}%
+  }{%
+    \ifbool{luatex}{\protected@csxdef{pdfinfo}{\pdfextension info}}{}%% CHKTEX 1
+    \pdfinfo{/Keywords (\@TheKeywords)}%
+  }%
+  \ifbool{@TwoSideMain}{%
+    \booltrue{@twoside}%
+    \booltrue{@mparswitch}%
+  }{}%
+  \csgappto{@smemmain}{\savepagenumber}%
+  \csgappto{@memmain}{\restorepagenumber}%
+  \mainmatter%
+  \ifbool{@PageNumMain}{%
+    \pagestyle{ABNTHdg}%
+    \aliaspagestyle{chapter}{ABNTHdg}%
+    \aliaspagestyle{cleared}{ABNTHdg}%
+    \aliaspagestyle{part}{ABNTHdg}%
+    \nopartblankpage%
+  }{%
+    \pagestyle{empty}%
+    \aliaspagestyle{chapter}{empty}%
+    \aliaspagestyle{cleared}{empty}%
+    \aliaspagestyle{part}{empty}%
+  }%
+  \chapterstyle{NumberedChapter}%
+}
+
+%% Elementos pós-textuais
+\newbool{@ToCDepthZero}
+\NewDocumentCommand{\PostTextual}{ s }{%
+  \IfBooleanTF{#1}{\booltrue{@ToCDepthZero}}{\boolfalse{@ToCDepthZero}}%
+  \backmatter%
+  \booltrue{@mainmatter}%
+  \setcounter{secnumdepth}{\value{maxsecnumdepth}}%
+  \ifbool{@ToCDepthZero}{%
+    \setcounter{tocdepth}{0}%
+    \settocdepth{chapter}%
+    \maxtocdepth{chapter}%
+    \hypersetup{bookmarksdepth = 0}%
+  }{}%
+  \PhantomPart%
+  \chapterstyle{UnnumberedChapter}%
+}
+\newcommand*{\AddToToC}[3][chapter]{%
+  \ifblank{#2}{}{%
+    \phantomsection%
+    \ifnumless{\csuse{toclevel@#1}}{1}{%
+      \addcontentsline{toc}{#1}{\MakeTextUppercase{#2}}%
+    }{%
+      \addcontentsline{toc}{#1}{%
+        \texorpdfstring{\protect\numberline{}}{}%
+        \ifcsequal{l@#1}{l@subsubsection}{\uline{#2}}{\ifcsequal{l@#1}{l@paragraph}{\textit{#2}}{#2}}%
+      }%
+    }%
+    \ifblank{#3}{}{\hypertarget{#3}{}}%
+  }%
+}
+
+%% Citações e referências
+\setlength{\bibitemsep}{\onelineskip}
+\AtBeginBibliography{\SingleSpace\vskip-\bibitemsep}
+% \AtEveryCitekey{\hyphenrules{nohyphenation}}%% Desativa hifenização em rótulos
+\DeclareLanguageMapping{brazilian}{brazilian-abnt}
+\DeclareLanguageMapping{english}{english-abnt}
+\DeclareLanguageMappingSuffix{}
+\NewBibliographyString{%
+  sheettotal,%
+  sheettotals,%
+  sineloco,%
+  sinenomine,%
+}
+\DefineBibliographyStrings{brazilian}{%
+  sineloco    = {s\adddot~l\adddot},%
+  sinenomine  = {s\adddot~n\adddot},%
+}
+\DefineBibliographyStrings{english}{%
+  sheettotal  = {s\adddot},%
+  sheettotals = {s\adddot},%
+  sineloco    = {s\adddot~l\adddot},%
+  sinenomine  = {s\adddot~n\adddot},%
+}
+\xpatchbibmacro{in:}{%
+  \bibstring{in}%
+}{%
+  \mkbibemph{\bibstring{in}}%
+}{}{}
+\xpatchbibmacro{name:andothers}{%
+  \bibstring{andothers}%
+}{%
+  \mkbibemph{\bibstring{andothers}}%
+}{}{}
+\xpatchbibmacro{location}{%
+  \bibstring{sineloco}%
+}{%
+  \mkbibemph{\bibstring{sineloco}}%
+}{}{}
+\xpatchbibmacro{venue}{%
+  \bibstring{sineloco}%
+}{%
+  \mkbibemph{\bibstring{sineloco}}%
+}{}{}
+\xpatchbibmacro{publisher}{%
+  \bibstring{sinenomine}%
+}{%
+  \mkbibemph{\bibstring{sinenomine}}%
+}{}{}
+\xpatchbibmacro{publisher+location+date}{%
+  \bibstring{sineloco}%
+  \setunit{\addcolon\addnbspace}%
+  \bibstring{sinenomine}%
+}{%
+  \mkbibemph{\bibstring{sineloco}}%
+  \setunit{\addcolon\addnbspace}%
+  \mkbibemph{\bibstring{sinenomine}}%
+}{}{}
+\xpatchbibmacro{publisher+location+issue+date}{%
+  \bibstring{sineloco}%
+  \setunit{\addcolon\addnbspace}%
+  \bibstring{sinenomine}%
+}{%
+  \mkbibemph{\bibstring{sineloco}}%
+  \setunit{\addcolon\addnbspace}%
+  \mkbibemph{\bibstring{sinenomine}}%
+}{}{}
+\ifbool{@ABNTCitNRB}{%
+  \csletcs{multinamedelim}{multinamedelimorig}%
+  \csletcs{finalnamedelim}{finalnamedelimorig}%
+  \NewDocumentCommand{\apud}{ o o m o o m }{%
+    \mkbibparens{%
+      \IfNoValueTF{#2}{%
+        \IfNoValueTF{#1}{%
+          \citeyearorlabelnumber*{#3}%
+        }{%
+          \citeyearorlabelnumber*[#1]{#3}%
+        }%
+      }{%
+        \citeyearorlabelnumber*[#1][#2]{#3}%
+      }\addspace%
+      \IfNoValueTF{#5}{%
+        \IfNoValueTF{#4}{%
+          \plaincite[\blx@imc@bibxstring{apud}][]{#6}%
+        }{%
+          \plaincite[\blx@imc@bibxstring{apud}][#4]{#6}%
+        }%
+      }{%
+        \cite[\blx@imc@bibxstring{apud} #4][#5]{#6}%
+      }%
+    }%
+  }%
+  \NewDocumentCommand{\textapud}{ o o m o o m }{%
+    \citelastname{#3}\addspace%
+    \mkbibparens{%
+      \IfNoValueTF{#2}{%
+        \IfNoValueTF{#1}{%
+          \citeyearorlabelnumber*{#3}%
+        }{%
+          \citeyearorlabelnumber*[#1]{#3}%
+        }%
+      }{%
+        \citeyearorlabelnumber*[#1][#2]{#3}%
+      }\addspace%
+      \IfNoValueTF{#5}{%
+        \IfNoValueTF{#4}{%
+          \plaincite[\blx@imc@bibxstring{apud}][]{#6}%
+        }{%
+          \plaincite[\blx@imc@bibxstring{apud}][#4]{#6}%
+        }%
+      }{%
+        \cite[\blx@imc@bibxstring{apud} #4][#5]{#6}%
+      }%
+    }%
+  }%
+  \DeclareCiteCommand{\citelastname}{%
+    \usebibmacro{cite:init}%
+    \boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}%
+  }{%
+    \ifciteindex{\indexnames{labelname}}{}%
+    \printtext[bibhyperref]{\printnames{labelname}}%
+  }{\multicitedelim}{\usebibmacro{postnote}}%
+  \DeclareCiteCommand*{\citeyearorlabelnumber}{%
+    \boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}%
+  }{%
+    \iffieldundef{labelnumber}{%
+      \printfield[bibhyperref]{year}%
+    }{%
+      \printfield[bibhyperref]{labelnumber}%
+    }%
+  }{\multicitedelim}{\usebibmacro{postnote}}%
+  \DeclareCiteCommand{\plaincite}{%
+    \usebibmacro{cite:init}%
+    \usebibmacro{prenote}%
+  }{%
+    \usebibmacro{citeindex}%
+    \usebibmacro{cite}%
+  }{\multicitedelim}{\usebibmacro{postnote}}%
+  \DeclareCiteCommand{\citeauthor}{%
+    \boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}%
+  }{%
+    \ifciteindex{\indexnames{labelname}}{}%
+    \printtext[bibhyperref]{\printnames{labelname}}%
+  }{\multicitedelim}{\usebibmacro{postnote}}%
+  \DeclareCiteCommand*{\citeauthor}{%
+    \boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}%
+  }{%
+    \ifciteindex{\indexnames{labelname}}{}%
+    \printtext[bibhyperref]{\printnames{labelname}}%
+  }{\multicitedelim}{\usebibmacro{postnote}}%
+  \DeclareCiteCommand{\citeyear}{%
+    \boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}%
+  }{\printfield[bibhyperref]{year}}{\multicitedelim}{\usebibmacro{postnote}}%
+  \DeclareCiteCommand*{\citeyear}{%
+    \boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}%
+  }{\printfield[bibhyperref]{year}}{\multicitedelim}{\usebibmacro{postnote}}%
+}{%
+  \xpatchbibmacro{textcite}{%
+    \ifnumequal{\value{textcitecount}}{\value{textcitetotal}-1}{%
+      \finalnamedelim%
+    }{%
+      \multinamedelim%
+    }%
+  }{%
+    \textcitedelim%
+  }{}{}%
+  \DeclareCiteCommand*{\citeauthor}{%
+    \boolfalse{citetracker}%
+    \boolfalse{pagetracker}%
+    \usebibmacro{prenote}%
+    \csletcs{mkbibnamefamily}{origmkbibnamefamily}%
+    \csletcs{mkbibnamegiven}{origmkbibnamegiven}%
+    \csletcs{mkbibnameprefix}{origmkbibnameprefix}%
+    \csletcs{mkbibnamesuffix}{origmkbibnamesuffix}%
+    \csletcs{multinamedelim}{multinamedelimorig}%
+    \csletcs{finalnamedelim}{finalnamedelimorig}%
+  }{%
+    \ifciteindex{\indexnames{labelname}}{}%
+    \printtext[bibhyperref]{\printnames{labelname}}%
+  }{\multicitedelim}{\usebibmacro{postnote}}%
+}
+\ifbool{@ABNTCitNSB}{%
+  \global\csletcs{mkbibparens}{mkbibbrackets}%
+  \global\csletcs{bibopenparen}{bibopenbracket}%
+  \global\csletcs{bibcloseparen}{bibclosebracket}%
+  \DeclareFieldFormat{labelnumberwidth}{\mkbibbrackets{#1}}%
+}{}
+\DeclareFieldFormat{doi}{%
+  \ifbool{@BibDOIIcon}{\MakeIcon{doi}\addnbspace}{}\mkbibacro{DOI}\addcolon\space%
+  \ifhyperref{\href{https://doi.org/#1}{\nolinkurl{#1}}}{\nolinkurl{#1}}%
+}
+\DeclareFieldFormat{url}{%
+  \ifbool{@BibURLIcon}{\faExternalLinkSquare*\addnbspace\mkbibacro{URL}}{\bibstring{urlfrom}}\addcolon\space%
+  \url{#1}%
+}
+\defbibheading{bibliography}[\refname]{%
+  \ifmemoirbibintoc{%
+    \addtocontents{toc}{\cftsetindents{chapter}{\cftlastnumwidth}{2em}}%
+    \AddToToC{#1}{ref}%
+  }{}%
+  \chapter*{#1}%
+  \label{ref}%
+}
+\newcommand*{\refref}{\hyperlink{ref}{\refname}}
+\csletcs{PrintReferences}{printbibliography}
+
+%% Glossário
+\newcommand*{\gly@err}[2]{%
+  \PackageWarning{lamia-tcc-utfpr-sh}{%
+    undefined #1 for label #2\MessageBreak%
+    in an entry of Abbreviation, Initials, Symbol,\MessageBreak%
+    or Glossary%
+  }%
+  \textbf{#2}%
+}
+\renewcommand*{\mfirstucMakeUppercase}{\MakeTextUppercase}
+%%%% Arquivo de estilo de glossário makeindex
+\begin{verbatimoutput}{\jobname.gst}
+%% \jobname.gst makeindex glossary style file
+%%%% Output style parameters
+preamble "\\begin{theglossary}\n"
+postamble "\n\n\\end{theglossary}\n"
+heading_prefix "\n\\GlyHdg{"
+heading_suffix "}"
+headings_flag 1
+item_0 "\n  \\glossitem "
+delim_0 "{\\memglonum{"
+delim_1 "{\\memglonum{"
+delim_2 "{\\memglonum{"
+delim_t "}}"
+%%%% Input style parameters
+keyword "\\glossaryentry"
+actual '?'
+\end{verbatimoutput}
+\ifpatchable*{\@ctualm@mwritetoglo}{%
+  \xpatchcmd{\@ctualm@mwritetoglo}{%
+    \immediate\write\memglofile%
+  }{%
+    \immediate@protected@write\memglofile{}%
+  }{}{}%
+}{}
+%%%% Itens de glossário
+\newcounter{SymCtr}
+\define@key{Glossary}{Key}{\ifcsvoid{GTag}{}{\ifblank{#1}{}{\csdef{\csuse{GTag}Key}{#1}}}}
+\define@key{Glossary}{Sort}{\ifcsvoid{GTag}{}{\ifblank{#1}{}{\csdef{\csuse{GTag}Sort}{#1}}}}
+\define@key{Glossary}{Term}{\ifcsvoid{GTag}{}{\ifblank{#1}{}{\csdef{\csuse{GTag}Term}{#1}}}}
+\define@key{Glossary}{Description}{\ifcsvoid{GTag}{}{\ifblank{#1}{}{\csdef{\csuse{GTag}Descr}{#1}}}}
+\define@key{Glossary}{Plural}{\ifcsvoid{GTag}{}{\ifblank{#1}{}{\csdef{\csuse{GTag}Plural}{#1}}}}
+\define@key{Glossary}{Parent}{\ifcsvoid{GTag}{}{\ifblank{#1}{}{\csdef{\csuse{GTag}Parent}{#1}}}}
+\define@key{Glossary}{Unit}{\ifcsvoid{GTag}{}{\ifblank{#1}{}{\csdef{\csuse{GTag}Unit}{\Unit{#1}}}}}
+\define@key{Glossary}{Type}{%
+  \ifcsvoid{GTag}{}{%
+    \csdef{\csuse{GTag}Type}{gly}%
+    \ifblank{#1}{}{%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{Acronym}} or %
+        test {\ifstrequal{#1}{acronym}}%
+      }{\csdef{\csuse{GTag}Type}{acr}}{}%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{Symbol}} or %
+        test {\ifstrequal{#1}{symbol}}%
+      }{\csdef{\csuse{GTag}Type}{sym}}{}%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{Glossary}} or %
+        test {\ifstrequal{#1}{glossary}}%
+      }{\csdef{\csuse{GTag}Type}{gly}}{}%
+    }%
+  }%
+}
+\define@key{Glossary}{AcronymType}{%
+  \ifcsvoid{GTag}{}{%
+    \csdef{\csuse{GTag}AcrType}{}%
+    \ifblank{#1}{}{%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{Abbreviation}} or %
+        test {\ifstrequal{#1}{abbreviation}}%
+      }{\csdef{\csuse{GTag}AcrType}{A}}{}%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{Initials}} or %
+        test {\ifstrequal{#1}{initials}}%
+      }{\csdef{\csuse{GTag}AcrType}{B}}{}%
+    }%
+  }%
+}
+\define@key{Glossary}{SymbolType}{%
+  \ifcsvoid{GTag}{}{%
+    \csdef{\csuse{GTag}SymType}{}%
+    \ifblank{#1}{}{%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{Notation}} or %
+        test {\ifstrequal{#1}{notation}}%
+      }{\csdef{\csuse{GTag}SymType}{A}}{}%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{Superscript}} or %
+        test {\ifstrequal{#1}{superscript}}%
+      }{\csdef{\csuse{GTag}SymType}{B}}{}%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{Subscript}} or %
+        test {\ifstrequal{#1}{subscript}}%
+      }{\csdef{\csuse{GTag}SymType}{C}}{}%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{GreekLetter}} or %
+        test {\ifstrequal{#1}{greekletter}} or %
+        test {\ifstrequal{#1}{Greek Letter}} or %
+        test {\ifstrequal{#1}{greek letter}}%
+      }{\csdef{\csuse{GTag}SymType}{D}}{}%
+      \ifboolexpr{%
+        test {\ifstrequal{#1}{LatinLetter}} or %
+        test {\ifstrequal{#1}{latinletter}} or %
+        test {\ifstrequal{#1}{Latin Letter}} or %
+        test {\ifstrequal{#1}{latin letter}}%
+      }{\csdef{\csuse{GTag}SymType}{E}}{}%
+    }%
+  }%
+}
+\csletcs{KV@Glossary@key}{KV@Glossary@Key}
+\csletcs{KV@Glossary@sort}{KV@Glossary@Sort}
+\csletcs{KV@Glossary@term}{KV@Glossary@Term}
+\csletcs{KV@Glossary@description}{KV@Glossary@Description}
+\csletcs{KV@Glossary@plural}{KV@Glossary@Plural}
+\csletcs{KV@Glossary@parent}{KV@Glossary@Parent}
+\csletcs{KV@Glossary@unit}{KV@Glossary@Unit}
+\csletcs{KV@Glossary@type}{KV@Glossary@Type}
+\csletcs{KV@Glossary@acronymtype}{KV@Glossary@AcronymType}
+\csletcs{KV@Glossary@symboltype}{KV@Glossary@SymbolType}
+\newcommand*{\NewGlossaryEntry}[2]{%
+  \ifblank{#2}{}{%
+    \csdef{GTag}{#1}%
+    \setkeys{Glossary}{%
+      Key         = {#1},%
+      Sort        = {},%
+      Term        = {},%
+      Description = {},%
+      Plural      = {},%
+      Parent      = {},%
+      Unit        = {},%
+      Type        = {Glossary},%
+      AcronymType = {},%
+      SymbolType  = {},%
+      #2,%
+    }%
+    \csundef{GTag}%
+  }%
+}
+\NewDocumentCommand{\MakeGlossaryEntry}{ s O{} m }{%
+  \ifblank{#3}{}{%
+    \csdef{Gly@Type}{\jobname-gly}%
+    \ifblank{#2}{%
+      \ifcsvoid{#3Type}{}{\csdef{Gly@Type}{\jobname-\csuse{#3Type}}}%
+    }{%
+      \csdef{Gly@Type}{\jobname-#2}%
+    }%
+    \csdef{Gly@Key}{#3}%
+    \ifcsstring{#3Type}{acr}{%
+      \ifcsvoid{#3AcrType}{%
+        \csepreto{Gly@Key}{0@}%
+      }{%
+        \csepreto{Gly@Key}{\csuse{#3AcrType}@}%
+      }%
+      \ifbool{@PrintAcrHdg}{}{\csdef{Gly@Key}{Acrn@\csuse{#3Key}}}%
+      \ifcsstring{#3AcrType}{A}{\abrv@in@doc}{}%
+      \ifcsstring{#3AcrType}{B}{\intl@in@doc}{}%
+    }{}%
+    \ifcsstring{#3Type}{sym}{%
+      \ifcsvoid{#3SymType}{%
+        \csepreto{Gly@Key}{0@}%
+      }{%
+        \csepreto{Gly@Key}{\csuse{#3SymType}@}%
+      }%
+      \ifbool{@PrintSymHdg}{}{%
+        \ifcsvoid{#3Sort}{%
+          \stepcounter{SymCtr}%
+          \csxdef{#3Sort}{\ThreeDigitsCounter{SymCtr}}%
+        }{}%
+        \csdef{Gly@Key}{Symb@\csuse{#3Sort}@\csuse{#3Key}}%
+      }%
+    }{}%
+    \ifcsvoid{#3Term}{}{%
+      \csdef{Gly@Term}{\csuse{#3Term}}%
+      \csdef{Gly@Idx}{\csuse{#3Term}}%
+      \ifcsstring{#3Type}{acr}{\csdef{Gly@Term}{\emakefirstuc{\csuse{#3Term}}}}{}%
+      \ifcsstring{#3Type}{gly}{%
+        \csdef{Gly@Idx}{#3?\Gly@Term}%
+        \ifcsvoid{#3Parent}{}{%
+          \csdef{Gly@Prnt}{\csuse{#3Parent}}%
+          \csdef{Gly@Prnt@Prnt}{}%
+          \ifcsvoid{\csuse{Gly@Prnt}Parent}{%
+            \csdef{Gly@Idx}{\Gly@Prnt?\csuse{\csuse{Gly@Prnt}Term}!#3?\Gly@Term}%
+          }{%
+            \csdef{Gly@Prnt@Prnt}{\csuse{\csuse{Gly@Prnt}Parent}}%
+            \csdef{Gly@Idx}{%
+              \Gly@Prnt@Prnt?\csuse{\csuse{Gly@Prnt@Prnt}Term}!%
+              \Gly@Prnt?\csuse{\csuse{Gly@Prnt}Term}!%
+              #3?\Gly@Term%
+            }%
+          }%
+        }%
+      }{}%
+      \ifcsvoid{#3Descr}{}{%
+        \csdef{Gly@Descr@Unit}{\csuse{#3Descr}}%
+        \ifcsstring{#3Type}{acr}{\csdef{Gly@Descr@Unit}{\emakefirstuc{\csuse{#3Descr}}}}{}%
+        \ifcsstring{#3Type}{sym}{%
+          \csdef{Gly@Term}{\ensuremath{\csuse{#3Term}}}%
+          \ifcsstring{#3SymType}{A}{\csdef{Gly@Idx}{@@@@\csuse{#3Key}?\Gly@Term}}{}%
+          \ifboolexpr{ test {\ifcsstring{#3SymType}{B}} or test {\ifcsstring{#3SymType}{C}} }{%
+            \csdef{Gly@Term}{\ensuremath{\DottedCircle\csuse{#3Term}}}%
+            \ifcsstring{#3SymType}{B}{\csdef{Gly@Idx}{@@@\csuse{#3Key}?\Gly@Term}}{}%
+            \ifcsstring{#3SymType}{C}{\csdef{Gly@Idx}{@@\csuse{#3Key}?\Gly@Term}}{}%
+          }{}%
+          \ifcsstring{#3SymType}{D}{\csdef{Gly@Idx}{@\csuse{#3Key}?\Gly@Term}}{}%
+          \ifcsstring{#3SymType}{E}{\csdef{Gly@Idx}{\csuse{#3Key}?\Gly@Term}}{}%
+          \csdef{Gly@Descr@Unit}{\emakefirstuc{\csuse{#3Descr}}}%
+          \ifcsvoid{#3Unit}{}{%
+            \ifbool{@UnitRightMargin}{%
+              \csdef{Gly@Descr@Unit}{%
+                \parbox[t]{0.7\linewidth}{\emakefirstuc{\csuse{#3Descr}}}%
+                \makebox[0.15\linewidth][r]{\ensuremath{\left[\csuse{#3Unit}\right]}}%
+              }%
+            }{%
+              \csappto{Gly@Descr@Unit}{, \csuse{#3Unit}}%
+            }%
+          }%
+        }{}%
+        \glossary[\Gly@Type](\Gly@Key){\Gly@Term}{\Gly@Descr@Unit}%% CHKTEX 36
+      }%
+      \IfBooleanT{#1}{\index{\Gly@Idx}}%
+    }%
+    \csundef{Gly@Type}%
+    \csundef{Gly@Key}%
+    \csundef{Gly@Term}%
+    \csundef{Gly@Descr@Unit}%
+    \csundef{Gly@Idx}%
+    \csundef{Gly@Prnt}%
+    \csundef{Gly@Prnt@Prnt}%
+  }%
+}
+\NewDocumentCommand{\gly}{ s O{} m O{} }{%
+  \ifblank{#3}{}{%
+    \ifcsvoid{#3Term}{\gly@err{Term}{#3}}{%
+      \ifcsstring{#3Type}{sym}{%
+        \begingroup%
+        \ifcsvoid{@MrkSym}{}{\csletcs{MrkSym}{@MrkSym}}%
+        \ensuremath{\csuse{#3Term}}%
+        \endgroup%
+      }{%
+        #4{\csuse{#3Term}}%
+      }%
+      \IfBooleanTF{#1}{%
+        \ifblank{#2}{\MakeGlossaryEntry*{#3}}{\MakeGlossaryEntry*[#2]{#3}}%
+      }{%
+        \ifblank{#2}{\MakeGlossaryEntry{#3}}{\MakeGlossaryEntry[#2]{#3}}%
+      }%
+    }%
+  }%
+}
+\NewDocumentCommand{\Gly}{ s O{} m }{%
+  \ifblank{#3}{}{%
+    \IfBooleanTF{#1}{%
+      \gly*[#2]{#3}[\emakefirstuc]%
+    }{%
+      \gly[#2]{#3}[\emakefirstuc]%
+    }%
+  }%
+}
+\NewDocumentCommand{\glypl}{ s O{} m O{} }{%
+  \ifblank{#3}{}{%
+    \ifcsvoid{#3Plural}{\gly@err{Plural}{#3}}{%
+      \ifcsstring{#3Type}{sym}{%
+        \ensuremath{\csuse{#3Plural}}%
+      }{%
+        #4{\csuse{#3Plural}}%
+      }%
+      \IfBooleanTF{#1}{%
+        \ifblank{#2}{\MakeGlossaryEntry*{#3}}{\MakeGlossaryEntry*[#2]{#3}}%
+      }{%
+        \ifblank{#2}{\MakeGlossaryEntry{#3}}{\MakeGlossaryEntry[#2]{#3}}%
+      }%
+    }%
+  }%
+}
+\NewDocumentCommand{\GlyPl}{ s O{} m }{%
+  \ifblank{#3}{}{%
+    \IfBooleanTF{#1}{%
+      \glypl*[#2]{#3}[\emakefirstuc]%
+    }{%
+      \glypl[#2]{#3}[\emakefirstuc]%
+    }%
+  }%
+}
+\newcommand*{\glydescr}[2][]{\ifblank{#2}{}{\ifcsvoid{#2Descr}{\gly@err{Description}{#2}}{#1{\csuse{#2Descr}}}}}
+\newcommand*{\GlyDescr}[1]{\glydescr[\emakefirstuc]{#1}}
+%%%% Ambiente de glossário
+\newbool{@GlyNoPgs}
+\newbool{@GlyLst}
+\AtBeginEnvironment{theglossary}{\clearforchapter}
+\ifpatchable*{\theglossary}{%
+  \xpatchcmd{\theglossary}{%
+    \chapter*{\glossaryname}%
+  }{%
+    \Gly@BM@ToC%
+    \chapter*{\Gly@Name}%
+  }{}{}%
+  \xpatchcmd{\theglossary}{%
+    \@makeschapterhead{\glossaryname}%
+  }{%
+    \Gly@BM@ToC%
+    \@makeschapterhead{\Gly@Name}%
+  }{}{}%
+}{}%
+\newcommand*{\glyref}{\hyperlink{\ifbool{@GlyLst}{glylst}{gly}}{\glossaryname}}
+\newcommand*{\Gly@Name}{\glossaryname}
+\newcommand*{\Gly@BM@ToC}{}
+\newcommand*{\GlyHdg}[1]{\@gobble}
+\NewDocumentCommand{\MakeGlossary}{ O{} O{gly} }{%
+  \ifboolexpr{%
+    test {\ifstrequal{#2}{acr}} or %
+    test {\ifstrequal{#2}{sym}} or %
+    test {\ifstrequal{#2}{gly}}%
+  }{%
+    \ifblank{#1}{}{\InputIfFileExists{#1}{}{\PackageWarning{lamia-tcc-utfpr-sh}{no file #1.tex}}}%
+    \IfFileExists{\jobname-#2.glo}{%
+      \immediate\write18{makeindex -q -s \jobname.gst -o \jobname-#2.gls \jobname-#2.glo}%
+    }{}%
+    \makeglossary[\jobname-#2]%
+  }{}%
+}
+\csletcs{old@printglossary}{printglossary}
+\RenewDocumentCommand{\printglossary}{ s O{gly} O{} }{%
+  \IfBooleanTF{#1}{\booltrue{@GlyNoPgs}}{\boolfalse{@GlyNoPgs}}%
+  \ifboolexpr{%
+    test {\ifstrequal{#2}{acr}} or %
+    test {\ifstrequal{#2}{sym}} or %
+    test {\ifstrequal{#2}{gly}}%
+  }{%
+    \changeglossactual[\jobname-#2]{?}%
+    \renewcommand*{\glossitem}[4]{%
+      \hangindent0.15\linewidth%
+      \settowidth{\dimen1}{##1\quad}%
+      \ifdimless{\dimen1}{\hangindent}{\makebox[\hangindent][l]{##1}}{##1\quad}##2\par%
+    }%
+    \ifstrequal{#2}{acr}{%
+      \renewcommand*{\Gly@BM@ToC}{\PDFBookmark{\AcronymsListName}{#2}}%
+      \renewcommand*{\Gly@Name}{\AcronymsListName}%
+      \csletcs{GlyHdg}{AcrHdg}%
+    }{}%
+    \ifstrequal{#2}{sym}{%
+      \renewcommand*{\Gly@BM@ToC}{\PDFBookmark{\SymbolsListName}{#2}}%
+      \renewcommand*{\Gly@Name}{\SymbolsListName}%
+      \csletcs{GlyHdg}{SymHdg}%
+    }{}%
+    \ifstrequal{#2}{gly}{%
+      \renewcommand*{\glossitem}[4]{%
+        \hangindent15mm%
+        {#3{##1}:} ##2.\ifbool{@GlyNoPgs}{}{ ##4.}\par%
+      }%
+      \renewcommand*{\Gly@BM@ToC}{\AddToToC{\glossaryname}{#2}}%
+      \renewcommand*{\Gly@Name}{\glossaryname}%
+      \renewcommand*{\GlyHdg}[1]{\IdxHdg[gly]{##1}}%
+    }{}%
+    \ifbool{onecolglossary}{\renewcommand*{\preglossaryhook}{\label{#2}}}{}%
+    \noglossaryintoc%
+    \old@printglossary[\jobname-#2]%
+    \clearforchapter%
+  }{}%
+}
+\newcommand*{\PrintGlossary}{\@ifstar{\printglossary*[gly]}{\printglossary[gly]}}
+\renewcommand*{\begintheglossaryhook}{\begin{SingleSpace}}
+\renewcommand*{\atendtheglossaryhook}{\end{SingleSpace}}
+\newenvironment*{Glossary}[1][\normalfont]{%
+  \immediate\write\@mainaux{\global\booltrue{@GlyLst}}%
+  \csdef{GlossaryLabelFont}##1{#1{##1}:}%
+  \clearforchapter%
+  \AddToToC{\glossaryname}{glylst}%
+  \chapter*{\glossaryname}%
+  \label{glylst}%
+  \vskip-0.5\onelineskip%
+  \setlength{\parindent}{\z@}%
+  \begin{description}[%
+    style         = unboxed,%
+    font          = \GlossaryLabelFont,%
+    first         = \SingleSpacing,%
+    leftmargin    = 15mm,%
+    listparindent = -\leftmargin,%
+    labelsep      = 0.25em,%
+  ]%
+}{%
+  \end{description}%
+  \clearforchapter%
+}
+
+%% Apêndices e anexos
+\csappto{appendices}{\appendix}
+\newcommand*{\cft@K@aftersnum}[1]{\csdef{cft#1aftersnum}{\hfill\textendash\hfill}}
+\cftinsertcode{ApxCfg}{%
+  \forcsvlist{\cft@K@aftersnum}{chapter, section, subsection, paragraph}%
+  \renewcommand*{\cftsubsubsectionaftersnum}{\uline{\hfill\textendash\hfill}}%
+  \cftsetindents{part}{\cftlastnumwidth}{2em}%
+  \cftsetindents{chapter}{\cftlastnumwidth}{2em}%
+  \cftsetindents{section}{\cftlastnumwidth}{2.8em}%
+  \cftsetindents{subsection}{\cftlastnumwidth}{3.7em}%
+  \cftsetindents{subsubsection}{\cftlastnumwidth}{4.6em}%
+  \cftsetindents{paragraph}{\cftlastnumwidth}{5.5em}%
+}
+\DeclareRobustCommand*{\@Switch}[1]{%
+  \@writefile{toc}{%
+    \renewcommand*{\cftappendixname}{\MakeTextUppercase{#1} }%
+    \renewcommand*{\cftsectionname}{#1 }%
+    \renewcommand*{\cftsubsectionname}{#1 }%
+    \renewcommand*{\cftsubsubsectionname}{\uline{#1 }}%
+    \renewcommand*{\cftparagraphname}{#1 }%
+  }%
+}
+\newcommand*{\SwitchDivisionName}[1]{\protected@write\@auxout{}{\@Switch{#1}}}
+\newcommand*{\PartPage}{%
+  \cftinserthook{toc}{ApxCfg}%
+  \chapterstyle{AppendixChapter}%
+  \SwitchDivisionName{\appendixname}%
+  \csdef{sectionsecnumformat}{\appendixname\ \thesection\ \textemdash\ }%
+  \csdef{subsectionsecnumformat}{\appendixname\ \thesubsection\ \textemdash\ }%
+  \csdef{subsubsectionsecnumformat}{\uline{\appendixname\ \thesubsubsection\ \textemdash\ }}%
+  \csdef{paragraphsecnumformat}{\appendixname\ \theparagraph\ \textemdash\ }%
+  \ifpatchable*{\Hy@writebookmark}{%
+    \xpatchcmd{\Hy@writebookmark}{%
+      \let\chapternumberline\Hy@numberline%
+    }{%
+      \csdef{chapternumberline}##1{\appendixname\ ##1 \textemdash\ }%
+    }{}{}%
+    \xpatchcmd{\Hy@writebookmark}{%
+      \let\numberline\Hy@numberline%
+    }{%
+      \csdef{numberline}##1{\appendixname\ ##1 \textemdash\ }%
+    }{}{}%
+  }{}%
+  \@ifstar{%
+    \clearforchapter%
+    \AddToToC[part]{\appendixtocname}{\Apxs@Anxs}%
+    \appendixpage*%
+  }{}%
+}
+\newcommand*{\Hy@param@chk}[1]{\ifcsstring{Hy@param}{#1}{\csletcs{Hy@param}{Hy@appendixstring}}{}}
+\newcommand*{\patch@hyper@makecurrent}[1][appendix]{%
+  \ifblank{#1}{}{%
+    \renewcommand*{\Hy@appendixstring}{#1}%
+    \renewcommand*{\Hy@chapapp}{\Hy@appendixstring}%
+  }%
+  \ifpatchable*{\hyper@makecurrent}{%
+    \xpatchcmd{\hyper@makecurrent}{%
+      \ifx\Hy@param\Hy@chapterstring\let\Hy@param\Hy@chapapp\fi%
+    }{%
+      \forcsvlist{\Hy@param@chk}{chapter, section, subsection, subsubsection, paragraph, subparagraph}%
+    }{}{}%
+  }{}%
+}
+%%%% Apêndices
+\newcommand*{\apxsref}{\hyperlink{apxs}{\Cref@appendix@name@plural}}
+\newcommand*{\crefaliasapxs}[1]{\crefalias{#1}{appendix}}
+\NewDocumentCommand{\AppendicesPart}{ s O{\Cref@appendix@name@plural} }{%
+  \forcsvlist{\crefaliasapxs}{subappendix, subsubappendix, subsubsubappendix, paragraph, subparagraph}%
+  \renewcommand*{\appendixtocname}{\MakeTextUppercase{#2}}%
+  \renewcommand*{\appendixpagename}{#2}%
+  \renewcommand*{\appendixname}{\Cref@appendix@name}%
+  \csgdef{Apxs@Anxs}{apxs}%
+  \patch@hyper@makecurrent%
+  \IfBooleanTF{#1}{\PartPage*}{\PartPage}%
+  \csgundef{Apxs@Anxs}%
+}
+\newenvironment*{Appendices}{%
+  \AppendicesPart%
+  \begin{appendices}%
+}{%
+  \end{appendices}%
+}
+\newenvironment*{Appendices*}{%
+  \AppendicesPart*%
+  \begin{appendices}%
+}{%
+  \end{appendices}%
+  \PhantomPart%
+}
+%%%% Anexos
+\Crefname{annex}{Anexo}{Anexos}
+\ifbool{@cref@capitalise}{%
+  \crefname{annex}{Anexo}{Anexos}%
+}{%
+  \crefname{annex}{anexo}{anexos}%
+}
+\csappto{extrasbrazilian}{%
+  \Crefname{annex}{Anexo}{Anexos}%
+  \ifbool{@cref@capitalise}{%
+    \crefname{annex}{Anexo}{Anexos}%
+  }{%
+    \crefname{annex}{anexo}{anexos}%
+  }%
+}
+\csappto{extrasenglish}{%
+  \Crefname{annex}{Annex}{Annexes}%
+  \ifbool{@cref@capitalise}{%
+    \crefname{annex}{Annex}{Annexes}%
+  }{%
+    \crefname{annex}{annex}{annexes}%
+  }%
+}
+\newcommand*{\annexautorefname}{\Cref@annex@name}
+\newcommand*{\anxsref}{\hyperlink{anxs}{\Cref@annex@name@plural}}
+\newcommand*{\crefaliasanxs}[1]{\crefalias{#1}{annex}}
+\NewDocumentCommand{\AnnexesPart}{ s O{\Cref@annex@name@plural} }{%
+  \forcsvlist{\crefaliasanxs}{appendix, subappendix, subsubappendix, subsubsubappendix, paragraph, subparagraph}%
+  \renewcommand*{\appendixtocname}{\MakeTextUppercase{#2}}%
+  \renewcommand*{\appendixpagename}{#2}%
+  \renewcommand*{\appendixname}{\Cref@annex@name}%
+  \csgdef{Apxs@Anxs}{anxs}%
+  \patch@hyper@makecurrent[annex]%
+  \IfBooleanTF{#1}{\PartPage*}{\PartPage}%
+  \csgundef{Apxs@Anxs}%
+}
+\newenvironment*{Annexes}{%
+  \AnnexesPart%
+  \begin{appendices}%
+}{%
+  \end{appendices}%
+}
+\newenvironment*{Annexes*}{%
+  \AnnexesPart*%
+  \begin{appendices}%
+}{%
+  \end{appendices}%
+  \PhantomPart%
+}
+
+%% Índice
+\AddToLang{NAlsName}{Não alfabéticos}{Non-alphabetics}
+\AddToLang{NumsName}{Números}{Numbers}
+\AddToLang{seename}{ver}{see}
+\AddToLang{alsoname}{ver também}{see also}
+%%%% Arquivo de estilo de índice makeindex
+\begin{verbatimoutput}{\jobname.ist}
+%% \jobname.ist makeindex index style file
+%%%% Output style parameters
+preamble "\\begin{theindex}\n\\begin{SingleSpace}\n"
+postamble "\n\n\\end{SingleSpace}\n\\end{theindex}\n"
+heading_prefix "\n\\IdxHdg{"
+heading_suffix "}"
+headings_flag 1
+%%%% Input style parameters
+actual '?'
+\end{verbatimoutput}
+%%%% Itens de índice
+\DeclareRobustCommand*{\GobbleComma}[1]{\@gobble{#1}}
+\newcommand*{\IndexSee}[2]{\ifblank{#1}{}{#1\index{#1\GobbleComma?|see{#2}}}}
+\newcommand*{\IndexSeeAlso}[2]{\ifblank{#1}{}{#1\index{#1\GobbleComma?|seealso{#2}}}}
+\renewcommand*{\see}[2]{\ifblank{#1}{}{\textbf{\seename} #1}}
+\renewcommand*{\seealso}[2]{\ifblank{#1}{}{\textbf{\alsoname} #1}}
+\renewcommand*{\@idxitem}{\par\hangindent40\p@}
+\renewcommand*{\subitem}{\@idxitem\nobreak\hskip15\p@}
+\renewcommand*{\subsubitem}{\@idxitem\nobreak\hskip30\p@}
+\NewDocumentCommand{\Index}{ m O{} O{} }{%
+  \ifblank{#1}{}{%
+    \ifblank{#2}{%
+      \ifblank{#3}{#1\index{#1}}{#3\index{#1!#3}}%
+    }{%
+      \ifblank{#3}{#2\index{#1!#2}}{#3\index{#1!#2!#3}}%
+    }%
+  }%
+}
+%%%% Ambiente de índice
+\AtBeginEnvironment{theindex}{\LessSloppy}
+\csletcs{indexspace}{glossaryspace}
+\ifpatchable*{\theindex}{%
+  \xpatchcmd{\theindex}{%
+    \chapter*{\indexname}%
+  }{%
+    \AddToToC{\indexname}{idx}%
+    \chapter*{\indexname}%
+  }{}{}%
+  \xpatchcmd{\theindex}{%
+    \@makeschapterhead{\indexname}%
+  }{%
+    \AddToToC{\indexname}{idx}%
+    \@makeschapterhead{\indexname}%
+  }{}{}%
+}{}
+\newcommand*{\idxref}{\hyperlink{idx}{\indexname}}
+\newcommand*{\IdxHdg}[2][idx]{%
+  \ifstrequal{#2}{Symbols}{\pdfbookmark[section]{\NAlsName}{nals#1}}{%
+    \ifstrequal{#2}{Numbers}{\pdfbookmark[section]{\NumsName}{nums#1}}{%
+      \pdfbookmark[section]{#2}{#2#1}%
+    }%
+  }%
+}
+\newcommand*{\MakeIndex}{%
+  \IfFileExists{\jobname.idx}{\immediate\write18{makeindex -q -s \jobname.ist \jobname.idx}}{}%
+  \makeindex%
+}
+\newcommand*{\PrintIndex}{%
+  \ifbool{onecolindex}{\renewcommand*{\preindexhook}{\label{idx}}}{}%
+  \noindexintoc%
+  \printindex%
+  \clearforchapter%
+}
+
+%% Listagem de Códigos fonte
+\newcommand{\sourcecodename}{Listagem}
+    \newcommand{\listofsourcecodesname}{Listagem de C\'odigos Fonte}
+\usepackage{listings}
+\lstset{ 
+  numbers=left,
+  xleftmargin=1cm,
+  numberstyle=\small,
+  basicstyle=\small,
+  keepspaces=true,
+  showspaces=false, 
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  aboveskip=0.75em,
+  belowcaptionskip=0em,
+  belowskip=0em,
+  literate=
+    {á}{{\'a}}1
+    {à}{{\`a}}1
+    {ã}{{\~a}}1
+    {é}{{\'e}}1
+    {ê}{{\^e}}1
+    {í}{{\'i}}1
+    {ó}{{\'o}}1
+    {õ}{{\~o}}1
+    {ú}{{\'u}}1
+    {ü}{{\"u}}1
+    {ç}{{\c{c}}}1
+}
+\newfloat[chapter]{sourcecode}{loc}{\sourcecodename}
+\newlistof{listofsourcecodes}{loc}{\listofsourcecodesname}
+\newlistentry{sourcecode}{loc}{0}
+
+% configurações para atender às regras da ABNT
+\setfloatadjustment{sourcecode}{\centering}
+\counterwithout{sourcecode}{chapter}
+\renewcommand{\cftsourcecodename}{\sourcecodename\space} 
+\renewcommand*{\cftsourcecodeaftersnum}{\hfill--\hfill}
+
+\newcommand{\incluirlistadecodigosfonte}{%% Definição do comando para inclusão da lista de ilustrações
+  \pdfbookmark[0]{\listofsourcecodesname}{loc}%% Marcador
+  \begin{Spacing}{1.5}%% Espaçamento simples entre linhas
+    \listofsourcecodes*
+  \end{Spacing}
+  \cleardoublepage%% Página de verso
+}
+
+%% Finalização do documento
+\AtEndDocument{\BackCover}
