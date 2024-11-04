@@ -2448,6 +2448,18 @@
 \newcommand*{\refref}{\hyperlink{ref}{\refname}}
 \csletcs{PrintReferences}{printbibliography}
 
+% Redefinindo o ambiente de bibliografia para justificar
+\defbibenvironment{bibliography}
+  {\list
+     {}
+     {\setlength{\leftmargin}{\bibhang}%
+      \setlength{\itemindent}{-\leftmargin}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+   \justifying} % Justifica o texto das referências
+  {\endlist}
+  {\item}
+
 %% Glossário
 \newcommand*{\gly@err}[2]{%
   \PackageWarning{lamia-tcc-utfpr-sh}{%
@@ -3089,6 +3101,12 @@ actual '?'
   \end{Spacing}
   \cleardoublepage%% Página de verso
 }
+
+% Citação longa
+\newenvironment{abntquote}
+  {\begin{list}{}{\setlength\leftmargin{4cm}\setlength\rightmargin{0cm}\setlength\parindent{0pt}\setlength\parsep{\parskip}}\item\relax\small}
+  {\end{list}}
+
 
 %% Finalização do documento
 \AtEndDocument{\BackCover}
