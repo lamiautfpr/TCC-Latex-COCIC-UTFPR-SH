@@ -73,6 +73,16 @@ Após o download do modelo, se o arquivo estiver em zip, faça upload na platafo
 
 Além de fazer o download do repositório, ajude-nos com a atualização do modelo e da criação da documentação. Para isso, faça o fork do projeto e envie as possíveis alterações para os nossos colaboradores. Para qualquer erro na documentação e no modelo encontrado abra uma issue, que assim que possível corrigiremos.
 
+## Algumas considerações sobre as imagens e figuras no geral
+
+Para o título das imagens, colocar essa função para tirar o negrito e estabelecer o estilo padrão:  
+\captionsetup{labelfont=normalfont, textfont=normalfont} 
+\caption{Cronograma de execução das atividades.}
+
+Para a fonte da imagem, é importante seguir a configuração abaixo:  
+{\textbf{Fonte}: Autoria Própria (2024).}  
+Como a fonte já ta em 10pt, basta colocar o "Fonte" em negrito
+
 ## Algumas Considerações a Respeito das Referencias
 
 A norma NBR 6030:2018 estipula alguns elementos obrigatórios para cada tipo de referencia bibliografia. Afim de facilitar o desenvolvimento da monografia, a seguir alguns modelos de bibtex para a construção de referencias. São apenas alguns tipos comuns que podem ser encontrados na escrita de uma referência. 
